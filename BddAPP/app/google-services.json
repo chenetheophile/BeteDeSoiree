@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189553541880",
+    "firebase_url": "https://appinnov-1e2ce-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "appinnov-1e2ce",
+    "storage_bucket": "appinnov-1e2ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189553541880:android:f71be0cf91981f0f87f10d",
+        "android_client_info": {
+          "package_name": "com.example.appinnov"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189553541880-8p3oi691pd2bt5f1peg9u7e1higcgkt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMC1HGt4JbMhiDn36LlJCO-NNCN158bbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189553541880-8p3oi691pd2bt5f1peg9u7e1higcgkt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
