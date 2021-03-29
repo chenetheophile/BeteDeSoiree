@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207195183512",
+    "project_id": "bdes-4fab8",
+    "storage_bucket": "bdes-4fab8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207195183512:android:a477e10278d9dc0e6eb3ed",
+        "android_client_info": {
+          "package_name": "com.example.applicationv3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207195183512-mjg90ppgs2a4tmtuk6k2m7kfq01tik4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO-paHsva-CGU1ve6Lw7KQsjYcvlh58Bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207195183512-mjg90ppgs2a4tmtuk6k2m7kfq01tik4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
