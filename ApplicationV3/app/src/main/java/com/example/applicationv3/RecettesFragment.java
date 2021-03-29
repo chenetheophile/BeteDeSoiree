@@ -1,5 +1,6 @@
 package com.example.applicationv3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class RecettesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent affiche=new Intent(getActivity(),affichage_recette.class);
+                affiche.putExtra("nomRecette",noms_recettes[position]);
             }
         });
         return rootView;
