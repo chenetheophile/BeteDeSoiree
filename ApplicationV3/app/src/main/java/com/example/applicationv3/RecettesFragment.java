@@ -43,6 +43,7 @@ public class RecettesFragment extends Fragment {
                         .setAction("Action", null).show();
                 Intent affiche=new Intent(getActivity(),affichage_recette.class);
                 affiche.putExtra("nomRecette",noms_recettes[position]);
+                startActivity(affiche);
             }
         });
         return rootView;
