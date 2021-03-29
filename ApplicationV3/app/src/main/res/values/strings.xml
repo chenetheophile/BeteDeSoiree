@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">ApplicationV3</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Jeux</string>
+    <string name="tab_text_2">Cocktails</string>
+    <string name="tab_text_3">Recettes</string>
+    <string name="tab_text_4">Musique</string>
+
+
+    <string-array name="noms_jeux">
+        <item>Action ou Vérité</item>
+        <item>Palmier</item>
+        <item>Loup Garou</item>
+    </string-array>
+
+    <string-array name="joueurs_jeux">
+        <item>2+</item>
+        <item>2+</item>
+        <item>6+ (dont meneur)</item>
+    </string-array>
+
+    <integer-array name="min_joueurs">
+        <item>2</item>
+        <item>2</item>
+        <item>6</item>
+    </integer-array>
+
+    <string-array name="equipement_jeux">
+        <item>Aucun</item>
+        <item>Jeu de cartes, bouteille vide</item>
+        <item>Jeu de cartes</item>
+    </string-array>
+
+
+    <string-array name="noms_cocktails">
+        <item>Cocktail1</item>
+        <item>Cocktail2</item>
+        <item>Cocktail3</item>
+        <item>Cocktail4</item>
+        <item>Cocktail5</item>
+        <item>Cocktail6</item>
+    </string-array>
+
+    <string-array name="detail_cocktails">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+
+    <string-array name="desc_cocktails">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+
+    <string-array name="noms_recettes">
+        <item>Recette1</item>
+        <item>Recette2</item>
+        <item>Recette3</item>
+        <item>Recette4</item>
+        <item>Recette5</item>
+        <item>Recette6</item>
+    </string-array>
+
+    <string-array name="detail_recettes">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+
+    <string-array name="desc_recettes">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+
+
+    <string-array name="noms_musique">
+        <item>Musique1</item>
+        <item>Musique2</item>
+        <item>Musique3</item>
+        <item>Musique4</item>
+        <item>Musique5</item>
+        <item>Musique6</item>
+    </string-array>
+
+    <string-array name="detail_musique">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+
+    <string-array name="desc_musique">
+        <item>Exemple1</item>
+        <item>Exemple2</item>
+        <item>Exemple3</item>
+        <item>Exemple4</item>
+        <item>Exemple5</item>
+        <item>Exemple6</item>
+    </string-array>
+    <string name="title_activity_joueurs">Joueurs</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_l_g_local">LGLocal</string>
+
+
+</resources>
