@@ -43,7 +43,7 @@ public class BDD {
                     });
         }
     }
-    public void chercherDB(String collection, String doc, Activity act){
+    public void chercherchampDB(String collection, String doc, Activity act){
         DocumentReference docRef = this.getBDD().collection(collection).document(doc);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
