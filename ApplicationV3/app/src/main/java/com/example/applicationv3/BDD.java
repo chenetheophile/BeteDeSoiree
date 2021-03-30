@@ -6,25 +6,30 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.applicationv3.ui.main.SectionsPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BDD {
+    private FirebaseFirestore base;
     public BDD(){
-
+    this.base=FirebaseFirestore.getInstance();
     }
     public FirebaseFirestore getBDD(){
-        return FirebaseFirestore.getInstance();//récupere la BDD
+        return this.base;//récupere la BDD
     }
-    public void creerChamp(FirebaseFirestore base, String nomCollection, String nomDocument, ArrayList<String> nomChamp, ArrayList<String> valeur) throws Exception {
+    public void creerChamp( String nomCollection, String nomDocument, ArrayList<String> nomChamp, ArrayList<String> valeur) throws Exception {
+        FirebaseFirestore base=this.getBDD();
         if(nomChamp.size()!=valeur.size()){
             throw new Exception("Difference du nombre d'element entre nomChamp et Valeur");
         }
@@ -42,6 +47,25 @@ public class BDD {
                         }
                     });
         }
+    }
+    public void getDocument(String collection){
+        this.getBDD().collection(collection)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            ArrayList<String> listeNom=new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                listeNom.add(document.getId());
+                            }
+                            //PB a chercher : passer des arguments dans le sectionspageradapter pour creer le frag
+                            Intent menuIntent=new Intent(,MenuActivity.class);
+                            menuIntent.putExtra("listeCocktail",listeNom);
+                        }
+                    }
+                });
+
     }
     public void chercherchampDB(String collection, String doc, Activity act){
         DocumentReference docRef = this.getBDD().collection(collection).document(doc);
