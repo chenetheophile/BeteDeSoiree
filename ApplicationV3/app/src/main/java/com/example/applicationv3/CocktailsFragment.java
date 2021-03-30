@@ -39,6 +39,8 @@ public class CocktailsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                BDD db=new BDD();
+                db.chercherDB("cocktail",noms_cocktails[position],getActivity());
             }
         });
         return rootView;

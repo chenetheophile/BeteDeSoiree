@@ -43,7 +43,7 @@ public class BDD {
                     });
         }
     }
-    public void chercherDB(String collection, String doc, String champ, Activity act){
+    public void chercherDB(String collection, String doc, Activity act){
         DocumentReference docRef = this.getBDD().collection(collection).document(doc);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -54,12 +54,18 @@ public class BDD {
                         switch (collection) {
                             case "recette":
                                 Intent recipe= new Intent(act, affichage_recette.class);
-                                recipe.putExtra("nourriture", document.getString(champ));
+                                recipe.putExtra("Nom",doc);
+                                recipe.putExtra("nourriture", document.getString("Ingredient"));
+                                recipe.putExtra("lien", document.getString("lien"));
                                 act.startActivity(recipe);
+                                break;
                             case "cocktail":
                                 Intent cocktail = new Intent(act, affichage_cocktail.class);
-                                cocktail.putExtra("boisson", document.getString(champ));
+                                cocktail.putExtra("boisson", document.getString("Ingredient"));
                                 act.startActivity(cocktail);
+                                break;
+                            default:
+                                break;
                         }
 
 
