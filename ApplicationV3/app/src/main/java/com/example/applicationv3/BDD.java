@@ -1,5 +1,7 @@
 package com.example.applicationv3;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -41,16 +43,26 @@ public class BDD {
                     });
         }
     }
-    public String chercherDB(String collection,String doc,String champ){
-        final String[] val = {""};
-        DocumentReference docRef = this.getBDD().collection(collection).document(document);
+    public void chercherDB(String collection, String doc, String champ, Activity act){
+        DocumentReference docRef = this.getBDD().collection(collection).document(doc);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        val[0] = document.getString(champ);
+                        switch (collection) {
+                            case "recette":
+                                Intent recipe= new Intent(act, affichage_recette.class);
+                                recipe.putExtra("nourriture", document.getString(champ));
+                                act.startActivity(recipe);
+                            case "cocktail":
+                                Intent cocktail = new Intent(act, affichage_cocktail.class);
+                                cocktail.putExtra("boisson", document.getString(champ));
+                                act.startActivity(cocktail);
+                        }
+
+
                     } else {
                         Log.d("TAG", "No such document");
                     }
@@ -59,6 +71,5 @@ public class BDD {
                 }
             }
         });
-        return val[0];
     }
 }

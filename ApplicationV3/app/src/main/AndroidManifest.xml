@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationV3">
-        <activity android:name=".affichage_recette"></activity>
+        <activity android:name=".affichage_cocktail"></activity>
+        <activity android:name=".affichage_recette" />
         <activity
             android:name=".LGLocal"
             android:label="@string/title_activity_l_g_local"

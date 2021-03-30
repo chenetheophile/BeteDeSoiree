@@ -5,13 +5,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class affichage_recette extends AppCompatActivity {
+public class affichage_cocktail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_affichage_recette);
-        TextView txt=findViewById(R.id.textView3);
-        txt.setText(getIntent().getExtras().getString("nourriture"));
+        setContentView(R.layout.activity_affichage_cocktail);
+        TextView txt=findViewById(R.id.textView6);
+        txt.setText(getIntent().getExtras().getString("boissons"));
     }
 }
