@@ -62,6 +62,8 @@ public class BDD {
                             case "cocktail":
                                 Intent cocktail = new Intent(act, affichage_cocktail.class);
                                 cocktail.putExtra("boisson", document.getString("Ingredient"));
+                                cocktail.putExtra("Nom", doc);
+                                cocktail.putExtra("lien", document.getString("lien"));
                                 act.startActivity(cocktail);
                                 break;
                             default:
