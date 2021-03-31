@@ -42,7 +42,7 @@ public class RecettesFragment extends Fragment {
                 Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 BDD db=new BDD();
-                db.chercherchampDB("recette",noms_recettes[position],getActivity());
+//                db.chercherchampDB("recette",noms_recettes[position],getActivity());
 
             }
         });
