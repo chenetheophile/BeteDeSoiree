@@ -1,6 +1,7 @@
 package com.example.applicationv3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -50,17 +51,21 @@ public class BDD {
                     });
         }
     }
-    public void getDocument(){
-            ArrayList<String> listeNomCocktail = new ArrayList<>();
-            ArrayList<String> listeNomRecette = new ArrayList<>();
+    public void getDocument(Context activity){
+        Intent intent=new Intent();
+        intent.setClass(activity,MenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            ArrayList<String>lienImgRecette=new ArrayList<>();
-            ArrayList<String>lienImgCocktail=new ArrayList<>();
+        ArrayList<String> listeNomCocktail = new ArrayList<>();
+        ArrayList<String> listeNomRecette = new ArrayList<>();
 
-            ArrayList<Long>TempsPrepa=new ArrayList<>();
+        ArrayList<String>lienImgRecette=new ArrayList<>();
+        ArrayList<String>lienImgCocktail=new ArrayList<>();
 
-            ArrayList<String>listeIngrCocktail=new ArrayList<>();
-            ArrayList<String>listeIngrRecette=new ArrayList<>();
+        ArrayList<Long>TempsPrepa=new ArrayList<>();
+
+        ArrayList<String>listeIngrCocktail=new ArrayList<>();
+        ArrayList<String>listeIngrRecette=new ArrayList<>();
 
 
         this.getBDD().collection("cocktail")
@@ -76,7 +81,11 @@ public class BDD {
                                 listeIngrCocktail.add(document.getString("Ingredient"));
 
                             }
+                            intent.putExtra("listeNomC",listeNomCocktail);
+                            intent.putExtra("lienC",lienImgCocktail);
+                            intent.putExtra("listeIngreC",listeIngrCocktail);
                             Log.i("test", "1");
+
                         }
 
 
@@ -98,8 +107,12 @@ public class BDD {
                                 listeIngrRecette.add(document.getString("Ingredient"));
                                 TempsPrepa.add(document.getLong("temps"));
                             }
+                            intent.putExtra("listeNomR",listeNomRecette);
+                            intent.putExtra("lienR",lienImgRecette);
+                            intent.putExtra("listeIngreR",listeIngrRecette);
+                            intent.putExtra("Temps",TempsPrepa);
                             Log.i("test", "2");
-
+                            activity.startActivity(intent);
 
                         }
                     }

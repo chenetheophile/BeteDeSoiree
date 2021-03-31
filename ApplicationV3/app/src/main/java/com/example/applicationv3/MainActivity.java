@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+    private BDD bdd=new BDD();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(startIntent);
+                bdd.getDocument(getApplicationContext());
             }
         });
     }
