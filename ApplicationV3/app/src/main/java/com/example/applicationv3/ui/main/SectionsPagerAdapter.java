@@ -40,8 +40,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new JeuxFragment();
                 break;
             case 1:
-
-                new BDD().getDocument("coktail");
+                fragment = new CocktailsFragment();
                 break;
             case 2:
                 fragment = new RecettesFragment();

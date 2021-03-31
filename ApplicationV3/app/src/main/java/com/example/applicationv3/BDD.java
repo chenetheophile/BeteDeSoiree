@@ -48,25 +48,50 @@ public class BDD {
                     });
         }
     }
-    public void getDocument(String collection){
-        this.getBDD().collection(collection)
+    public void getDocument(){
+            ArrayList<String> listeNomCocktail = new ArrayList<>();
+            ArrayList<String> listeNomRecette = new ArrayList<>();
+
+        this.getBDD().collection("recette")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            ArrayList<String> listeNom=new ArrayList<>();
+                        if (task.isSuccessful()) {
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                listeNom.add(document.getId());
+                                listeNomRecette.add(document.getId());
                             }
-                            //PB a chercher : passer des arguments dans le sectionspageradapter pour creer le frag
-                            Intent menuIntent=new Intent(,MenuActivity.class);
-                            menuIntent.putExtra("listeCocktail",listeNom);
+                            Log.i("test", "1");
+
                         }
                     }
+
                 });
 
-    }
+            this.getBDD().collection("cocktail")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    listeNomCocktail.add(document.getId());
+                                }
+                                Log.i("test", "2");
+                            }
+
+
+                        }
+
+
+                    });
+
+
+        }
+
+
     public void chercherchampDB(String collection, String doc, Activity act){
         DocumentReference docRef = this.getBDD().collection(collection).document(doc);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -99,7 +124,7 @@ public class BDD {
                         Log.d("TAG", "No such document");
                     }
                 } else {
-                    Log.d("TAG", "get failed with ", task.getException());
+                    Log.d("TAG", "get failed with ");
                 }
             }
         });
