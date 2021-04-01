@@ -1,6 +1,8 @@
 package com.example.applicationv3;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +29,9 @@ public class CocktailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.cocktails_fragment_layout, container, false);
 
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
-        noms_cocktails = getResources().getStringArray(R.array.noms_cocktails);
-        detail_cocktails = getResources().getStringArray(R.array.detail_cocktails);
-        desc_cocktails = getResources().getStringArray(R.array.desc_cocktails);
+        noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
+        detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
+        desc_cocktails = getActivity().getIntent().getExtras().getStringArray("Description");
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
@@ -39,8 +41,12 @@ public class CocktailsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                BDD db=new BDD();
-//                db.chercherchampDB("cocktail",noms_cocktails[position],getActivity());
+                Intent cocktail = new Intent(getActivity(), affichage_cocktail.class);
+                cocktail.putExtra("boisson",detail_cocktails[position] );
+                cocktail.putExtra("Nom", noms_cocktails[position]);
+                cocktail.putExtra("lien", getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
+                Log.i("test",getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
+                getActivity().startActivity(cocktail);
             }
         });
         return rootView;

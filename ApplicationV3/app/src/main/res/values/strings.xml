@@ -32,60 +32,6 @@
     </string-array>
 
 
-    <string-array name="noms_cocktails">
-        <item>Cocktail1</item>
-        <item>Cocktail2</item>
-        <item>Cocktail3</item>
-        <item>Cocktail4</item>
-        <item>Cocktail5</item>
-        <item>Cocktail6</item>
-    </string-array>
-
-    <string-array name="detail_cocktails">
-        <item>Exemple1</item>
-        <item>Exemple2</item>
-        <item>Exemple3</item>
-        <item>Exemple4</item>
-        <item>Exemple5</item>
-        <item>Exemple6</item>
-    </string-array>
-
-    <string-array name="desc_cocktails">
-        <item>Exemple1</item>
-        <item>Exemple2</item>
-        <item>Exemple3</item>
-        <item>Exemple4</item>
-        <item>Exemple5</item>
-        <item>Exemple6</item>
-    </string-array>
-
-    <string-array name="noms_recettes">
-        <item>Recette1</item>
-        <item>Recette2</item>
-        <item>Recette3</item>
-        <item>Recette4</item>
-        <item>Recette5</item>
-        <item>Recette6</item>
-    </string-array>
-
-    <string-array name="detail_recettes">
-        <item>Exemple1</item>
-        <item>Exemple2</item>
-        <item>Exemple3</item>
-        <item>Exemple4</item>
-        <item>Exemple5</item>
-        <item>Exemple6</item>
-    </string-array>
-
-    <string-array name="desc_recettes">
-        <item>Exemple1</item>
-        <item>Exemple2</item>
-        <item>Exemple3</item>
-        <item>Exemple4</item>
-        <item>Exemple5</item>
-        <item>Exemple6</item>
-    </string-array>
-
 
     <string-array name="noms_musique">
         <item>Musique1</item>

@@ -29,9 +29,9 @@ public class RecettesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.recettes_fragment_layout, container, false);
 
         ListeRecettes = rootView.findViewById(R.id.ListeRecettes);
-        noms_recettes = getResources().getStringArray(R.array.noms_recettes);
-        detail_recettes = getResources().getStringArray(R.array.detail_recettes);
-        desc_recettes = getResources().getStringArray(R.array.desc_recettes);
+        noms_recettes = getActivity().getIntent().getExtras().getStringArray("listeNomR");
+        detail_recettes = getActivity().getIntent().getExtras().getStringArray("Temps");
+        desc_recettes = getActivity().getIntent().getExtras().getStringArray("Description");
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_recettes, detail_recettes, desc_recettes, images);
         ListeRecettes.setAdapter(jeuxAdapter);
@@ -41,8 +41,11 @@ public class RecettesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                BDD db=new BDD();
-//                db.chercherchampDB("recette",noms_recettes[position],getActivity());
+                Intent recipe= new Intent(getActivity(), affichage_recette.class);
+                recipe.putExtra("Nom",noms_recettes[position]);
+                recipe.putExtra("nourriture",getActivity().getIntent().getExtras().getStringArray("listeIngreR")[position]);
+                recipe.putExtra("lien",getActivity().getIntent().getExtras().getStringArray("lienR")[position]);
+                getActivity().startActivity(recipe);
 
             }
         });

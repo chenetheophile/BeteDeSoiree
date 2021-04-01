@@ -62,10 +62,13 @@ public class BDD {
         ArrayList<String>lienImgRecette=new ArrayList<>();
         ArrayList<String>lienImgCocktail=new ArrayList<>();
 
-        ArrayList<Long>TempsPrepa=new ArrayList<>();
+        ArrayList<String>TempsPrepa=new ArrayList<>();
 
         ArrayList<String>listeIngrCocktail=new ArrayList<>();
         ArrayList<String>listeIngrRecette=new ArrayList<>();
+
+        ArrayList<String>DescR=new ArrayList<>();
+        ArrayList<String>DescC=new ArrayList<>();
 
 
         this.getBDD().collection("cocktail")
@@ -79,11 +82,13 @@ public class BDD {
                                 listeNomCocktail.add(document.getId());
                                 lienImgCocktail.add(document.getString("lien"));
                                 listeIngrCocktail.add(document.getString("Ingredient"));
+                                DescC.add(document.getString("Description"));
 
                             }
-                            intent.putExtra("listeNomC",listeNomCocktail);
-                            intent.putExtra("lienC",lienImgCocktail);
-                            intent.putExtra("listeIngreC",listeIngrCocktail);
+                            intent.putExtra("listeNomC",listeNomCocktail.toArray(new String[0]));
+                            intent.putExtra("lienC",lienImgCocktail.toArray(new String[0]));
+                            intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
+                            intent.putExtra("Description",DescC.toArray(new String[0]));
                             Log.i("test", "1");
 
                         }
@@ -105,12 +110,15 @@ public class BDD {
                                 listeNomRecette.add(document.getId());
                                 lienImgRecette.add(document.getString("lien"));
                                 listeIngrRecette.add(document.getString("Ingredient"));
-                                TempsPrepa.add(document.getLong("temps"));
+                                TempsPrepa.add(document.getString("temps"));
+                                DescR.add(document.getString("Description"));
                             }
-                            intent.putExtra("listeNomR",listeNomRecette);
-                            intent.putExtra("lienR",lienImgRecette);
-                            intent.putExtra("listeIngreR",listeIngrRecette);
-                            intent.putExtra("Temps",TempsPrepa);
+                            intent.putExtra("listeNomR",listeNomRecette.toArray(new String[0]));
+                            intent.putExtra("lienR",lienImgRecette.toArray(new String[0]));
+                            intent.putExtra("listeIngreR",listeIngrRecette.toArray(new String[0]));
+                            intent.putExtra("Temps",TempsPrepa.toArray(new String[0]));
+                            intent.putExtra("Description",DescR.toArray(new String[0]));
+
                             Log.i("test", "2");
                             activity.startActivity(intent);
 
