@@ -1,5 +1,6 @@
 package com.example.applicationv3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 
 public class MusiqueFragment extends Fragment {
 
@@ -38,8 +41,8 @@ public class MusiqueFragment extends Fragment {
         ListeMusique.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(getActivity(),testSpot.class);
+                startActivity(intent);
             }
         });
         return rootView;
