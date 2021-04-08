@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CocktailsFragment extends Fragment {
@@ -27,6 +28,8 @@ public class CocktailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.cocktails_fragment_layout, container, false);
+
+
 
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
@@ -47,6 +50,15 @@ public class CocktailsFragment extends Fragment {
                 cocktail.putExtra("lien", getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
                 Log.i("test",getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
                 getActivity().startActivity(cocktail);
+            }
+        });
+        FloatingActionButton ajout=rootView.findViewById(R.id.ajoutCocktail);
+        ajout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent proposition=new Intent(getContext(), Proposition.class);
+                proposition.putExtra("type","Cocktail");
+                startActivity(proposition);
             }
         });
         return rootView;

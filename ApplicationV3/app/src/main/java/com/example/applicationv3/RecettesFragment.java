@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class RecettesFragment extends Fragment {
@@ -27,6 +28,15 @@ public class RecettesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recettes_fragment_layout, container, false);
+        FloatingActionButton ajout=rootView.findViewById(R.id.ajoutRecette);
+        ajout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent proposition=new Intent(getContext(), Proposition.class);
+                proposition.putExtra("type","Recette");
+                startActivity(proposition);
+            }
+        });
 
         ListeRecettes = rootView.findViewById(R.id.ListeRecettes);
         noms_recettes = getActivity().getIntent().getExtras().getStringArray("listeNomR");
@@ -49,6 +59,8 @@ public class RecettesFragment extends Fragment {
 
             }
         });
+
         return rootView;
     }
+
 }
