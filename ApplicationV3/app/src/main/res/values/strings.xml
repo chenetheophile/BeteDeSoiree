@@ -113,16 +113,30 @@
         <item>Exemple5</item>
         <item>Exemple6</item>
     </string-array>
+
     <string name="title_activity_joueurs">Joueurs</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_l_g_local">LGLocal</string>
+    <string-array name="cartes_lg">
+        <item>Carte1</item>
+        <item>Carte2</item>
+        <item>Carte3</item>
+    </string-array>
 
+    <string-array name="desc_cartes">
+        <item>Description1</item>
+        <item>Description2</item>
+        <item>Description3</item>
+    </string-array>
 
+    <string-array name="extensions">
+        <item>Extension1</item>
+        <item>Extension2</item>
+        <item>Extension3</item>
+    </string-array>
+
+    <string-array name="desc_ext">
+        <item>Description1</item>
+        <item>Description2</item>
+        <item>Description3</item>
+    </string-array>
 </resources>

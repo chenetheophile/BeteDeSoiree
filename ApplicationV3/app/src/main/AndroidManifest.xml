@@ -12,7 +12,7 @@
         <activity android:name=".affichage_recette"></activity>
         <activity
             android:name=".LGLocal"
-            android:label="@string/title_activity_l_g_local"
+            android:label="LGLocal"
             android:theme="@style/Theme.ApplicationV3.NoActionBar" />
         <activity android:name=".Loup_Garou" />
         <activity
