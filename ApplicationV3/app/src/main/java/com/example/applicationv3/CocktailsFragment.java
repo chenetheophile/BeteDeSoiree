@@ -39,9 +39,9 @@ public class CocktailsFragment extends Fragment {
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
-        //Si génération d'erreur ici Regarde dans le logcat en cherchant "test" Retiens le dernier chiffre puis vérifie que le startActivity de BDD (ligne 93 OU 123) soit bien après le Log du dernier chiffre.
-        //S'il n'est pas à la bonne place déplace le
-        /*
+        /*Si génération d'erreur ici Regarde dans le logcat en cherchant "test" Retiens le dernier chiffre puis vérifie que le startActivity de BDD (ligne 93 OU 123) soit bien après le Log du dernier chiffre.
+        *S'il n'est pas à la bonne place déplace le
+        *
         *  L'erreur vient d'un problème de thread que j'arrive pas à résoudre.
         *
         *
