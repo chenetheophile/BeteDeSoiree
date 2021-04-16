@@ -34,11 +34,18 @@ public class CocktailsFragment extends Fragment {
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
         detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
+
         desc_cocktails = getActivity().getIntent().getExtras().getStringArray("Description");
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
-
+        //Si génération d'erreur ici Regarde dans le logcat en cherchant "test" Retiens le dernier chiffre puis vérifie que le startActivity de BDD (ligne 93 OU 123) soit bien après le Log du dernier chiffre.
+        //S'il n'est pas à la bonne place déplace le
+        /*
+        *  L'erreur vient d'un problème de thread que j'arrive pas à résoudre.
+        *
+        *
+        * */
         ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -90,6 +90,7 @@ public class BDD {
                             intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
                             intent.putExtra("Description",DescC.toArray(new String[0]));
                             Log.i("test", "1");
+                            activity.startActivity(intent);
 
                         }
 
@@ -118,9 +119,8 @@ public class BDD {
                             intent.putExtra("listeIngreR",listeIngrRecette.toArray(new String[0]));
                             intent.putExtra("Temps",TempsPrepa.toArray(new String[0]));
                             intent.putExtra("Description",DescR.toArray(new String[0]));
-
                             Log.i("test", "2");
-                            activity.startActivity(intent);
+
 
                         }
                     }
