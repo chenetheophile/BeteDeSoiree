@@ -10,8 +10,7 @@
         android:theme="@style/Theme.ApplicationV3">
         <activity android:name=".Proposition"></activity>
         <activity android:name=".testSpot" />
-        <activity android:name=".affichage_cocktail" />
-        <activity android:name=".affichage_recette" />
+        <activity android:name=".affichage_Recette" />
         <activity
             android:name=".LGLocal"
             android:label="@string/title_activity_l_g_local"
@@ -34,5 +33,6 @@
         </activity>
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission." />
     <uses-feature android:name="android.hardware.camera" />
 </manifest>

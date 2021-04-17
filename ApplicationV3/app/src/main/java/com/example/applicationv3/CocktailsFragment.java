@@ -49,13 +49,11 @@ public class CocktailsFragment extends Fragment {
         ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent cocktail = new Intent(getActivity(), affichage_cocktail.class);
-                cocktail.putExtra("boisson",detail_cocktails[position] );
+                Intent cocktail = new Intent(getActivity(), affichage_Recette.class);
+                cocktail.putExtra("Ingredient",detail_cocktails[position] );
                 cocktail.putExtra("Nom", noms_cocktails[position]);
                 cocktail.putExtra("lien", getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
-                Log.i("test",getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
+
                 getActivity().startActivity(cocktail);
             }
         });

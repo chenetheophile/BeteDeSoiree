@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public class RecettesFragment extends Fragment {
 
@@ -49,12 +48,12 @@ public class RecettesFragment extends Fragment {
         ListeRecettes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(view, "Cliqué : " + String.valueOf(jeuxAdapter.getItem(position)), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent recipe= new Intent(getActivity(), affichage_recette.class);
+                Intent recipe= new Intent(getActivity(), affichage_Recette.class);
+
                 recipe.putExtra("Nom",noms_recettes[position]);
-                recipe.putExtra("nourriture",getActivity().getIntent().getExtras().getStringArray("listeIngreR")[position]);
+                recipe.putExtra("Ingredient",getActivity().getIntent().getExtras().getStringArray("listeIngreR")[position]);
                 recipe.putExtra("lien",getActivity().getIntent().getExtras().getStringArray("lienR")[position]);
+
                 getActivity().startActivity(recipe);
 
             }
