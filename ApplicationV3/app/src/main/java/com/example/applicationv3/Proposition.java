@@ -1,23 +1,21 @@
 package com.example.applicationv3;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class Proposition extends AppCompatActivity {
 
@@ -28,6 +26,8 @@ public class Proposition extends AppCompatActivity {
 
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
+
+        EditText nomRecettePro=findViewById(R.id.NomRecettePropo);
 
         ImageView img=findViewById(R.id.photo);
         img.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +45,13 @@ public class Proposition extends AppCompatActivity {
 
         });
 
+        Button envoi=findViewById(R.id.envoyer);
+        envoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendProp();
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -54,5 +61,12 @@ public class Proposition extends AppCompatActivity {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(photo);
         }
+    }
+    private void sendProp(){
+        String Email="chene.theophile@gmail.com";
+        String Subject="slt";
+        String mess="lol";
+        JavaMailAPI javaMailAPI=new JavaMailAPI(this,Email,Subject, mess);
+        javaMailAPI.execute();
     }
 }
