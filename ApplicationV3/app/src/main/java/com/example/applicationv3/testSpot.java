@@ -56,6 +56,7 @@ public class testSpot extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        Log.i("Spotify","Decconection");
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
     }
 
