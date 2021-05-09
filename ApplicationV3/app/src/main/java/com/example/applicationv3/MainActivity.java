@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 public class MainActivity extends AppCompatActivity {
     private BDD bdd=new BDD();
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 bdd.getDocument(getApplicationContext());
             }
         });
@@ -28,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         param.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 par.setVisibility(View.VISIBLE);
             }
         });
     }
+
 }

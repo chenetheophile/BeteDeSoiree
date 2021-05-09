@@ -17,13 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class Proposition extends AppCompatActivity {
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+public class Proposition extends AppCompatActivity {
+    private FirebaseUser usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposition);
-
+        FloatingActionButton addBDD=findViewById(R.id.addB);
+        addBDD.setVisibility(View.GONE);
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
 
@@ -52,6 +57,9 @@ public class Proposition extends AppCompatActivity {
                 sendProp();
             }
         });
+        if(FirebaseAuth.getInstance().getCurrentUser().getUid()=="EhyhGe5VcXPlnoOFTIgXtwehLw33"){
+            addBDD.setVisibility(View.VISIBLE);
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
