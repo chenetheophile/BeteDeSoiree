@@ -1,10 +1,12 @@
 package com.example.applicationv3;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Joueurs extends AppCompatActivity {
@@ -29,13 +32,17 @@ public class Joueurs extends AppCompatActivity {
     int minJoueurs = 2;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter joueursAdapter;
+    public static HashMap<Integer, String> nomsJoueurs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (nomsJoueurs == null){
+            nomsJoueurs = new HashMap<>();
+        }
         setContentView(R.layout.activity_joueurs);
 
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         int IdJeu = getIntent().getExtras().getInt("IdJeu");
         minJoueurs = getResources().getIntArray(R.array.min_joueurs)[IdJeu];
@@ -66,10 +73,9 @@ public class Joueurs extends AppCompatActivity {
                 nbJoueurs++;
                 Noms.add("Nom j" + String.valueOf(Noms.size() + 1));
                 SAM.add("SAM");
+                nomsJoueurs.remove(Noms.size());
                 images.add(imageList[new Random().nextInt(5)]);
                 joueursAdapter.notifyDataSetChanged();
-                Snackbar.make(v, "+1", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 
@@ -78,12 +84,11 @@ public class Joueurs extends AppCompatActivity {
             public void onClick(View v) {
                 if (nbJoueurs > minJoueurs) {
                     nbJoueurs--;
+                    nomsJoueurs.remove(Noms.size() - 1);
                     Noms.remove(Noms.size() - 1);
                     SAM.remove(SAM.size() - 1);
                     images.remove(images.size() - 1);
                     joueursAdapter.notifyDataSetChanged();
-                    Snackbar.make(v, "-1", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
                 }
             }
         });
@@ -91,7 +96,6 @@ public class Joueurs extends AppCompatActivity {
         SendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (IdJeu) {
                     case (0):
                         Intent startIntent = new Intent(getApplicationContext(), ActionVerite.class);

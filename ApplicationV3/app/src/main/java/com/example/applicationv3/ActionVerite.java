@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.HashMap;
+
 public class ActionVerite extends AppCompatActivity {
 
     private int level = 1;
@@ -63,7 +65,7 @@ public class ActionVerite extends AppCompatActivity {
                 } else if (Tours5RadioButton.isChecked()){
                     tours = 10;
                 }
-                Snackbar.make(v, "Niveau : " + String.valueOf(level) + ", tours : " + String.valueOf(tours), Snackbar.LENGTH_LONG)
+                Snackbar.make(v, Joueurs.nomsJoueurs.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

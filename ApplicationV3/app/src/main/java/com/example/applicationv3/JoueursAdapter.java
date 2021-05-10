@@ -28,7 +28,6 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
     ArrayList<String> Noms = new ArrayList<>();
     ArrayList<String> SAM = new ArrayList<>();
     ArrayList<Integer> images = new ArrayList<>();
-    HashMap<Integer, String> nomsJoueurs = new HashMap<>();
     Context context;
 
     public JoueursAdapter(Context c, ArrayList<String> n, ArrayList<String> s, ArrayList<Integer> i){
@@ -48,7 +47,15 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
 
     @Override
     public void onBindViewHolder(@NonNull JoueursHolder holder, int position) {
+        if (position == 0) {
+            holder.nomJoueurEditText.requestFocus();
+        }
         holder.nomJoueurEditText.setHint(Noms.get(position));
+        if (Joueurs.nomsJoueurs.containsKey(position)){
+            holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));
+        } else {
+            holder.nomJoueurEditText.setText("");
+        }
         holder.JoueurImageView.setImageResource(images.get(position));
         holder.samCheckBox.setText(SAM.get(position));
 
@@ -66,19 +73,18 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void afterTextChanged(Editable s) {
-                String value = nomsJoueurs.get(position);
+                String value = Joueurs.nomsJoueurs.get(position);
                 if(value!=null){
-                    nomsJoueurs.replace(position, value, holder.nomJoueurEditText.getText().toString());
+                    Joueurs.nomsJoueurs.replace(position, holder.nomJoueurEditText.getText().toString());
                 } else {
-                    if (nomsJoueurs.containsKey(position)){
-                        nomsJoueurs.replace(position, value, holder.nomJoueurEditText.getText().toString());
+                    if (Joueurs.nomsJoueurs.containsKey(position)){
+                        Joueurs.nomsJoueurs.replace(position, holder.nomJoueurEditText.getText().toString());
                     } else {
-                        nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
+                        Joueurs.nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
                     }
                 }
             }
         });
-
     }
 
     @Override
