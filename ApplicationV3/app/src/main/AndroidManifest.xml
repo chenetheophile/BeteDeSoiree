@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationV3">
-        <activity android:name=".affichage_recette"></activity>
+        <activity android:name=".AVJeu"></activity>
+        <activity android:name=".ReglesJeu" />
+        <activity android:name=".ActionVerite" />
+        <activity android:name=".affichage_recette" />
         <activity
             android:name=".LGLocal"
             android:label="LGLocal"

@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Joueurs">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ListeJoueurs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/SendActionButton"
         android:layout_width="wrap_content"
@@ -17,16 +25,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_send" />
-
-    <ListView
-        android:id="@+id/ListeJoueurs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/AddActionButton"

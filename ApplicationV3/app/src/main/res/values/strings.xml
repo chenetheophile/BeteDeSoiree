@@ -8,9 +8,15 @@
 
 
     <string-array name="noms_jeux">
-        <item>Action ou Vérité</item>
+        <item>Action ou Vérité ?</item>
         <item>Palmier</item>
         <item>Loup Garou</item>
+    </string-array>
+
+    <string-array name="desc_jeux">
+        <item>Choisissez entre Action et Vérité et laissez le hasard décider de votre sort...</item>
+        <item>Piochez une carte au hasard et réalisez l action correspondante.</item>
+        <item>Chaque joueur a un rôle et un objectif. Survivre, protéger le village, ou dévorer les habitants...</item>
     </string-array>
 
     <string-array name="joueurs_jeux">
