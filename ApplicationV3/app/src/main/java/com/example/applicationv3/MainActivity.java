@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 
 public class MainActivity extends AppCompatActivity {
-    private BDD bdd=new BDD();
+    private BDD bdd=new BDD(null);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

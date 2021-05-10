@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CocktailsFragment extends Fragment {
 
@@ -39,13 +40,6 @@ public class CocktailsFragment extends Fragment {
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
-        /*Si génération d'erreur ici Regarde dans le logcat en cherchant "test" Retiens le dernier chiffre puis vérifie que le startActivity de BDD (ligne 93 OU 123) soit bien après le Log du dernier chiffre.
-        *S'il n'est pas à la bonne place déplace le
-        *
-        *  L'erreur vient d'un problème de thread que j'arrive pas à résoudre.
-        *
-        *
-        * */
         ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -63,6 +57,7 @@ public class CocktailsFragment extends Fragment {
             public void onClick(View v) {
                 Intent proposition=new Intent(getContext(), Proposition.class);
                 proposition.putExtra("type","Cocktail");
+                proposition.putExtra("User",(FirebaseUser)getActivity().getIntent().getExtras().get("User"));
                 startActivity(proposition);
             }
         });

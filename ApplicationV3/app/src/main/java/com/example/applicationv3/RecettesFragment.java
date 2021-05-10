@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RecettesFragment extends Fragment {
 
@@ -33,6 +34,7 @@ public class RecettesFragment extends Fragment {
             public void onClick(View v) {
                 Intent proposition=new Intent(getContext(), Proposition.class);
                 proposition.putExtra("type","Recette");
+                proposition.putExtra("User",(FirebaseUser)getActivity().getIntent().getExtras().get("User"));
                 startActivity(proposition);
             }
         });

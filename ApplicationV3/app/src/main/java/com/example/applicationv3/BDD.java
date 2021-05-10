@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -16,8 +17,10 @@ import java.util.Map;
 
 public class BDD {
     private FirebaseFirestore base;
-    public BDD(){
-    this.base=FirebaseFirestore.getInstance();
+    private FirebaseUser User;
+    public BDD(FirebaseUser usr){
+        this.User=usr;
+        this.base=FirebaseFirestore.getInstance();
     }
 
     public FirebaseFirestore getBDD(){
@@ -46,6 +49,7 @@ public class BDD {
     }
     public void getDocument(Context activity){
         Intent intent=new Intent();
+        intent.putExtra("User",User);
         FirebaseFirestore base=this.getBDD();
         intent.setClass(activity,MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -81,7 +85,6 @@ public class BDD {
                             intent.putExtra("lienC",lienImgCocktail.toArray(new String[0]));
                             intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
                             intent.putExtra("Description",DescC.toArray(new String[0]));
-                            Log.i("test", "1");
                             base.collection("recette")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -102,7 +105,6 @@ public class BDD {
                                                 intent.putExtra("listeIngreR",listeIngrRecette.toArray(new String[0]));
                                                 intent.putExtra("Temps",TempsPrepa.toArray(new String[0]));
                                                 intent.putExtra("Description",DescR.toArray(new String[0]));
-                                                Log.i("test", "2");
                                                 activity.startActivity(intent);
 
                                             }

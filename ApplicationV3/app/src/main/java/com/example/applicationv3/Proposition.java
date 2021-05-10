@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Proposition extends AppCompatActivity {
-    private FirebaseUser usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class Proposition extends AppCompatActivity {
         addBDD.setVisibility(View.GONE);
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
-
+        FirebaseUser usr= (FirebaseUser) getIntent().getExtras().get("User");
         EditText nomRecettePro=findViewById(R.id.NomRecettePropo);
 
         ImageView img=findViewById(R.id.photo);
@@ -57,8 +57,13 @@ public class Proposition extends AppCompatActivity {
                 sendProp();
             }
         });
-        if(FirebaseAuth.getInstance().getCurrentUser().getUid()=="EhyhGe5VcXPlnoOFTIgXtwehLw33"){
-            addBDD.setVisibility(View.VISIBLE);
+        if(usr!=null){
+            Log.i("usr",usr.getUid());
+            if(usr.getUid().contentEquals("EhyhGe5VcXPlnoOFTIgXtwehLw33")){
+                addBDD.setVisibility(View.VISIBLE);
+            }
+        }else{
+            Log.i("usr","null");
         }
     }
     @Override
