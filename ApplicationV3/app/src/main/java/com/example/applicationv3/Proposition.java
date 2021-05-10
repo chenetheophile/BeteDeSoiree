@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -20,10 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.io.File;
 
 public class Proposition extends AppCompatActivity {
     private  EditText nomRecettePro;
@@ -54,11 +50,12 @@ public class Proposition extends AppCompatActivity {
                 if (ContextCompat.checkSelfPermission(Proposition.this, Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_DENIED){
                     ActivityCompat.requestPermissions( Proposition.this,new String[]{Manifest.permission.CAMERA}, 0);
+                img.callOnClick();
+                }else {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    int REQUEST_ID_IMAGE_CAPTURE = 100;
+                    startActivityForResult(intent, REQUEST_ID_IMAGE_CAPTURE);
                 }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                int REQUEST_ID_IMAGE_CAPTURE = 100;
-                startActivityForResult(intent, REQUEST_ID_IMAGE_CAPTURE);
-
             }
 
         });

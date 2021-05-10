@@ -1,26 +1,17 @@
 package com.example.applicationv3.ui.login;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.applicationv3.BDD;
 import com.example.applicationv3.R;
@@ -55,9 +46,18 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {//si appui sur le bouton va connecter l'user/lui creer un compte
             @Override
             public void onClick(View v) {
-                EmailPassword Connexion=new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
-                if (Connexion.getEtat()){
-                    new BDD(Connexion.getUser()).getDocument(getActivity());//une fois connecter passe a la suite de l'app
+                if((passwordEditText.getText().toString().length())>=6){
+                    EmailPassword Connexion=new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (Connexion.getEtat()){
+                        new BDD(Connexion.getUser()).getDocument(getActivity());//une fois connecter passe a la suite de l'app
+                    }
+                }else{
+                    Toast.makeText(getView().getContext(),"Le mot de passe doit contenir au moins 6 caractère",Toast.LENGTH_LONG).show();
                 }
             }
         });
