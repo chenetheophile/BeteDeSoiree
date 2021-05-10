@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -22,17 +23,29 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
+
 public class Proposition extends AppCompatActivity {
+    private  EditText nomRecettePro;
+    private  EditText Desc;
+    private  Bitmap photo;
+    private  EditText Ingr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposition);
+
         FloatingActionButton addBDD=findViewById(R.id.addB);
         addBDD.setVisibility(View.GONE);
+
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
+
         FirebaseUser usr= (FirebaseUser) getIntent().getExtras().get("User");
-        EditText nomRecettePro=findViewById(R.id.NomRecettePropo);
+
+        nomRecettePro=findViewById(R.id.NomRecettePropo);
+        Desc=findViewById(R.id.DescriptionPropo);
+        Ingr=findViewById(R.id.IngrRecettePropo);
 
         ImageView img=findViewById(R.id.photo);
         img.setOnClickListener(new View.OnClickListener() {
@@ -71,15 +84,15 @@ public class Proposition extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             ImageView img=findViewById(R.id.photo);
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            photo = (Bitmap) data.getExtras().get("data");
             img.setImageBitmap(photo);
         }
     }
     private void sendProp(){
         String Email="chene.theophile@gmail.com";
-        String Subject="slt";
-        String mess="lol";
-        JavaMailAPI javaMailAPI=new JavaMailAPI(this,Email,Subject, mess);
+        String Subject="Proposition recette";
+        String mess=nomRecettePro.getText().toString()+"\n"+Ingr.getText().toString()+"\n"+Desc.getText().toString();
+        JavaMailAPI javaMailAPI=new JavaMailAPI(this,Email,Subject, mess,photo);
         javaMailAPI.execute();
     }
 }
