@@ -45,7 +45,7 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Void doInBackground(Void... voids) {//envoi un mail a l'adresse en arriere plan pour que l'utilisateur puisse suggerer des recette
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.socketFactory.port", "465");

@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         View par=findViewById(R.id.parametrefrag);
-        par.setVisibility(View.GONE);
+
         Button StartButton =findViewById(R.id.StartButton);
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
                 bdd.getDocument(getApplicationContext());
             }
         });
+
         ImageButton param=findViewById(R.id.parametre);
+
         par.setTag(par.getVisibility());
         par.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            //check si la la page des param est devant ou non
             @Override
             public void onGlobalLayout() {
                 int newVis = par.getVisibility();

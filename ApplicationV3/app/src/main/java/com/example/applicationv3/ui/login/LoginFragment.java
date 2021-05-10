@@ -44,19 +44,20 @@ public class LoginFragment extends Fragment {
         final EditText passwordEditText = view.findViewById(R.id.password);
         final Button loginButton = view.findViewById(R.id.login);
         final ImageButton fermer=view.findViewById(R.id.fermeLogin);
-        fermer.setOnClickListener(new View.OnClickListener() {
+
+        fermer.setOnClickListener(new View.OnClickListener() {//si on click sur la fleche ferme la fenetre des param
             @Override
             public void onClick(View v) {
                 view.setVisibility(View.GONE);
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {//si appui sur le bouton va connecter l'user/lui creer un compte
             @Override
             public void onClick(View v) {
                 EmailPassword Connexion=new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
                 if (Connexion.getEtat()){
-                    new BDD(Connexion.getUser()).getDocument(getActivity());
+                    new BDD(Connexion.getUser()).getDocument(getActivity());//une fois connecter passe a la suite de l'app
                 }
             }
         });

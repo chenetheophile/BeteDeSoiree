@@ -50,7 +50,7 @@ public class Proposition extends AppCompatActivity {
         ImageView img=findViewById(R.id.photo);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//si il veut prendre une photo verifier que la permission est accordé et ouvre l'appareil photo ensuite
                 if (ContextCompat.checkSelfPermission(Proposition.this, Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_DENIED){
                     ActivityCompat.requestPermissions( Proposition.this,new String[]{Manifest.permission.CAMERA}, 0);
@@ -70,7 +70,7 @@ public class Proposition extends AppCompatActivity {
                 sendProp();
             }
         });
-        if(usr!=null){
+        if(usr!=null){//si l'utilisateur est celui de ce UID alors afficher le boutons d'add dans la DBB (admins seulement)
             Log.i("usr",usr.getUid());
             if(usr.getUid().contentEquals("EhyhGe5VcXPlnoOFTIgXtwehLw33")){
                 addBDD.setVisibility(View.VISIBLE);
@@ -80,7 +80,7 @@ public class Proposition extends AppCompatActivity {
         }
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//si jamais l utilisateur veut prendre une photo la prend et l affiche en tant que recette de photo
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             ImageView img=findViewById(R.id.photo);
@@ -88,7 +88,7 @@ public class Proposition extends AppCompatActivity {
             img.setImageBitmap(photo);
         }
     }
-    private void sendProp(){
+    private void sendProp(){//envoi la proposition par mail
         String Email="chene.theophile@gmail.com";
         String Subject="Proposition recette";
         String mess=nomRecettePro.getText().toString()+"\n"+Ingr.getText().toString()+"\n"+Desc.getText().toString();

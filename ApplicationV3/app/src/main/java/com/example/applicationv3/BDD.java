@@ -27,7 +27,7 @@ public class BDD {
         return this.base;//récupere la BDD
     }
 
-    public void creerChamp( String nomCollection, String nomDocument, ArrayList<String> nomChamp, ArrayList<String> valeur) throws Exception {
+    public void creerChamp( String nomCollection, String nomDocument, ArrayList<String> nomChamp, ArrayList<String> valeur) throws Exception {//sert a creer un champ dans un document de la DB servira pour les admins
         FirebaseFirestore base=this.getBDD();
         if(nomChamp.size()!=valeur.size()){
             throw new Exception("Difference du nombre d'element entre nomChamp et Valeur");
@@ -47,7 +47,7 @@ public class BDD {
                     });
         }
     }
-    public void getDocument(Context activity){
+    public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
         Intent intent=new Intent();
         intent.putExtra("User",User);
         FirebaseFirestore base=this.getBDD();

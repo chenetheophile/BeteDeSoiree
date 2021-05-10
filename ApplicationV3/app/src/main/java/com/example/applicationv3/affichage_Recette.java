@@ -38,6 +38,7 @@ public class affichage_Recette extends AppCompatActivity {
         }else{
             fav.setChecked(false);
         }
+        //verifie que l'utilisateur a deja coché la recette dans une precedente ouverture et coloris l etoile en fonction
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,13 +46,13 @@ public class affichage_Recette extends AppCompatActivity {
                     sauver((String) Recette.getText(),true,true);
                 }else{
                     supprimer((String) Recette.getText());
-                }
+                }//ajoute ou supprime une recette des favoris
             }
         });
         ImageView imgRecette=findViewById(R.id.img_recette);
         Picasso.get().load(getIntent().getExtras().getString("lien")).into(imgRecette);
     }
-    private boolean verifier(String recette) {
+    private boolean verifier(String recette) {//parcours le fichier des fav et verifie que le nom y est si oui renvoi vrai faux sinon
         boolean verif=false;
 
         FileInputStream fis = null;
@@ -71,7 +72,7 @@ public class affichage_Recette extends AppCompatActivity {
         }
         return verif;
     }
-    private void sauver(String recette,boolean ajout,boolean mess){
+    private void sauver(String recette,boolean ajout,boolean mess){//ajoute une recette a la fin du fichier des fav
         if(mess){
         Toast.makeText(getApplicationContext(),recette+" Sauvegardé",Toast.LENGTH_SHORT).show();
         }
@@ -91,7 +92,7 @@ public class affichage_Recette extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-        private void supprimer(String recette){
+        private void supprimer(String recette){//supprime une recette des fav
         Toast.makeText(getApplicationContext(),recette+" retiré des favoris",Toast.LENGTH_SHORT).show();
         String liste="\n";
         if(verifier(recette)){

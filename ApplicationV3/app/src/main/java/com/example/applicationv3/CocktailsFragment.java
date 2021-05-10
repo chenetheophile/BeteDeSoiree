@@ -30,8 +30,7 @@ public class CocktailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.cocktails_fragment_layout, container, false);
 
-
-
+        //affiche les cocktails selon un modèle qu on adapte et recupere les cocktails etc depuis les documents recuperer de la bdd
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
         detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
@@ -41,7 +40,7 @@ public class CocktailsFragment extends Fragment {
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
         ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
+            @Override//si on click sur une recette affiche son detail
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent cocktail = new Intent(getActivity(), affichage_Recette.class);
                 cocktail.putExtra("Ingredient",detail_cocktails[position] );

@@ -17,7 +17,7 @@ public class testSpot extends AppCompatActivity {
     private static final String CLIENT_ID = "32b4234974454d2f80147b49495c162f";
     private static final String REDIRECT_URI = "http://com.example.applicationv3/callback";
     private SpotifyAppRemote mSpotifyAppRemote;
-
+//code recuperer sur spotify developpeur. Pour l instant lorsqu on lance une activité ca connecte a spotify et lance une musique aléatoire
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
