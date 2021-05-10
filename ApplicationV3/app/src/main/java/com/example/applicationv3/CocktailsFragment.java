@@ -33,10 +33,14 @@ public class CocktailsFragment extends Fragment {
         //affiche les cocktails selon un modèle qu on adapte et recupere les cocktails etc depuis les documents recuperer de la bdd
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
+        desc_cocktails = getActivity().getIntent().getExtras().getStringArray("Description");
         detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
 
-        desc_cocktails = getActivity().getIntent().getExtras().getStringArray("Description");
 
+        for(int i=0;i<desc_cocktails.length;i++){
+            Log.i("Ajout",desc_cocktails[i]);
+            Log.i("Ajout", String.valueOf(i));
+        }
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
         ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {

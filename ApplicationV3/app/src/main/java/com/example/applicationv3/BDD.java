@@ -22,6 +22,10 @@ public class BDD {
         this.User=usr;
         this.base=FirebaseFirestore.getInstance();
     }
+    public  BDD(){
+        this.User=null;
+        this.base=FirebaseFirestore.getInstance();
+    }
 
     public FirebaseFirestore getBDD(){
         return this.base;//récupere la BDD
@@ -73,18 +77,25 @@ public class BDD {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
+                            int nbDoc=0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                nbDoc+=1;
                                 listeNomCocktail.add(document.getId());
                                 lienImgCocktail.add(document.getString("lien"));
                                 listeIngrCocktail.add(document.getString("Ingredient"));
                                 DescC.add(document.getString("Description"));
 
                             }
+
                             intent.putExtra("listeNomC",listeNomCocktail.toArray(new String[0]));
                             intent.putExtra("lienC",lienImgCocktail.toArray(new String[0]));
-                            intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
                             intent.putExtra("Description",DescC.toArray(new String[0]));
+                            intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
+
+                            for(int i=0;i<DescC.toArray(new String[0]).length;i++){
+                                Log.i("Ajout",DescC.toArray(new String[0])[i]);
+                                Log.i("Ajout", String.valueOf(i));
+                            }
                             base.collection("recette")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

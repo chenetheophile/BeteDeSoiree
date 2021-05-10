@@ -13,13 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.applicationv3.ui.login.LoginFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
     private  EditText nomRecettePro;
@@ -75,7 +79,27 @@ public class Proposition extends AppCompatActivity {
         }else{
             Log.i("usr","null");
         }
+        addBDD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nomRecettePro.length()!=0&&Desc.length()!=0&&Ingr.length()!=0){
+                    ArrayList<String>champ=new ArrayList<>();
+                    ArrayList<String>val=new ArrayList<>();
+                    champ.add("Description");
+                    champ.add("Ingredient");
+                    val.add(Desc.getText().toString());
+                    val.add(Ingr.getText().toString());
+                    try {
+                        new BDD().creerChamp(getIntent().getExtras().getString("type").toLowerCase(),nomRecettePro.getText().toString(),champ,val);
+                        Toast.makeText(getApplicationContext(),"Recette ajouté à la BDD",Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {//si jamais l utilisateur veut prendre une photo la prend et l affiche en tant que recette de photo
         super.onActivityResult(requestCode, resultCode, data);
