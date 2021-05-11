@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.applicationv3.BDD;
 import com.example.applicationv3.R;
 import com.example.applicationv3.data.EmailPassword;
 
@@ -47,15 +46,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if((passwordEditText.getText().toString().length())>=6){
-                    EmailPassword Connexion=new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (Connexion.getEtat()){
-                        new BDD(Connexion.getUser()).getDocument(getActivity());//une fois connecter passe a la suite de l'app
-                    }
+                    new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
+
                 }else{
                     Toast.makeText(getView().getContext(),"Le mot de passe doit contenir au moins 6 caractère",Toast.LENGTH_LONG).show();
                 }

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.applicationv3.BDD;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -18,7 +19,7 @@ public class EmailPassword {
 
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth;
-    private boolean etatConn;
+    private boolean etatConn,erreur=false;
     private View window;
 
     public EmailPassword(String email, String password, View fenetre){
@@ -34,8 +35,12 @@ public class EmailPassword {
             signIn(email,password);
         }
     }
-
-
+    public boolean getError(){
+        return this.erreur;
+    }
+    public void setError(boolean err){
+        this.erreur=err;
+    }
     private void createAccount(String email, String password) {
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -45,10 +50,10 @@ public class EmailPassword {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            setEtatConn(true);
                             signIn(email,password);
                         } else {
                             Toast.makeText(window.getContext(),"Erreur d'inscription",Toast.LENGTH_LONG).show();
+                            setError(true);
                         }
                     }
                 });
@@ -61,7 +66,6 @@ public class EmailPassword {
         return usr;
 
     }
-
     private void signIn(String email, String password) {//check si l email et le mdp correspondent a un compte dans la db si oui ca connecte sinon ca cree un nouveau compte
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
@@ -71,15 +75,17 @@ public class EmailPassword {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-
+                                new BDD(getUser()).getDocument(window.getContext());//une fois connecter passe a la suite de l'app
                         } else {
                             String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                             switch (errorCode){
                                 case "ERROR_INVALID_EMAIL":
                                     Toast.makeText(window.getContext(), "Adresse mail non valide", Toast.LENGTH_LONG).show();
+                                    setError(true);
                                     break;
                                 case "ERROR_WRONG_PASSWORD":
                                     Toast.makeText(window.getContext(), "Mot de passe ou adresse mail non valide", Toast.LENGTH_LONG).show();
+                                    setError(true);
                                     break;
                                 default:
                                     createAccount(email,password);
@@ -101,7 +107,7 @@ public class EmailPassword {
 
     public void setEtatConn(boolean etatConn) {
         if (etatConn){
-//            window.setVisibility(View.GONE);
+            window.setVisibility(View.GONE);
         }
         this.etatConn = etatConn;
     }

@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.applicationv3.ui.login.LoginFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -73,7 +72,7 @@ public class Proposition extends AppCompatActivity {
         });
         if(usr!=null){//si l'utilisateur est celui de ce UID alors afficher le boutons d'add dans la DBB (admins seulement)
             Log.i("usr",usr.getUid());
-            if(usr.getUid().contentEquals("EhyhGe5VcXPlnoOFTIgXtwehLw33")){
+            if(usr.getUid().contentEquals("vVZZs4LYckheS6yevDNxuijgLih1")){
                 addBDD.setVisibility(View.VISIBLE);
             }
         }else{
