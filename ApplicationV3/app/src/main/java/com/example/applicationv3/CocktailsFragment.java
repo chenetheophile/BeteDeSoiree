@@ -1,6 +1,9 @@
 package com.example.applicationv3;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class CocktailsFragment extends Fragment {
 
@@ -23,7 +29,8 @@ public class CocktailsFragment extends Fragment {
     private String[] noms_cocktails;
     private String[] detail_cocktails;
     private String[] desc_cocktails;
-    int[] images = {R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground};
+    private String[] lien;
+    int[] images;
 
     @Nullable
     @Override
@@ -33,13 +40,13 @@ public class CocktailsFragment extends Fragment {
         //affiche les cocktails selon un modèle qu on adapte et recupere les cocktails etc depuis les documents recuperer de la bdd
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
-        desc_cocktails = getActivity().getIntent().getExtras().getStringArray("Description");
+        desc_cocktails = getActivity().getIntent().getExtras().getStringArray("DescriptionC");
         detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
-
-
-        for(int i=0;i<desc_cocktails.length;i++){
-            Log.i("Ajout",desc_cocktails[i]);
-            Log.i("Ajout", String.valueOf(i));
+        int taille=desc_cocktails.length;
+        lien=getActivity().getIntent().getExtras().getStringArray("lienC");
+        images=new int[noms_cocktails.length];
+        for(int i=0;i<noms_cocktails.length;i++){
+            images[i]=R.drawable.ic_launcher_foreground;
         }
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
         ListeCocktails.setAdapter(jeuxAdapter);
@@ -49,7 +56,7 @@ public class CocktailsFragment extends Fragment {
                 Intent cocktail = new Intent(getActivity(), affichage_Recette.class);
                 cocktail.putExtra("Ingredient",detail_cocktails[position] );
                 cocktail.putExtra("Nom", noms_cocktails[position]);
-                cocktail.putExtra("lien", getActivity().getIntent().getExtras().getStringArray("lienC")[position]);
+                cocktail.putExtra("lien", lien[position]);
 
                 getActivity().startActivity(cocktail);
             }

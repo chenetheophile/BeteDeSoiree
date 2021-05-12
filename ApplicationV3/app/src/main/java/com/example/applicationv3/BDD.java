@@ -77,9 +77,8 @@ public class BDD {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            int nbDoc=0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                nbDoc+=1;
+
                                 listeNomCocktail.add(document.getId());
                                 lienImgCocktail.add(document.getString("lien"));
                                 listeIngrCocktail.add(document.getString("Ingredient"));
@@ -89,13 +88,13 @@ public class BDD {
 
                             intent.putExtra("listeNomC",listeNomCocktail.toArray(new String[0]));
                             intent.putExtra("lienC",lienImgCocktail.toArray(new String[0]));
-                            intent.putExtra("Description",DescC.toArray(new String[0]));
+                            intent.putExtra("DescriptionC",DescC.toArray(new String[0]));
                             intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
 
-                            for(int i=0;i<DescC.toArray(new String[0]).length;i++){
-                                Log.i("Ajout",DescC.toArray(new String[0])[i]);
-                                Log.i("Ajout", String.valueOf(i));
-                            }
+//                            for(int i=0;i<DescC.toArray(new String[0]).length;i++){
+//                                Log.i("Ajout",DescC.toArray(new String[0])[i]);
+//                                Log.i("Ajout", String.valueOf(i));
+//                            }
                             base.collection("recette")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -115,7 +114,7 @@ public class BDD {
                                                 intent.putExtra("lienR",lienImgRecette.toArray(new String[0]));
                                                 intent.putExtra("listeIngreR",listeIngrRecette.toArray(new String[0]));
                                                 intent.putExtra("Temps",TempsPrepa.toArray(new String[0]));
-                                                intent.putExtra("Description",DescR.toArray(new String[0]));
+                                                intent.putExtra("DescriptionR",DescR.toArray(new String[0]));
                                                 activity.startActivity(intent);
 
                                             }

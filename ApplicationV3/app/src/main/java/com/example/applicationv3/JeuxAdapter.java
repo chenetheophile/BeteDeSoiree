@@ -2,6 +2,7 @@ package com.example.applicationv3;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,11 @@ public class JeuxAdapter extends BaseAdapter {
         String nom = noms_jeux[position];
         String detail = joueurs_jeux[position];
         String desc = equipement_jeux[position];
-
         NomJeuTextView.setText(nom);
         DetailJeuTextView.setText(detail);
         DescJeuTextView.setText(desc);
         ObjetImageView.setImageResource(images_jeux[position]);
+
         return v;
     }
 }

@@ -21,8 +21,7 @@ public class RecettesFragment extends Fragment {
     private String[] noms_recettes;
     private String[] detail_recettes;
     private String[] desc_recettes;
-    int[] images = {R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
-            R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground};
+    int[] images ;
 //voir cocktail la logique est strictement identique
     @Nullable
     @Override
@@ -42,8 +41,11 @@ public class RecettesFragment extends Fragment {
         ListeRecettes = rootView.findViewById(R.id.ListeRecettes);
         noms_recettes = getActivity().getIntent().getExtras().getStringArray("listeNomR");
         detail_recettes = getActivity().getIntent().getExtras().getStringArray("Temps");
-        desc_recettes = getActivity().getIntent().getExtras().getStringArray("Description");
-
+        desc_recettes = getActivity().getIntent().getExtras().getStringArray("DescriptionR");
+        images=new int[noms_recettes.length];
+        for(int i=0;i<noms_recettes.length;i++){
+            images[i]=R.drawable.ic_launcher_foreground;
+        }
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_recettes, detail_recettes, desc_recettes, images);
         ListeRecettes.setAdapter(jeuxAdapter);
 
