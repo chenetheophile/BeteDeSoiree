@@ -48,8 +48,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 fragment = new MusiqueFragment();
                 break;
-            default:
-                fragment=new rechercheFragment();
         }
         return fragment;
     }
