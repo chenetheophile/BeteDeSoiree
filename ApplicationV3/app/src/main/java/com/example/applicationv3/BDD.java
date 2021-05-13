@@ -57,20 +57,8 @@ public class BDD {
         FirebaseFirestore base=this.getBDD();
         intent.setClass(activity,MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        ArrayList<String> listeNomCocktail = new ArrayList<>();
-        ArrayList<String> listeNomRecette = new ArrayList<>();
-
-        ArrayList<String>lienImgRecette=new ArrayList<>();
-        ArrayList<String>lienImgCocktail=new ArrayList<>();
-
-        ArrayList<String>TempsPrepa=new ArrayList<>();
-
-        ArrayList<String>listeIngrCocktail=new ArrayList<>();
-        ArrayList<String>listeIngrRecette=new ArrayList<>();
-
-        ArrayList<String>DescR=new ArrayList<>();
-        ArrayList<String>DescC=new ArrayList<>();
+        ArrayList<Recette> cocktailArrayList=new ArrayList<>();
+        ArrayList<Recette> recetteArrayList=new ArrayList<>();
         base.collection("cocktail")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -78,23 +66,9 @@ public class BDD {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                listeNomCocktail.add(document.getId());
-                                lienImgCocktail.add(document.getString("lien"));
-                                listeIngrCocktail.add(document.getString("Ingredient"));
-                                DescC.add(document.getString("Description"));
-
+                                cocktailArrayList.add(new Recette(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description")));
                             }
-
-                            intent.putExtra("listeNomC",listeNomCocktail.toArray(new String[0]));
-                            intent.putExtra("lienC",lienImgCocktail.toArray(new String[0]));
-                            intent.putExtra("DescriptionC",DescC.toArray(new String[0]));
-                            intent.putExtra("listeIngreC",listeIngrCocktail.toArray(new String[0]));
-
-//                            for(int i=0;i<DescC.toArray(new String[0]).length;i++){
-//                                Log.i("Ajout",DescC.toArray(new String[0])[i]);
-//                                Log.i("Ajout", String.valueOf(i));
-//                            }
+                            intent.putExtra("Cocktail",cocktailArrayList);
                             base.collection("recette")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -104,17 +78,9 @@ public class BDD {
 
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                                    listeNomRecette.add(document.getId());
-                                                    lienImgRecette.add(document.getString("lien"));
-                                                    listeIngrRecette.add(document.getString("Ingredient"));
-                                                    TempsPrepa.add(document.getString("temps"));
-                                                    DescR.add(document.getString("Description"));
+                                                    recetteArrayList.add(new Recette(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("temps")));
                                                 }
-                                                intent.putExtra("listeNomR",listeNomRecette.toArray(new String[0]));
-                                                intent.putExtra("lienR",lienImgRecette.toArray(new String[0]));
-                                                intent.putExtra("listeIngreR",listeIngrRecette.toArray(new String[0]));
-                                                intent.putExtra("Temps",TempsPrepa.toArray(new String[0]));
-                                                intent.putExtra("DescriptionR",DescR.toArray(new String[0]));
+                                                intent.putExtra("Recette",recetteArrayList);
                                                 activity.startActivity(intent);
 
                                             }

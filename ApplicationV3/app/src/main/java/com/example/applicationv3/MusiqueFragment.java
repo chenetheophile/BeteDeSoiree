@@ -6,19 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
 
 public class MusiqueFragment extends Fragment {
 
-    private ListView ListeMusique;
+    private RecyclerView ListeMusique;
     private String[] noms_musique;
     private String[] detail_musique;
     private String[] desc_musique;
@@ -37,14 +35,14 @@ public class MusiqueFragment extends Fragment {
 
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_musique, detail_musique, desc_musique, images);
         ListeMusique.setAdapter(jeuxAdapter);
-
-        ListeMusique.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(),testSpot.class);
-                startActivity(intent);
-            }
-        });
+        ListeMusique.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ListeMusique.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent=new Intent(getActivity(),testSpot.class);
+//                startActivity(intent);
+//            }
+//        });
         return rootView;
     }
 }
