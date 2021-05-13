@@ -42,7 +42,7 @@ public class CocktailsFragment extends Fragment {
         noms_cocktails = getActivity().getIntent().getExtras().getStringArray("listeNomC");
         desc_cocktails = getActivity().getIntent().getExtras().getStringArray("DescriptionC");
         detail_cocktails = getActivity().getIntent().getExtras().getStringArray("listeIngreC");
-        int taille=desc_cocktails.length;
+
         lien=getActivity().getIntent().getExtras().getStringArray("lienC");
         images=new int[noms_cocktails.length];
         for(int i=0;i<noms_cocktails.length;i++){

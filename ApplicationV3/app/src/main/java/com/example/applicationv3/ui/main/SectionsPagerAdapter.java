@@ -1,7 +1,7 @@
 package com.example.applicationv3.ui.main;
 
-import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.applicationv3.BDD;
 import com.example.applicationv3.JeuxFragment;
 import com.example.applicationv3.CocktailsFragment;
-import com.example.applicationv3.MainActivity;
 import com.example.applicationv3.RecettesFragment;
 import com.example.applicationv3.MusiqueFragment;
 import com.example.applicationv3.R;
@@ -32,9 +30,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
+        Log.i("pos", String.valueOf(position));
         switch (position){
             case 0:
                 fragment = new JeuxFragment();
@@ -48,6 +48,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 fragment = new MusiqueFragment();
                 break;
+            default:
+                fragment=new rechercheFragment();
         }
         return fragment;
     }
