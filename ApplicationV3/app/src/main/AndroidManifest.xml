@@ -16,6 +16,7 @@
         <activity android:name=".ResultatAV" />
         <activity android:name=".AVJeu" />
         <activity android:name=".testSpot" />
+        <activity android:name=".ActionVerite" />
         <activity android:name=".affichage_Recette" />
         <activity
             android:name=".LGLocal"
