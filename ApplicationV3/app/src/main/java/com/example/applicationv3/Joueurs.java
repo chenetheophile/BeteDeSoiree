@@ -1,18 +1,24 @@
 package com.example.applicationv3;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Joueurs extends AppCompatActivity {
@@ -20,12 +26,14 @@ public class Joueurs extends AppCompatActivity {
 
     public static int nbJoueurs;
 
-    ArrayList<String> Noms = new ArrayList<>();
-    ArrayList<String> SAM = new ArrayList<>();
     ArrayList<Integer> images = new ArrayList<>();
+    ArrayList<String> joueurs = new ArrayList<>();
+
     int imageList[] = {R.drawable.happy, R.drawable.angry, R.drawable.shocked, R.drawable.cool, R.drawable.bored};
     int minJoueurs = 2;
-
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter joueursAdapter;
+    public static HashMap<Integer, String> nomsJoueurs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +42,40 @@ public class Joueurs extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        JoueursAdapter joueursAdapter = new JoueursAdapter(this, Noms, SAM, images);
-
         int IdJeu = getIntent().getExtras().getInt("IdJeu");
         minJoueurs = getResources().getIntArray(R.array.min_joueurs)[IdJeu];
-
-
-        nbJoueurs = minJoueurs;
-
+        if (nbJoueurs < minJoueurs) {
+            nbJoueurs = minJoueurs;
+        }
+        if (nomsJoueurs == null) {
+            nomsJoueurs = new HashMap<>();
+        }
         for (int i = 0; i < minJoueurs; i++) {
-            Noms.add("Nom j" + String.valueOf(i + 1));
-            SAM.add("SAM");
             images.add(imageList[new Random().nextInt(5)]);
         }
+
+        joueursAdapter = new JoueursAdapter(this, images);
 
         FloatingActionButton AddButton = (FloatingActionButton) findViewById(R.id.AddActionButton);
         FloatingActionButton RemoveButton = (FloatingActionButton) findViewById(R.id.RemoveActionButton);
         FloatingActionButton SendButton = (FloatingActionButton) findViewById(R.id.SendActionButton);
+
         RecyclerView ListeJoueurs = (RecyclerView) findViewById(R.id.ListeJoueurs);
+        ListeJoueurs.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        ListeJoueurs.setLayoutManager(layoutManager);
+        ListeJoueurs.setAdapter(joueursAdapter);
 
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nbJoueurs++;
-                Noms.add("Nom j" + String.valueOf(Noms.size() + 1));
-                SAM.add("SAM");
-                images.add(imageList[new Random().nextInt(5)]);
-                joueursAdapter.notifyDataSetChanged();
+                if (nbJoueurs < 18) {
+                    nbJoueurs++;
+                    images.add(imageList[new Random().nextInt(5)]);
+                    nomsJoueurs.clear();
+                    joueursAdapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -69,8 +84,7 @@ public class Joueurs extends AppCompatActivity {
             public void onClick(View v) {
                 if (nbJoueurs > minJoueurs) {
                     nbJoueurs--;
-                    Noms.remove(Noms.size() - 1);
-                    SAM.remove(SAM.size() - 1);
+                    nomsJoueurs.clear();
                     images.remove(images.size() - 1);
                     joueursAdapter.notifyDataSetChanged();
                 }
@@ -80,22 +94,35 @@ public class Joueurs extends AppCompatActivity {
         SendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int i = 0; i < nomsJoueurs.size(); i++) {
+                    if (joueurs.contains(nomsJoueurs.get(i))) {
+                        int a = 2;
+                        while (joueurs.contains(nomsJoueurs.get(i) + String.valueOf(a))){
+                            a++;
+                        }
+                        joueurs.add(nomsJoueurs.get(i) + String.valueOf(a));
+                    } else {
+                        joueurs.add(nomsJoueurs.get(i));
+                    }
+                }
                 switch (IdJeu) {
                     case (0):
-                        Snackbar.make(v, "Action ou vérité", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        Intent startIntent = new Intent(getApplicationContext(), ActionVerite.class);
+                        startIntent.putExtra("IdJeu", IdJeu);
+                        startIntent.putExtra("Joueurs", joueurs);
+                        startActivity(startIntent);
                         break;
                     case (1):
                         Snackbar.make(v, "Palmier", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         break;
                     case (2):
-                        startActivity(new Intent(getApplicationContext(), Loup_Garou.class));
+                        Intent intent = new Intent(getApplicationContext(), Loup_Garou.class);
+                        intent.putExtra("Joueurs", joueurs);
+                        startActivity(intent);
                         break;
                 }
             }
         });
-
-//        ListeJoueurs.setAdapter(joueursAdapter);
     }
 }

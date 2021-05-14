@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.applicationv3.ChoixCartes;
-import com.example.applicationv3.ChoixExtensions;
 import com.example.applicationv3.Repartition;
 
 public class LGAdapter extends FragmentPagerAdapter {

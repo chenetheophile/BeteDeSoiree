@@ -23,10 +23,6 @@ public class LGLocal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_l_g_local);
 
-        for (int i = 0; i < getResources().getStringArray(R.array.extensions).length; i++) {
-            extChoisies.add(false);
-        }
-
         PagerAdapter lgAdapter = new LGAdapter(getSupportFragmentManager(), 2);
 
         ViewPager viewPager = findViewById(R.id.view_pager2);
