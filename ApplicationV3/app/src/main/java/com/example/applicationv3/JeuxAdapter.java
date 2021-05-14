@@ -2,6 +2,7 @@ package com.example.applicationv3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     private ArrayList<Item>listerecette=new ArrayList<>();
     private Context context;
 
-    public  void recetteAdapter(ArrayList<Item> liste){
+    public void recetteAdapter(ArrayList<Item> liste){
         this.listerecette=liste;
         listepleine=new ArrayList<>(liste);
     }
@@ -63,12 +64,26 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cocktail = new Intent(context, affichage_Recette.class);
-//                cocktail.putExtra("Ingredient",detail_cocktails[position] );
-//                cocktail.putExtra("Nom", noms_cocktails[position]);
-//                cocktail.putExtra("lien", lien_img[position]);
-//
-//                startActivity(cocktail);
+                Intent intent;
+                switch (listepleine.get(position).getType()){
+                    case "Cocktail":
+                    case "Recette":
+                        intent=new Intent(context,affichage_Recette.class);
+                        intent.putExtra("Recette",listepleine.get(position));
+                        break;
+                    case "Jeux":
+                        intent=new Intent(context,Joueurs.class);
+                        intent.putExtra("IdJeu",position);
+                        break;
+                    case "Musique":
+                        intent=new Intent(context,testSpot.class);
+                        break;
+                    default:
+                        intent=null;
+                        break;
+
+                }
+                context.startActivity(intent);
             }
         });
 

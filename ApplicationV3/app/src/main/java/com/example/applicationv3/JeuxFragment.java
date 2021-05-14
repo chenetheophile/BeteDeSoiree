@@ -36,7 +36,7 @@ public class JeuxFragment extends Fragment {
         joueurs_jeux = getResources().getStringArray(R.array.joueurs_jeux);
         equipement_jeux = getResources().getStringArray(R.array.equipement_jeux);
         for(int i=0;i<noms_jeux.length;i++){
-            jeux.add(new Item("jeux",noms_jeux[i],joueurs_jeux[i],equipement_jeux[i],true));
+            jeux.add(new Item("Jeux",noms_jeux[i],joueurs_jeux[i],equipement_jeux[i],true));
         }
 //
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), jeux, images);

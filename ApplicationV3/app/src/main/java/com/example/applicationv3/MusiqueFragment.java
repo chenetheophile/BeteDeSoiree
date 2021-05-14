@@ -36,7 +36,7 @@ public class MusiqueFragment extends Fragment {
         desc_musique = getResources().getStringArray(R.array.desc_musique);
 
         for(int i=0;i<noms_musique.length;i++){
-            musique.add(new Item("musique",noms_musique[i],detail_musique[i],desc_musique[i],true));
+            musique.add(new Item("Musique",noms_musique[i],detail_musique[i],desc_musique[i],true));
         }
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), musique, images);
         ListeMusique.setAdapter(jeuxAdapter);

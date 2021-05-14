@@ -20,20 +20,21 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class affichage_Recette extends AppCompatActivity {
-
+    Item recette;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_recette);
+        recette=(Item)getIntent().getExtras().get("Recette");
 
         TextView txt=findViewById(R.id.listeIngredient);
-        txt.setText(getIntent().getExtras().getString("Ingredient"));
+        txt.setText(recette.getIngredient());
 
-        TextView Recette=findViewById(R.id.NomRecette);
-        Recette.setText(getIntent().getExtras().getString("Nom"));
+        TextView nomRecette=findViewById(R.id.NomRecette);
+        nomRecette.setText(recette.getNom());
 
         CheckBox fav=findViewById(R.id.fav);
-        if(verifier(Recette.getText().toString())) {
+        if(verifier(nomRecette.getText().toString())) {
             fav.setChecked(true);
         }else{
             fav.setChecked(false);
@@ -43,19 +44,19 @@ public class affichage_Recette extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(fav.isChecked()){
-                    sauver((String) Recette.getText(),true,true);
+                    sauver((String) nomRecette.getText(),true,true);
                 }else{
-                    supprimer((String) Recette.getText());
+                    supprimer((String) nomRecette.getText());
                 }//ajoute ou supprime une recette des favoris
             }
         });
         ImageView imgRecette=findViewById(R.id.img_recette);
-        Picasso.get().load(getIntent().getExtras().getString("lien")).into(imgRecette);
+        Picasso.get().load(recette.getLien()).into(imgRecette);
     }
     private boolean verifier(String recette) {//parcours le fichier des fav et verifie que le nom y est si oui renvoi vrai faux sinon
         boolean verif=false;
 
-        FileInputStream fis = null;
+        FileInputStream fis;
         try {
             fis = affichage_Recette.this.openFileInput("Fav");
             InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
@@ -96,7 +97,7 @@ public class affichage_Recette extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),recette+" retiré des favoris",Toast.LENGTH_SHORT).show();
         String liste="\n";
         if(verifier(recette)){
-            FileInputStream fis = null;
+            FileInputStream fis;
             try {
                 fis = affichage_Recette.this.openFileInput("Fav");
                 InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);

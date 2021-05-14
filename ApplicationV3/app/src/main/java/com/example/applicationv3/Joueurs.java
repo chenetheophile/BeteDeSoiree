@@ -51,7 +51,7 @@ public class Joueurs extends AppCompatActivity {
         FloatingActionButton AddButton = (FloatingActionButton) findViewById(R.id.AddActionButton);
         FloatingActionButton RemoveButton = (FloatingActionButton) findViewById(R.id.RemoveActionButton);
         FloatingActionButton SendButton = (FloatingActionButton) findViewById(R.id.SendActionButton);
-        ListView ListeJoueurs = (ListView) findViewById(R.id.ListeJoueurs);
+        RecyclerView ListeJoueurs = (RecyclerView) findViewById(R.id.ListeJoueurs);
 
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +96,6 @@ public class Joueurs extends AppCompatActivity {
             }
         });
 
-        ListeJoueurs.setAdapter(joueursAdapter);
+//        ListeJoueurs.setAdapter(joueursAdapter);
     }
 }
