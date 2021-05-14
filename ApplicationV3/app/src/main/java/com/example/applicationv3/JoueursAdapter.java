@@ -44,7 +44,6 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
     @Override
     public void onBindViewHolder(@NonNull JoueursHolder holder, int position) {
         holder.nomJoueurEditText.setHint("Nom du j" + String.valueOf(position + 1));
-        //holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));
         holder.JoueurImageView.setImageResource(images.get(position));
         holder.samCheckBox.setText("SAM");
 
@@ -71,6 +70,7 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
                         Joueurs.nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
                     }
                 }
+
             }
         });
         holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));

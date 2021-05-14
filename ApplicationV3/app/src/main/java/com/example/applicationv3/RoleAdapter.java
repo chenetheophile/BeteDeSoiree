@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -42,6 +43,21 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.RoleHolder> {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ct, android.R.layout.simple_spinner_item, nomsJoueurs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.roleSpinner.setAdapter(adapter);
+        holder.roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                AttributionLG.roles.put(nomsRoles.get(position), nomsJoueurs.get(pos));
+                System.out.println("changed");
+                for (Object value : AttributionLG.roles.values().toArray()) {
+                    System.out.println(value);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override

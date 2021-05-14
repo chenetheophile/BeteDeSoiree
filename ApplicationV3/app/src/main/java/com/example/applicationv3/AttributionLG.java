@@ -24,7 +24,7 @@ public class AttributionLG extends AppCompatActivity {
 
     private RecyclerView ListeRoles;
     private ArrayList<String> nomsJoueurs = new ArrayList<>();
-    private Map <String, Integer> img;
+    private Map<String, Integer> img;
     public ArrayList<Integer> imagesCartes = new ArrayList<>();
     public ArrayList<String> nomsRoles = new ArrayList<>();
 
@@ -33,6 +33,7 @@ public class AttributionLG extends AppCompatActivity {
     private RecyclerView.Adapter rolesAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    public static HashMap<String, String> roles = new HashMap<>();
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -41,11 +42,19 @@ public class AttributionLG extends AppCompatActivity {
         setContentView(R.layout.activity_attribution_l_g);
 
         img = Map.of("Loup-Garou", R.drawable.loupgarou, "Voyante", R.drawable.voyante, "Petite Fille", R.drawable.petitefille, "Cupidon", R.drawable.cupidon,
-        "Chasseur", R.drawable.chasseur, "Sorcière", R.drawable.sorciere, "Voleur", R.drawable.voleur, "Villageois", R.drawable.villageois);
+                "Chasseur", R.drawable.chasseur, "Sorcière", R.drawable.sorciere, "Voleur", R.drawable.voleur, "Villageois", R.drawable.villageois);
 
         for (int i = 0; i < ChoixCarteAdapter.numCartes.size(); i++) {
             for (int j = 0; j < ChoixCarteAdapter.numCartes.get((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i]); j++) {
-                nomsRoles.add((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i]);
+                if (nomsRoles.contains((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i])) {
+                    int a = 2;
+                    while (nomsRoles.contains((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i] + " " + a)) {
+                        a++;
+                    }
+                    nomsRoles.add((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i] + " " + a);
+                } else {
+                    nomsRoles.add((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i]);
+                }
                 imagesCartes.add(img.get((String) ChoixCarteAdapter.numCartes.keySet().toArray()[i]));
             }
         }
@@ -64,7 +73,26 @@ public class AttributionLG extends AppCompatActivity {
         validerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "valider", Snackbar.LENGTH_SHORT).show();
+                Map<String, Integer> resultMap = new HashMap<String, Integer>();
+
+                for (String key : roles.keySet()) {
+                    String value = (String) roles.get(key);
+
+                    if (resultMap.containsKey(value)) {
+                        resultMap.put(value, resultMap.get(value) + 1);
+                    } else {
+                        resultMap.put(value, 1);
+                    }
+                }
+                for (int value : resultMap.values()) {
+                    if (value > 1) {
+                        Snackbar.make(v, "Chaque joueur doit avoir un rôle.", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+                Intent intent = new Intent(getApplicationContext(), LGJeu.class);
+                intent.putExtra("roles", roles);
+                startActivity(intent);
             }
         });
         ListeRoles = findViewById(R.id.ListeRoles);

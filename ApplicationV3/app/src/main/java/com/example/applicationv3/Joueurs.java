@@ -33,7 +33,7 @@ public class Joueurs extends AppCompatActivity {
     int minJoueurs = 2;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter joueursAdapter;
-    public static HashMap<Integer, String> nomsJoueurs;
+    public static HashMap<Integer, String> nomsJoueurs = new HashMap<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,6 @@ public class Joueurs extends AppCompatActivity {
         minJoueurs = getResources().getIntArray(R.array.min_joueurs)[IdJeu];
         if (nbJoueurs < minJoueurs) {
             nbJoueurs = minJoueurs;
-        }
-        if (nomsJoueurs == null) {
-            nomsJoueurs = new HashMap<>();
         }
         for (int i = 0; i < minJoueurs; i++) {
             images.add(imageList[new Random().nextInt(5)]);

@@ -20,22 +20,23 @@ import java.util.ArrayList;
 public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> implements Filterable {
 
     LayoutInflater mInflater;
-    private ArrayList<String> noms_jeux=new ArrayList<>();
-    private ArrayList<String> joueurs_jeux=new ArrayList<>();
-    private ArrayList<String> equipement_jeux=new ArrayList<>();
-    private ArrayList<Integer> images_jeux=new ArrayList<>();
-    private ArrayList<Item>listepleine=new ArrayList<>();
-    private ArrayList<Item>listerecette=new ArrayList<>();
+    private ArrayList<String> noms_jeux = new ArrayList<>();
+    private ArrayList<String> joueurs_jeux = new ArrayList<>();
+    private ArrayList<String> equipement_jeux = new ArrayList<>();
+    private ArrayList<Integer> images_jeux = new ArrayList<>();
+    private ArrayList<Item> listepleine = new ArrayList<>();
+    private ArrayList<Item> listerecette = new ArrayList<>();
     private Context context;
 
-    public void recetteAdapter(ArrayList<Item> liste){
-        this.listerecette=liste;
-        listepleine=new ArrayList<>(liste);
+    public void recetteAdapter(ArrayList<Item> liste) {
+        this.listerecette = liste;
+        listepleine = new ArrayList<>(liste);
     }
-    public JeuxAdapter(Context c, ArrayList<Item>recette , ArrayList<Integer> img){
-        this.context=c;
+
+    public JeuxAdapter(Context c, ArrayList<Item> recette, ArrayList<Integer> img) {
+        this.context = c;
         listepleine.addAll(recette);
-        for(int i=0;i<recette.size();i++){
+        for (int i = 0; i < recette.size(); i++) {
             noms_jeux.add(recette.get(i).getNom());
             joueurs_jeux.add(recette.get(i).getIngredient());
             equipement_jeux.add(recette.get(i).getDescription());
@@ -48,7 +49,7 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     @Override
     public JeuxHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-       return new JeuxHolder(mInflater.inflate(R.layout.listview_jeux, null));
+        return new JeuxHolder(mInflater.inflate(R.layout.listview_jeux, null));
 
     }
 
@@ -65,21 +66,21 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
             @Override
             public void onClick(View v) {
                 Intent intent;
-                switch (listepleine.get(position).getType()){
+                switch (listepleine.get(position).getType()) {
                     case "Cocktail":
                     case "Recette":
-                        intent=new Intent(context,affichage_Recette.class);
-                        intent.putExtra("Recette",listepleine.get(position));
+                        intent = new Intent(context, affichage_Recette.class);
+                        intent.putExtra("Recette", listepleine.get(position));
                         break;
                     case "Jeux":
-                        intent=new Intent(context,Joueurs.class);
-                        intent.putExtra("IdJeu",position);
+                        intent = new Intent(context, Joueurs.class);
+                        intent.putExtra("IdJeu", position);
                         break;
                     case "Musique":
-                        intent=new Intent(context,testSpot.class);
+                        intent = new Intent(context, testSpot.class);
                         break;
                     default:
-                        intent=null;
+                        intent = null;
                         break;
 
                 }
@@ -109,45 +110,47 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
         return filtre;
     }
 
-    private Filter filtre=new Filter() {
+    private Filter filtre = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            ArrayList<Item>listefiltre=new ArrayList<>();
-            if (constraint==null ||constraint.length()==0){
+            ArrayList<Item> listefiltre = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
                 listefiltre.addAll(listepleine);
-            }else{
-                String lettrefiltre=constraint.toString().toLowerCase().trim();
-                for (Item recette:listepleine){
-                    if (recette.getNom().toLowerCase().contains(lettrefiltre)){
+            } else {
+                String lettrefiltre = constraint.toString().toLowerCase().trim();
+                for (Item recette : listepleine) {
+                    if (recette.getNom().toLowerCase().contains(lettrefiltre)) {
                         listefiltre.add(recette);
                     }
                 }
             }
-            FilterResults resultat=new FilterResults();
-            resultat.values=listefiltre;
+            FilterResults resultat = new FilterResults();
+            resultat.values = listefiltre;
             return resultat;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             listerecette.clear();
-            listerecette.addAll((ArrayList)results.values);
+            listerecette.addAll((ArrayList) results.values);
             notifyDataSetChanged();
         }
     };
-    public class JeuxHolder extends RecyclerView.ViewHolder{
+
+    public class JeuxHolder extends RecyclerView.ViewHolder {
         TextView NomJeuTextView;
         TextView DetailJeuTextView;
-        TextView DescJeuTextView ;
-        ImageView ObjetImageView ;
+        TextView DescJeuTextView;
+        ImageView ObjetImageView;
         CardView layout;
+
         public JeuxHolder(@NonNull View itemView) {
             super(itemView);
             NomJeuTextView = (TextView) itemView.findViewById(R.id.NomJeuTextView);
             DetailJeuTextView = (TextView) itemView.findViewById(R.id.DetailJeuTextView);
             DescJeuTextView = (TextView) itemView.findViewById(R.id.DescJeuTextView);
             ObjetImageView = (ImageView) itemView.findViewById(R.id.ObjetImageView);
-            layout=itemView.findViewById(R.id.boiteItem);
+            layout = itemView.findViewById(R.id.boiteItem);
         }
     }
 
