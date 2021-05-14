@@ -57,8 +57,8 @@ public class BDD {
         FirebaseFirestore base=this.getBDD();
         intent.setClass(activity,MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        ArrayList<Recette> cocktailArrayList=new ArrayList<>();
-        ArrayList<Recette> recetteArrayList=new ArrayList<>();
+        ArrayList<Item> cocktailArrayList=new ArrayList<>();
+        ArrayList<Item> recetteArrayList=new ArrayList<>();
         base.collection("cocktail")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -66,7 +66,7 @@ public class BDD {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                cocktailArrayList.add(new Recette(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description")));
+                                cocktailArrayList.add(new Item(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description")));
                             }
                             intent.putExtra("Cocktail",cocktailArrayList);
                             base.collection("recette")
@@ -78,7 +78,7 @@ public class BDD {
 
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                                    recetteArrayList.add(new Recette(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("temps")));
+                                                    recetteArrayList.add(new Item(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("temps")));
                                                 }
                                                 intent.putExtra("Recette",recetteArrayList);
                                                 activity.startActivity(intent);

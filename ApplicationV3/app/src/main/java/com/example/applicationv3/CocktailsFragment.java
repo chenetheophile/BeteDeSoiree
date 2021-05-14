@@ -1,13 +1,9 @@
 package com.example.applicationv3;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +16,11 @@ import java.util.ArrayList;
 public class CocktailsFragment extends Fragment {
 
     private RecyclerView ListeCocktails;
-    private String[] noms_cocktails;
-    private String[] detail_cocktails;
-    private String[] desc_cocktails;
-    private String[] lien_img;
-    int[] images;
+//    private String[] noms_cocktails;
+//    private String[] detail_cocktails;
+//    private String[] desc_cocktails;
+//    private String[] lien_img;
+    private ArrayList<Integer>images=new ArrayList<>();
 
     @Nullable
     @Override
@@ -34,27 +30,26 @@ public class CocktailsFragment extends Fragment {
         //affiche les cocktails selon un modèle qu on adapte et recupere les cocktails etc depuis les documents recuperer de la bdd
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
 
-        ArrayList<Recette>listeRecette= (ArrayList<Recette>) getActivity().getIntent().getExtras().get("Cocktail");
+        ArrayList<Item>listeRecette= (ArrayList<Item>) getActivity().getIntent().getExtras().get("Cocktail");
 
         ArrayList<String>nom=new ArrayList<>(),desc=new ArrayList<>(),ingr=new ArrayList<>(),lien=new ArrayList<>();
 
-        for (int i=0;i<listeRecette.size();i++){
-            Recette tempo=listeRecette.get(i);
-            nom.add(tempo.getNom());
-            desc.add(tempo.getDescription());
-            ingr.add(tempo.getIngredient());
-            lien.add(tempo.getLien());
-        }
-        noms_cocktails=nom.toArray(new String[nom.size()]);
-        desc_cocktails=desc.toArray(new String[desc.size()]);
-        detail_cocktails=ingr.toArray(new String[ingr.size()]);
-        lien_img= lien.toArray(new String[lien.size()]);
+//        for (int i=0;i<listeRecette.size();i++){
+//            Recette tempo=listeRecette.get(i);
+//            nom.add(tempo.getNom());
+//            desc.add(tempo.getDescription());
+//            ingr.add(tempo.getIngredient());
+//            lien.add(tempo.getLien());
+//        }
+//        noms_cocktails=nom.toArray(new String[nom.size()]);
+//        desc_cocktails=desc.toArray(new String[desc.size()]);
+//        detail_cocktails=ingr.toArray(new String[ingr.size()]);
+//        lien_img= lien.toArray(new String[lien.size()]);
 
-        images=new int[noms_cocktails.length];
-        for(int i=0;i<noms_cocktails.length;i++){
-            images[i]=R.drawable.ic_launcher_foreground;
+        for(int i=0;i<listeRecette.size();i++){
+            images.add(R.drawable.ic_launcher_foreground);
         }
-        JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), noms_cocktails, detail_cocktails, desc_cocktails, images);
+        JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), listeRecette, images);
         ListeCocktails.setAdapter(jeuxAdapter);
         ListeCocktails.setLayoutManager(new LinearLayoutManager(getContext()));
 //        ListeCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
