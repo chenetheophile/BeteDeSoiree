@@ -33,6 +33,7 @@ public class AttributionLG extends AppCompatActivity {
     private RecyclerView.Adapter rolesAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
