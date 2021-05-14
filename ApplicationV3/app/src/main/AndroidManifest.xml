@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.applicationv3">
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,18 +8,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationV3">
-        <activity android:name=".LGJeu"></activity>
-        <activity android:name=".InfoAttrib" />
-        <activity android:name=".AttributionLG" />
-        <activity android:name=".DescCartes" />
-        <activity android:name=".ResultatAV" />
-        <activity android:name=".AVJeu" />
-        <activity android:name=".ReglesJeu" />
-        <activity android:name=".ActionVerite" />
-        <activity android:name=".affichage_recette" />
+        <activity android:name=".Proposition" />
+
+        <activity android:name=".testSpot" />
+        <activity android:name=".affichage_Recette" />
         <activity
             android:name=".LGLocal"
-            android:label="LGLocal"
+            android:label="@string/title_activity_l_g_local"
             android:theme="@style/Theme.ApplicationV3.NoActionBar" />
         <activity android:name=".Loup_Garou" />
         <activity
@@ -39,5 +33,8 @@
             </intent-filter>
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission." />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.camera" />
 </manifest>

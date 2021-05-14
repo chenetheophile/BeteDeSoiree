@@ -1,6 +1,9 @@
 package com.example.applicationv3.ui.main;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -29,9 +32,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
+        Log.i("pos", String.valueOf(position));
         switch (position){
             case 0:
                 fragment = new JeuxFragment();
@@ -60,4 +65,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Show 4 total pages.
         return 4;
     }
+
+
 }
