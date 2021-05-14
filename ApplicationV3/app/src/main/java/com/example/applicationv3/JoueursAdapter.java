@@ -25,14 +25,10 @@ import java.util.zip.Inflater;
 
 public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursHolder> {
 
-    ArrayList<String> Noms = new ArrayList<>();
-    ArrayList<String> SAM = new ArrayList<>();
     ArrayList<Integer> images = new ArrayList<>();
     Context context;
 
-    public JoueursAdapter(Context c, ArrayList<String> n, ArrayList<String> s, ArrayList<Integer> i){
-        Noms = n;
-        SAM = s;
+    public JoueursAdapter(Context c, ArrayList<Integer> i) {
         images = i;
         context = c;
     }
@@ -47,17 +43,10 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
 
     @Override
     public void onBindViewHolder(@NonNull JoueursHolder holder, int position) {
-        if (position == 0) {
-            holder.nomJoueurEditText.requestFocus();
-        }
-        holder.nomJoueurEditText.setHint(Noms.get(position));
-        if (Joueurs.nomsJoueurs.containsKey(position)){
-            holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));
-        } else {
-            holder.nomJoueurEditText.setText("");
-        }
+        holder.nomJoueurEditText.setHint("Nom du j" + String.valueOf(position + 1));
+        //holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));
         holder.JoueurImageView.setImageResource(images.get(position));
-        holder.samCheckBox.setText(SAM.get(position));
+        holder.samCheckBox.setText("SAM");
 
         holder.nomJoueurEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,28 +59,27 @@ public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursH
                 return;
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void afterTextChanged(Editable s) {
                 String value = Joueurs.nomsJoueurs.get(position);
-                if(value!=null){
-                    Joueurs.nomsJoueurs.replace(position, holder.nomJoueurEditText.getText().toString());
+                if (value != null) {
+                    Joueurs.nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
                 } else {
-                    if (Joueurs.nomsJoueurs.containsKey(position)){
-                        Joueurs.nomsJoueurs.replace(position, holder.nomJoueurEditText.getText().toString());
+                    if (Joueurs.nomsJoueurs.containsKey(position)) {
+                        Joueurs.nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
                     } else {
                         Joueurs.nomsJoueurs.put(position, holder.nomJoueurEditText.getText().toString());
                     }
                 }
             }
         });
+        holder.nomJoueurEditText.setText(Joueurs.nomsJoueurs.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return Noms.size();
+        return images.size();
     }
-
 
 
     public class JoueursHolder extends RecyclerView.ViewHolder {

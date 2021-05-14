@@ -10,12 +10,16 @@ import android.widget.Button;
 import com.example.applicationv3.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 public class Loup_Garou extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loup__garou);
+
+        ArrayList<String> joueurs = getIntent().getStringArrayListExtra("Joueurs");
 
         Button LocalButton = (Button) findViewById(R.id.LocalButton);
         Button ReseauButton = (Button) findViewById(R.id.ReseauButton);
@@ -24,6 +28,7 @@ public class Loup_Garou extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startIntent = new Intent(getApplicationContext(), LGLocal.class);
+                startIntent.putExtra("Joueurs", joueurs);
                 startActivity(startIntent);
             }
         });

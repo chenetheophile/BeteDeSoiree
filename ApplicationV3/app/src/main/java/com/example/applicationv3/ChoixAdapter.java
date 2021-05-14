@@ -51,9 +51,9 @@ public class ChoixAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = mInflater.inflate(R.layout.listview_choix, null);
-        TextView nomTextView = (TextView) v.findViewById(R.id.nomTextView);
-        TextView descTextView = (TextView) v.findViewById(R.id.descTextView);
-        ImageView carteImageView = (ImageView) v.findViewById(R.id.carteImageView);
+        TextView nomTextView = (TextView) v.findViewById(R.id.nomCarteTextView);
+        TextView descTextView = (TextView) v.findViewById(R.id.descCarteTextView);
+        ImageView carteImageView = (ImageView) v.findViewById(R.id.cartesImageView);
         CheckBox choixCheckBox = (CheckBox) v.findViewById(R.id.choixCheckBox);
 
         nomTextView.setText(names.get(position));

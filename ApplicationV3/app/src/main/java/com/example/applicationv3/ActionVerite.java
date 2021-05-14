@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ActionVerite extends AppCompatActivity {
@@ -30,12 +31,15 @@ public class ActionVerite extends AppCompatActivity {
     Button JouerButton;
     Button ReglesButton;
 
+    ArrayList<String> joueurs = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_action_verite);
 
         idJeu = getIntent().getExtras().getInt("idJeu");
+        joueurs = getIntent().getExtras().getStringArrayList("Joueurs");
 
         Level1RadioButton = findViewById(R.id.Level1RadioButton);
         Level2RadioButton = findViewById(R.id.Level2RadioButton);
@@ -65,8 +69,11 @@ public class ActionVerite extends AppCompatActivity {
                 } else if (Tours5RadioButton.isChecked()){
                     tours = 10;
                 }
-                Snackbar.make(v, Joueurs.nomsJoueurs.toString(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent startIntent = new Intent(getApplicationContext(), AVJeu.class);
+                startIntent.putExtra("tours",tours);
+                startIntent.putExtra("level", level);
+                startIntent.putExtra("joueurs", joueurs);
+                startActivity(startIntent);
             }
         });
 
@@ -74,7 +81,7 @@ public class ActionVerite extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startIntent = new Intent(getApplicationContext(), ReglesJeu.class);
-                startIntent.putExtra("idJeu", idJeu);
+                startIntent.putExtra("IdJeu", idJeu);
                 startActivity(startIntent);
             }
         });

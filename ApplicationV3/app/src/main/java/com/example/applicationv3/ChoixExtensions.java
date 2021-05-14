@@ -43,7 +43,7 @@ public class ChoixExtensions extends Fragment {
             public void onClick(View v) {
                 for (int i = 0; i < nomsExt.size(); i++) {
                     if (choixAdapter.isChoisi(i)){
-                        
+                        LGLocal.extChoisies.set(i, true);
                     }
                 }
             }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.applicationv3.ui.main.SectionsPagerAdapter;
 
+import java.text.ChoiceFormat;
 import java.util.ArrayList;
 
 public class LGLocal extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class LGLocal extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabs2);
         tabLayout.addTab(tabLayout.newTab().setText("Cartes"));
-        tabLayout.addTab(tabLayout.newTab().setText("Extensions"));
+        tabLayout.addTab(tabLayout.newTab().setText("Répartition"));
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.applicationv3.ChoixCartes;
 import com.example.applicationv3.ChoixExtensions;
+import com.example.applicationv3.Repartition;
 
 public class LGAdapter extends FragmentPagerAdapter {
 
@@ -24,7 +25,7 @@ public class LGAdapter extends FragmentPagerAdapter {
                 ChoixCartes tab1 = new ChoixCartes();
                 return tab1;
             case 1:
-                ChoixExtensions tab2 = new ChoixExtensions();
+                Repartition tab2 = new Repartition();
                 return tab2;
             default:
                 return null;

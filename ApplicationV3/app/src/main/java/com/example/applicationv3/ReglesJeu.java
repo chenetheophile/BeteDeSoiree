@@ -21,7 +21,10 @@ public class ReglesJeu extends AppCompatActivity {
 
         idJeu = getIntent().getExtras().getInt("IdJeu");
 
-        TitleTextView.setText(getResources().getStringArray(R.array.noms_jeux)[idJeu]);
-        ReglesTextView.setText(getResources().getStringArray(R.array.desc_jeux)[idJeu]);
+        String[] noms = getResources().getStringArray(R.array.noms_jeux);
+        String[] desc = getResources().getStringArray(R.array.desc_jeux);
+
+        TitleTextView.setText(noms[idJeu]);
+        ReglesTextView.setText(desc[idJeu]);
     }
 }

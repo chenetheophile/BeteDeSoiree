@@ -122,16 +122,60 @@
 
     <string name="title_activity_joueurs">Joueurs</string>
 
+
     <string-array name="cartes_lg">
-        <item>Carte1</item>
-        <item>Carte2</item>
-        <item>Carte3</item>
+        <item>Loup-Garou</item>
+        <item>Voyante</item>
+        <item>Petite Fille</item>
+        <item>Cupidon</item>
+        <item>Chasseur</item>
+        <item>Sorcière</item>
+        <item>Voleur</item>
+        <item>Villageois</item>
+
+    </string-array>
+
+    <string-array name="repartition">
+        <item>21000002</item>
+        <item>21000003</item>
+        <item>21000004</item>
+        <item>21011004</item>
+        <item>21111004</item>
+        <item>21011105</item>
+        <item>31111014</item>
+        <item>31011115</item>
+        <item>31111016</item>
+        <item>31011117</item>
+        <item>31111117</item>
+        <item>41111117</item>
+        <item>41111118</item>
     </string-array>
 
     <string-array name="desc_cartes">
-        <item>Description1</item>
-        <item>Description2</item>
-        <item>Description3</item>
+        <item>Chaque nuit, ils dévorent un Villageois.
+            Le jour, ils essaient de masquer leur identité nocturne pour échapper à la vindicte populaire.
+            Ils sont 1, 2, 3 ou 4 suivant le nombre de joueurs et les variantes appliquées.
+            (En aucun cas un Loup-Garou ne peut dévorer un Loup-Garou).</item>
+        <item>Il n@a aucune compétence particulière.
+            Ses seules armes sont la capacité d@analyse des comportements pour identifier les Loups-Garous, et la force de conviction pour empêcher l@exécution de l’innocent qu’il est.</item>
+        <item>Chaque nuit, elle découvre la vraie personnalité d@un joueur de son choix.
+            Elle doit aider les autres Villageois, mais rester discrète pour ne pas être démasquée par les Loups-Garous.</item>
+        <item>Si on veut jouer le Voleur, il faut ajouter deux cartes Villageois en plus de toutes celles déjà choisies.
+            Après la distribution, les deux cartes non distribuées sont placées au centre de la table faces cachées.
+            La première nuit, le Voleur pourra prendre connaissance de ces deux cartes, et échanger sa carte contre une des deux autres.
+            Si ces cartes sont deux Loups-Garous, il est obligé d’échanger sa carte contre un des deux Loups-Garous.
+            Il jouera désormais ce personnage jusqu’à la fin de la partie.</item>
+        <item>S@il se fait dévorer par les Loups-Garous ou exécuter malencontreusement par les joueurs, le Chasseur doit répliquer avant de rendre l@âme, en éliminant immédiatement n@importe quel autre joueur de son choix.</item>
+        <item>Cupidon</item>
+        <item>Elle sait concocter 2 potions extrêmement puissantes :
+            une potion de guérison, pour ressusciter le joueur tué par les Loups-Garous, une potion d@empoisonnement, utilisée la nuit pour éliminer un joueur.
+            La Sorcière doit utiliser chaque potion 1 seule fois dans la partie. Elle peut se servir des ses 2 potions la même nuit.
+            Le matin suivant l’usage de ce pouvoir, il pourra donc y avoir soit 0 mort, 1 mort ou 2 morts.
+            La Sorcière peut utiliser les potions à son profit, et donc se guérir elle-même si elle vient d’être attaquée par les Loups-Garous.</item>
+        <item>La Petite Fille peut, en entrouvrant les yeux, espionner les Loups-Garous pendant leur réveil. Si elle se fait surprendre par un des Loups-Garous, elle meurt immédiatement (en silence), à la place de
+            la victime désignée.
+            La Petite Fille ne peut espionner que la nuit, durant le tour d’éveil des Loups-Garous.
+            Elle n@a pas le droit de se faire passer pour un Loup-Garou et d’ouvrir grand les yeux.</item>
     </string-array>
 
     <string-array name="extensions">
@@ -145,4 +189,5 @@
         <item>Description2</item>
         <item>Description3</item>
     </string-array>
+
 </resources>
