@@ -2,9 +2,14 @@ package com.example.applicationv3;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +24,8 @@ import java.util.ArrayList;
 
 public class RecettesFragment extends Fragment {
 
+    private EditText barre;
     private RecyclerView ListeRecettes;
-    private String[] noms_recettes;
-    private String[] detail_recettes;
-    private String[] desc_recettes;
-    private String[] lien_img;
    private ArrayList<Integer>images=new ArrayList<>() ;
 //voir cocktail la logique est strictement identique
     @Nullable
@@ -41,19 +43,40 @@ public class RecettesFragment extends Fragment {
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(),listeRecette, images);
         ListeRecettes.setAdapter(jeuxAdapter);
         ListeRecettes.setLayoutManager(new LinearLayoutManager(getContext()));
-//        ListeRecettes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent recipe= new Intent(getActivity(), affichage_Recette.class);
-//
-//                recipe.putExtra("Nom",noms_recettes[position]);
-//                recipe.putExtra("Ingredient",detail_recettes[position]);
-//                recipe.putExtra("lien",lien_img[position]);
-//
-//                getActivity().startActivity(recipe);
-//
-//            }
-//        });
+
+        barre=getActivity().findViewById(R.id.barreRecherche);
+        ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
+        rechercher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (barre.getVisibility()==View.INVISIBLE){
+                    barre.setVisibility(View.VISIBLE);
+                }else {
+                    barre.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
+        barre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Filter filtre=jeuxAdapter.getFilter();
+                filtre.filter(barre.getText().toString().toLowerCase().trim());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         FloatingActionButton ajout=rootView.findViewById(R.id.ajoutRecette);
         ajout.setOnClickListener(new View.OnClickListener() {
             @Override

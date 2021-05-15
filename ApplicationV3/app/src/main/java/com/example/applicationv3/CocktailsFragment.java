@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ public class CocktailsFragment extends Fragment {
     private JeuxAdapter jeuxAdapter;
     private ArrayList<Item>listeRecette=new ArrayList<>();
     private ArrayList<Integer>images=new ArrayList<>();
+
     private EditText barre;
 
 
@@ -40,18 +43,26 @@ public class CocktailsFragment extends Fragment {
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
 
         listeRecette= (ArrayList<Item>) getActivity().getIntent().getExtras().get("Cocktail");
+        for(int i=0;i<listeRecette.size();i++){
+            if(i==0){
+                images.clear();
+            }
+            images.add(R.drawable.ic_launcher_foreground);
+        }
+        jeuxAdapter = new JeuxAdapter(this.getContext(), listeRecette, images);
+        ListeCocktails.setAdapter(jeuxAdapter);
+        ListeCocktails.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<String>nom=new ArrayList<>(),desc=new ArrayList<>(),ingr=new ArrayList<>(),lien=new ArrayList<>();
         barre=getActivity().findViewById(R.id.barreRecherche);
         ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
         rechercher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (barre.getVisibility()==View.GONE||barre.getVisibility()==View.INVISIBLE){
+                if (barre.getVisibility()==View.INVISIBLE){
                     barre.setVisibility(View.VISIBLE);
                 }else {
-                    barre.setVisibility(View.GONE);
+                    barre.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -65,7 +76,9 @@ public class CocktailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                jeuxAdapter.getFilter().filter(barre.getText().toString().toLowerCase().trim());
+                Filter filtre=jeuxAdapter.getFilter();
+                filtre.filter(barre.getText().toString().toLowerCase().trim());
+
             }
 
             @Override
@@ -73,13 +86,6 @@ public class CocktailsFragment extends Fragment {
 
             }
         });
-        for(int i=0;i<listeRecette.size();i++){
-            images.add(R.drawable.ic_launcher_foreground);
-        }
-        jeuxAdapter = new JeuxAdapter(this.getContext(), listeRecette, images);
-        ListeCocktails.setAdapter(jeuxAdapter);
-        ListeCocktails.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         FloatingActionButton ajout=rootView.findViewById(R.id.ajoutCocktail);
         ajout.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +100,6 @@ public class CocktailsFragment extends Fragment {
 
         return rootView;
     }
-
 
 
 

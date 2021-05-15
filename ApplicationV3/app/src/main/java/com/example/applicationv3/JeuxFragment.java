@@ -2,9 +2,14 @@ package com.example.applicationv3;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +23,10 @@ import java.util.Arrays;
 
 public class JeuxFragment extends Fragment {
 
+    private EditText barre;
     private RecyclerView ListeJeux;
     private ArrayList<Item> jeux =new ArrayList<>();
-    private String[] noms_jeux;
-    private String[] joueurs_jeux;
-    private String[] equipement_jeux;
+
     ArrayList<Integer> images=new ArrayList<>(Arrays.asList(R.drawable.action_verite, R.drawable.palmier, R.drawable.loup_garou));
 
     @Nullable
@@ -32,24 +36,51 @@ public class JeuxFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.jeux_fragment_layout, container, false);
         ListeJeux = (RecyclerView) rootView.findViewById(R.id.ListeJeux);
 
-        noms_jeux = getResources().getStringArray(R.array.noms_jeux);
-        joueurs_jeux = getResources().getStringArray(R.array.joueurs_jeux);
-        equipement_jeux = getResources().getStringArray(R.array.equipement_jeux);
-        for(int i=0;i<noms_jeux.length;i++){
-            jeux.add(new Item("Jeux",noms_jeux[i],joueurs_jeux[i],equipement_jeux[i],true));
-        }
-//
+        String[] noms_jeux = getResources().getStringArray(R.array.noms_jeux);
+        String[] joueurs_jeux = getResources().getStringArray(R.array.joueurs_jeux);
+        String[] equipement_jeux = getResources().getStringArray(R.array.equipement_jeux);
+        if (jeux.size()!=noms_jeux.length){
+            for(int i=0;i<noms_jeux.length;i++){
+                jeux.add(new Item("Jeux",noms_jeux[i],joueurs_jeux[i],equipement_jeux[i],true));
+            }}
+
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), jeux, images);
         ListeJeux.setAdapter(jeuxAdapter);
         ListeJeux.setLayoutManager(new LinearLayoutManager(getContext()));
-//        ListeJeux.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent startIntent = new Intent(getActivity(), Joueurs.class);
-//                startIntent.putExtra("IdJeu", position);
-//                startActivity(startIntent);
-//            }
-//        });
+
+        barre=getActivity().findViewById(R.id.barreRecherche);
+        ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
+        rechercher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (barre.getVisibility()==View.INVISIBLE){
+                    barre.setVisibility(View.VISIBLE);
+                }else {
+                    barre.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
+        barre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Filter filtre=jeuxAdapter.getFilter();
+                filtre.filter(barre.getText().toString().toLowerCase().trim());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return rootView;
     }
 }

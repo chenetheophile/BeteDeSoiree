@@ -2,6 +2,7 @@ package com.example.applicationv3.data;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,13 @@ public class EmailPassword {
     private FirebaseAuth mAuth;
     private boolean etatConn,erreur=false;
     private View window;
+    private ProgressBar chargement;
 
-    public EmailPassword(String email, String password, View fenetre){
+    public EmailPassword(String email, String password, View fenetre, ProgressBar barre){
         this.mAuth = FirebaseAuth.getInstance();
         this.etatConn=false;
         this.window=fenetre;
+        this.chargement=barre;
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null){//regarde si on est deja connecte
@@ -75,7 +78,7 @@ public class EmailPassword {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                                new BDD(getUser()).getDocument(window.getContext());//une fois connecter passe a la suite de l'app
+                                new BDD(getUser(),chargement).getDocument(window.getContext());//une fois connecter passe a la suite de l'app
                         } else {
                             String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                             switch (errorCode){

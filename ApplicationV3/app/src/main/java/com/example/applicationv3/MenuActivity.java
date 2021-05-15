@@ -35,6 +35,7 @@ public class MenuActivity extends AppCompatActivity {
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
         ViewPager viewPager = findViewById(R.id.affichage_liste);
+        viewPager.setOffscreenPageLimit(3);
         EditText barr=findViewById(R.id.barreRecherche);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);

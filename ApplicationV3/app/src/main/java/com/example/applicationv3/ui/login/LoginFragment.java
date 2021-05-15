@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,8 +46,11 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {//si appui sur le bouton va connecter l'user/lui creer un compte
             @Override
             public void onClick(View v) {
+                ProgressBar barre=getActivity().findViewById(R.id.chargement);
                 if((passwordEditText.getText().toString().length())>=6){
-                    new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView());
+                    barre.setVisibility(View.VISIBLE);
+                    getActivity().findViewById(R.id.parametrefrag).setVisibility(View.GONE);
+                    new EmailPassword(usernameEditText.getText().toString(),passwordEditText.getText().toString(),getView(),barre);
 
                 }else{
                     Toast.makeText(getView().getContext(),"Le mot de passe doit contenir au moins 6 caractère",Toast.LENGTH_LONG).show();

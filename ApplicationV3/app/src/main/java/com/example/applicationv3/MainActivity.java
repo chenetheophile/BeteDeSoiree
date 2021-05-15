@@ -5,23 +5,27 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private BDD bdd=new BDD(null);
+    private BDD bdd;
+    private ProgressBar charg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        charg=findViewById(R.id.chargement);
+        charg.setProgress(0);
+        bdd=new BDD(null,charg);
         View par=findViewById(R.id.parametrefrag);
         par.setVisibility(View.GONE);
         Button StartButton =findViewById(R.id.StartButton);
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                charg.setVisibility(View.VISIBLE);
                 bdd.getDocument(getApplicationContext());
             }
         });
@@ -54,5 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }
