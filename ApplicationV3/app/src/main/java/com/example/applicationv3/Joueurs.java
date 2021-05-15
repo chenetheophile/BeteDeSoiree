@@ -70,7 +70,6 @@ public class Joueurs extends AppCompatActivity {
                 if (nbJoueurs < 18) {
                     nbJoueurs++;
                     images.add(imageList[new Random().nextInt(5)]);
-                    nomsJoueurs.clear();
                     joueursAdapter.notifyDataSetChanged();
                 }
             }
@@ -81,7 +80,6 @@ public class Joueurs extends AppCompatActivity {
             public void onClick(View v) {
                 if (nbJoueurs > minJoueurs) {
                     nbJoueurs--;
-                    nomsJoueurs.clear();
                     images.remove(images.size() - 1);
                     joueursAdapter.notifyDataSetChanged();
                 }

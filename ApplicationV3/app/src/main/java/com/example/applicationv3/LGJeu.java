@@ -16,10 +16,10 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 public class LGJeu extends AppCompatActivity {
 
-    ArrayList<String> ordres = new ArrayList<>(Arrays.asList("Voleur", "Cupidon", "Voyante", "Loup-Garou", "Sorcière"));
     ImageView soleilLune;
     TextView topText, midText, bottomText, titleText;
     ImageButton prevButton, nextButton;
@@ -42,12 +42,32 @@ public class LGJeu extends AppCompatActivity {
             "Je lui montre la victime des Loups-Garous. Va-t-elle user de sa potion de guérison, ou d’empoisonnement ?", "La sorcière se rendort."));
     ArrayList<String> jour = new ArrayList<>(Arrays.asList("Le village se réveille.", "Il y a eu " + String.valueOf(nbVictimes) + " vitcimes cette nuit.", "Le village va donc voter pour éliminer quelqu'un."));
 
-    ArrayList<ArrayList<String>> ordre = new ArrayList<>(Arrays.asList(nuit, voleur, cupidon, voyante, loups, sorciere, jour));
+    ArrayList<ArrayList<String>> ordre = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_l_g_jeu);
+
+        roles = (HashMap<String, String>) getIntent().getExtras().get("roles");
+        Set<String> keys = roles.keySet();
+        ordre.add(nuit);
+        if (keys.contains("Voleur")) {
+            ordre.add(voleur);
+        }
+        if (keys.contains("Cupidon")) {
+            ordre.add(cupidon);
+        }
+        if (keys.contains("Voyante")) {
+            ordre.add(voyante);
+        }
+        if (keys.contains("Loup-Garou")) {
+            ordre.add(loups);
+        }
+        if (keys.contains("Sorcière")) {
+            ordre.add(sorciere);
+        }
+        ordre.add(jour);
 
         layout = findViewById(R.id.LGLayout);
         soleilLune = findViewById(R.id.jourNuitImageView);
@@ -60,8 +80,6 @@ public class LGJeu extends AppCompatActivity {
         textViews.add(topText);
         textViews.add(midText);
         textViews.add(bottomText);
-
-        roles = (HashMap<String, String>) getIntent().getExtras().get("roles");
 
         roleAct = 0;
         txt = 0;
