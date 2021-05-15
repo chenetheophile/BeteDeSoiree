@@ -93,7 +93,7 @@ public class CocktailsFragment extends Fragment {
             public void onClick(View v) {
                 Intent proposition=new Intent(getContext(), Proposition.class);
                 proposition.putExtra("type","Cocktail");
-                proposition.putExtra("User",(FirebaseUser)getActivity().getIntent().getExtras().get("User"));
+                proposition.putExtra("User", (FirebaseUser) getActivity().getIntent().getExtras().get("User"));
                 startActivity(proposition);
             }
         });

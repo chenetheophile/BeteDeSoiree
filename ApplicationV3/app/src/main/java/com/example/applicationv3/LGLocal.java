@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class LGLocal extends AppCompatActivity {
 
-    public static ArrayList<Boolean> extChoisies = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
