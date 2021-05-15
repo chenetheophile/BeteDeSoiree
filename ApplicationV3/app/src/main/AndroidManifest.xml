@@ -15,7 +15,7 @@
         <activity android:name=".DescCartes" />
         <activity android:name=".ResultatAV" />
         <activity android:name=".AVJeu" />
-        <activity android:name=".testSpot" />
+        <activity android:name=".lecturePlaylist" />
         <activity android:name=".ActionVerite" />
         <activity android:name=".affichage_Recette" />
         <activity
