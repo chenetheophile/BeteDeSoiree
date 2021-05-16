@@ -18,9 +18,11 @@ import java.util.Arrays;
 public class MusiqueFragment extends Fragment {
 
     private RecyclerView ListeMusique;
-    private String[] noms_musique;
-    private String[] detail_musique;
-    private String[] desc_musique;
+    private ArrayList<String> Playlist=new ArrayList<>(Arrays.asList("Chill","Indie","Dance/Electronique","Rock","Jazz","Classique"));
+    private ArrayList<String> Desc=new ArrayList<>(Arrays.asList("Pour des soirées calmes","Des découvertes en perspectives","De quoi s'ambiancer","Rock","Pour des nouvelles vibes ","Parce que le retour au source nous fait du bien"));
+    private ArrayList<String> Detail=new ArrayList<>(Arrays.asList("playlist:37i9dQZF1DXdCsscAsbRNz","playlist:37i9dQZF1DX924zU1IARaD",
+            "playlist:37i9dQZF1DXaXB8fQg7xif","playlist:37i9dQZF1DWXTHBOfJ8aI7",
+            "playlist:37i9dQZF1DXbITWG1ZJKYt","playlist:37i9dQZF1DWV0gynK7G6pD"));
     private ArrayList<Item> musique=new ArrayList<>();
     private ArrayList<Integer> images = new ArrayList<>(Arrays.asList(R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground));
@@ -31,23 +33,13 @@ public class MusiqueFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.musique_fragment_layout, container, false);
 
         ListeMusique = rootView.findViewById(R.id.ListeMusique);
-        noms_musique = getResources().getStringArray(R.array.noms_musique);
-        detail_musique = getResources().getStringArray(R.array.detail_musique);
-        desc_musique = getResources().getStringArray(R.array.desc_musique);
 
-        for(int i=0;i<noms_musique.length;i++){
-            musique.add(new Item("Musique",noms_musique[i],detail_musique[i],desc_musique[i],true));
+        for(int i=0;i<Playlist.size();i++){
+            musique.add(new Item("Musique",Playlist.get(i),Detail.get(i),Desc.get(i),true));
         }
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), musique, images);
         ListeMusique.setAdapter(jeuxAdapter);
         ListeMusique.setLayoutManager(new LinearLayoutManager(getContext()));
-//        ListeMusique.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent=new Intent(getActivity(),testSpot.class);
-//                startActivity(intent);
-//            }
-//        });
         return rootView;
     }
 }

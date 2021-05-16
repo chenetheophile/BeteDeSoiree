@@ -58,7 +58,11 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
         }else{
             Item item=recipe.get(position);
             String nom = item.getNom();
-            String detail = item.getIngredient();
+            String detail="";
+            if(!item.getType().equalsIgnoreCase("Musique")){
+                detail = item.getIngredient();
+            }
+
             String desc = item.getDescription();
             holder.layout.setVisibility(View.VISIBLE);
             holder.NomJeuTextView.setText(nom);
@@ -80,7 +84,8 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
                             intent.putExtra("IdJeu",position);
                             break;
                         case "Musique":
-                            intent=new Intent(context,testSpot.class);
+                            intent=new Intent(context, lecturePlaylist.class);
+                            intent.putExtra("Playlist",item);
                             break;
                         default:
                             intent=null;
