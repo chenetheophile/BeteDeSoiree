@@ -13,10 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.applicationv3.ui.main.LGAdapter;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ChoixLG extends AppCompatActivity {
@@ -51,9 +48,9 @@ public class ChoixLG extends AppCompatActivity {
 
         checked = new ArrayList<>();
         for (int i = 0; i < roles.size(); i++) {
-            checked.add(false);
         }
 
+        checked.add(false);
         LGAdapter = new LGChoixAdapter(roles, joueurs, images, checked,this);
         listeChoix = findViewById(R.id.ListeChoix);
         validerButton = findViewById(R.id.validerChoixButton);
@@ -63,7 +60,7 @@ public class ChoixLG extends AppCompatActivity {
                 for (int i = 0; i < roles.size(); i++) {
                     if (LGAdapter.getItemViewType(i) == 1) {
                         Intent resultIntent = new Intent();
-                        resultIntent.putExtra("result", i);
+                        resultIntent.putExtra("result", joueurs.get(i));
                         resultIntent.putExtra("role", role);
                         setResult(RESULT_OK, resultIntent);
                         finish();

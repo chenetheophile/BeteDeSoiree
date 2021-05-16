@@ -10,12 +10,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_appli"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_appli"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationV3">
-        <activity android:name=".ChoixLG"></activity>
+        <activity android:name=".ChoixSorciere"></activity>
+        <activity android:name=".ChoixLG" />
         <activity android:name=".Proposition" />
         <activity android:name=".LGJeu" />
         <activity android:name=".InfoAttrib" />
