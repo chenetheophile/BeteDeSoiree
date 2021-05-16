@@ -2,10 +2,12 @@ package com.example.applicationv3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -15,7 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> implements Filterable{
 
@@ -24,8 +32,8 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     private ArrayList<String> joueurs_jeux=new ArrayList<>();
     private ArrayList<String> equipement_jeux=new ArrayList<>();
     private ArrayList<Integer> images_jeux=new ArrayList<>();
-    private ArrayList<Item>recipe=new ArrayList<>();
-    private ArrayList<Item>listepleine=new ArrayList<>();
+    private ArrayList<Item>recipe;
+    private ArrayList<Item>listepleine;
     private Context context;
 
 
@@ -51,11 +59,13 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull JeuxHolder holder, int position) {
-
         if (recipe.size()==position-1 ||recipe.size()<=position){
-            Log.i("search","suppr");
             holder.layout.setVisibility(View.GONE);
         }else{
+            recipe.get(position).setFavori(new affichage_Recette().verifier(recipe.get(position).getNom(),context));
+            Log.i("MajFav", String.valueOf(recipe.get(position).getNom()));
+            Log.i("MajFav", String.valueOf(recipe.get(position).isFavori()));
+
             Item item=recipe.get(position);
             String nom = item.getNom();
             String detail="";
@@ -93,6 +103,7 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
 
                     }
                     context.startActivity(intent);
+
                 }
             });
 
@@ -134,7 +145,6 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
             layout=itemView.findViewById(R.id.boiteItem);
         }
     }
-
     @Override
     public Filter getFilter() {
         return filtre;
@@ -149,7 +159,7 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
             }else{
                 String lettrefiltre=constraint.toString().toLowerCase().trim();
                 for (Item recette:listepleine){
-                    if (recette.getNom().toLowerCase().contains(lettrefiltre)){
+                    if (recette.getNom().toLowerCase().contains(lettrefiltre)||"Favoris".toLowerCase().contains(lettrefiltre)&&recette.isFavori()){
                         listefiltre.add(recette);
                     }
                 }
@@ -179,3 +189,4 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     };
 
 }
+

@@ -66,6 +66,7 @@ public class BDD {
                     });
         }
     }
+
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
         Intent intent=new Intent();
         intent.putExtra("User",User);
@@ -82,7 +83,7 @@ public class BDD {
                         if (task.isSuccessful()) {
                             int nbCocktail=task.getResult().size();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                cocktailArrayList.add(new Item(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description")));
+                                cocktailArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description")));
                               updateProgressBar((int)50/nbCocktail);
                             }
                             intent.putExtra("Cocktail",cocktailArrayList);
@@ -94,7 +95,7 @@ public class BDD {
                                             if (task.isSuccessful()) {
                                                 int nbRecette=task.getResult().size();
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    recetteArrayList.add(new Item(document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("temps")));
+                                                    recetteArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("temps")));
                                                     updateProgressBar((int)50/nbRecette);
                                                 }
                                                 intent.putExtra("Recette",recetteArrayList);

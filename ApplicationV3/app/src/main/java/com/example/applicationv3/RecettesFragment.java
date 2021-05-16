@@ -43,6 +43,7 @@ public class RecettesFragment extends Fragment {
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(),listeRecette, images);
         ListeRecettes.setAdapter(jeuxAdapter);
         ListeRecettes.setLayoutManager(new LinearLayoutManager(getContext()));
+        ((donnee)getActivity().getApplication()).setAdapterRecette(jeuxAdapter);
 
         barre=getActivity().findViewById(R.id.barreRecherche);
         ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
