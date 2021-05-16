@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-public class CocktailsFragment extends Fragment {
+public class CocktailsFragment extends Fragment{
 
     private RecyclerView ListeCocktails;
-    private JeuxAdapter jeuxAdapter;
+    public JeuxAdapter jeuxAdapter;
     private ArrayList<Item>listeRecette=new ArrayList<>();
     private ArrayList<Integer>images=new ArrayList<>();
 
@@ -41,7 +42,6 @@ public class CocktailsFragment extends Fragment {
 
         //affiche les cocktails selon un modèle qu on adapte et recupere les cocktails etc depuis les documents recuperer de la bdd
         ListeCocktails = rootView.findViewById(R.id.ListeCocktails);
-
         listeRecette= (ArrayList<Item>) getActivity().getIntent().getExtras().get("Cocktail");
         for(int i=0;i<listeRecette.size();i++){
             if(i==0){
@@ -52,7 +52,7 @@ public class CocktailsFragment extends Fragment {
         jeuxAdapter = new JeuxAdapter(this.getContext(), listeRecette, images);
         ListeCocktails.setAdapter(jeuxAdapter);
         ListeCocktails.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        ((donnee)getActivity().getApplication()).setAdapterCocktail(jeuxAdapter);
         barre=getActivity().findViewById(R.id.barreRecherche);
         ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
         rechercher.setOnClickListener(new View.OnClickListener() {

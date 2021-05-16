@@ -2,14 +2,19 @@ package com.example.applicationv3;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -17,16 +22,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
-public class affichage_Recette extends AppCompatActivity {
+public class affichage_Recette extends AppCompatActivity{
     Item recette;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_recette);
         recette=(Item)getIntent().getExtras().get("Recette");
-
         TextView txt=findViewById(R.id.listeIngredient);
         txt.setText(recette.getIngredient());
 
@@ -34,31 +39,41 @@ public class affichage_Recette extends AppCompatActivity {
         nomRecette.setText(recette.getNom());
 
         CheckBox fav=findViewById(R.id.fav);
-        if(verifier(nomRecette.getText().toString())) {
+        if(recette.isFavori()) {
             fav.setChecked(true);
         }else{
             fav.setChecked(false);
         }
         //verifie que l'utilisateur a deja coché la recette dans une precedente ouverture et coloris l etoile en fonction
         fav.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if(fav.isChecked()){
-                    sauver((String) nomRecette.getText(),true,true);
+                    recette.setFavori(true);
+                    sauver((String) nomRecette.getText(),true,true,getApplicationContext());
+
+
                 }else{
-                    supprimer((String) nomRecette.getText());
+                    recette.setFavori(false);
+                    supprimer((String) nomRecette.getText(),getApplicationContext());
+
                 }//ajoute ou supprime une recette des favoris
+                Log.i("MAJfav",String.valueOf(recette.isFavori()));
+                ((donnee)getApplication()).getAdapterCocktail().notifyDataSetChanged();
+                ((donnee)getApplication()).getAdapterRecette().notifyDataSetChanged();
             }
         });
         ImageView imgRecette=findViewById(R.id.img_recette);
         Picasso.get().load(recette.getLien()).into(imgRecette);
     }
-    private boolean verifier(String recette) {//parcours le fichier des fav et verifie que le nom y est si oui renvoi vrai faux sinon
+
+    public boolean verifier(String recette, Context act) {//parcours le fichier des fav et verifie que le nom y est si oui renvoi vrai faux sinon
         boolean verif=false;
 
         FileInputStream fis;
         try {
-            fis = affichage_Recette.this.openFileInput("Fav");
+            fis =act.openFileInput("Fav");
             InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
@@ -69,11 +84,11 @@ public class affichage_Recette extends AppCompatActivity {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            sauver("",false,false);
+            sauver("",false,false,act);
         }
         return verif;
     }
-    private void sauver(String recette,boolean ajout,boolean mess){//ajoute une recette a la fin du fichier des fav
+    private void sauver(String recette,boolean ajout,boolean mess,Context act){//ajoute une recette a la fin du fichier des fav
         if(mess){
         Toast.makeText(getApplicationContext(),recette+" Sauvegardé",Toast.LENGTH_SHORT).show();
         }
@@ -82,9 +97,12 @@ public class affichage_Recette extends AppCompatActivity {
             recette+='\n';
             String filename="Fav";
             if (ajout) {
-                outputStream = openFileOutput(filename, Context.MODE_APPEND);
+                outputStream = act.openFileOutput(filename, Context.MODE_APPEND);
+                Log.i("Fic","Append");
+
             } else {
-                outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                outputStream = act.openFileOutput(filename, Context.MODE_PRIVATE);
+                Log.i("Fic","erase");
             }
             outputStream.write(recette.getBytes());
             outputStream.flush();
@@ -92,14 +110,15 @@ public class affichage_Recette extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
-        private void supprimer(String recette){//supprime une recette des fav
+        private void supprimer(String recette,Context act){//supprime une recette des fav
         Toast.makeText(getApplicationContext(),recette+" retiré des favoris",Toast.LENGTH_SHORT).show();
         String liste="\n";
-        if(verifier(recette)){
+        if(verifier(recette,getApplicationContext())){
             FileInputStream fis;
             try {
-                fis = affichage_Recette.this.openFileInput("Fav");
+                fis = act.openFileInput("Fav");
                 InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
@@ -109,7 +128,7 @@ public class affichage_Recette extends AppCompatActivity {
                     }
                     line = reader.readLine();
                 }
-                sauver(liste,false,false);
+                sauver(liste,false,false,act);
             } catch (IOException e) {
                 e.printStackTrace();
             }

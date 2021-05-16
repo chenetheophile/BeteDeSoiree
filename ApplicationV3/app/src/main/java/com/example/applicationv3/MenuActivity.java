@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ public class MenuActivity extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.affichage_liste);
         viewPager.setOffscreenPageLimit(3);
+
         EditText barr=findViewById(R.id.barreRecherche);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
