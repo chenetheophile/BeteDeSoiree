@@ -91,7 +91,10 @@ public class AttributionLG extends AppCompatActivity {
                     }
                 }
                 Intent intent = new Intent(getApplicationContext(), LGJeu.class);
-                intent.putExtra("roles", roles);
+                intent.putExtra("rolesMap", roles);
+                intent.putExtra("roles", nomsRoles);
+                intent.putExtra("images", imagesCartes);
+                intent.putExtra("joueurs", nomsJoueurs);
                 startActivity(intent);
             }
         });

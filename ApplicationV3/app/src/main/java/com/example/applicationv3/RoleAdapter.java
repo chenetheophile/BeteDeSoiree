@@ -47,10 +47,7 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.RoleHolder> {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 AttributionLG.roles.put(nomsRoles.get(position), nomsJoueurs.get(pos));
-                System.out.println("changed");
-                for (Object value : AttributionLG.roles.values().toArray()) {
-                    System.out.println(value);
-                }
+                ((TextView) parent.getChildAt(0)).setTextColor(view.getResources().getColor(R.color.black));
             }
 
             @Override

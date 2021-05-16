@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/loup_garou" />
+        app:srcCompat="@drawable/loupgarou" />
 
     <Button
         android:id="@+id/LocalButton"
@@ -23,6 +23,7 @@
         android:layout_height="100dp"
         android:backgroundTint="@color/teal_700"
         android:text="Local"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +35,7 @@
         android:layout_height="100dp"
         android:backgroundTint="@color/teal_700"
         android:text="Réseau"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

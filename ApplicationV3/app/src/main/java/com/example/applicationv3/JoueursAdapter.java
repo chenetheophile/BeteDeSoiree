@@ -25,7 +25,7 @@ import java.util.zip.Inflater;
 
 public class JoueursAdapter extends RecyclerView.Adapter<JoueursAdapter.JoueursHolder> {
 
-    ArrayList<Integer> images = new ArrayList<>();
+    ArrayList<Integer> images;
     Context context;
 
     public JoueursAdapter(Context c, ArrayList<Integer> i) {

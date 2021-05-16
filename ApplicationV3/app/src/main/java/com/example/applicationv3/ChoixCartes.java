@@ -29,7 +29,7 @@ public class ChoixCartes extends Fragment {
     Button reglesButton;
     Button defautButton;
 
-    public RecyclerView.Adapter choixAdapter;
+    RecyclerView.Adapter choixAdapter;
     RecyclerView.LayoutManager layoutManager;
 
     @Override
