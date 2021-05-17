@@ -76,21 +76,25 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
             f.createNewFile();
 
             //Convert bitmap to byte array
-            Bitmap bitmap = image;
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-            byte[] bitmapdata = bos.toByteArray();
+            if(image!=null) {
+                Bitmap bitmap = image;
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
 
-            //write the bytes in file
-            FileOutputStream fos = new FileOutputStream(f);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
+                //write the bytes in file
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+                DataSource source = new FileDataSource(f);
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName("img");
+                mp.addBodyPart(messageBodyPart);
+            }
 
-            DataSource source = new FileDataSource(f);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName("img");
-            mp.addBodyPart(messageBodyPart);
+
+
             // Send the complete message parts
             mimeMessage.setContent(mp);
             Transport.send(mimeMessage);

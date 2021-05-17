@@ -63,14 +63,12 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
             holder.layout.setVisibility(View.GONE);
         }else{
             recipe.get(position).setFavori(new affichage_Recette().verifier(recipe.get(position).getNom(),context));
-            Log.i("MajFav", String.valueOf(recipe.get(position).getNom()));
-            Log.i("MajFav", String.valueOf(recipe.get(position).isFavori()));
 
             Item item=recipe.get(position);
             String nom = item.getNom();
             String detail="";
             if(!item.getType().equalsIgnoreCase("Musique")){
-                detail = item.getIngredient();
+                detail = item.getPrincip();
             }
 
             String desc = item.getDescription();

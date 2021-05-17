@@ -41,7 +41,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.4'
     implementation 'com.google.firebase:firebase-firestore:22.1.2'
     implementation 'com.google.firebase:firebase-auth:20.0.4'
-    implementation 'com.google.code.gson:gson:2.8.6'
     implementation project(':spotify-app-remote-release-0.7.1')
     implementation "com.google.code.gson:gson:2.8.5"
     implementation files('libs/activation.jar')

@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class affichage_Recette extends AppCompatActivity{
     Item recette;
@@ -32,12 +35,38 @@ public class affichage_Recette extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_recette);
         recette=(Item)getIntent().getExtras().get("Recette");
+
         TextView txt=findViewById(R.id.listeIngredient);
         txt.setText(recette.getIngredient());
+
+        TextView Description=findViewById(R.id.description);
+        Description.setText(recette.getDescription());
 
         TextView nomRecette=findViewById(R.id.NomRecette);
         nomRecette.setText(recette.getNom());
 
+        TextView time=findViewById(R.id.time);
+        ImageView ic_time=findViewById(R.id.ic_time);
+
+
+        RecyclerView etap=findViewById(R.id.EtapeRecycler);
+        ArrayList<String>listeEtape=new ArrayList<>();
+        for(int i=0;i<recette.getEtape().split("@").length;i++){
+            listeEtape.add(String.valueOf(recette.getEtape().split("@")[i]));
+        }
+
+        EtapeAdapter etapeAdapter=new EtapeAdapter(getApplicationContext(),listeEtape);
+        etap.setAdapter(etapeAdapter);
+        etap.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        if (recette.getType().equalsIgnoreCase("Recette")){
+            time.setText(recette.getTempsPrepa());
+            time.setVisibility(View.VISIBLE);
+            ic_time.setVisibility(View.VISIBLE);
+        }else{
+            time.setVisibility(View.GONE);
+            ic_time.setVisibility(View.GONE);
+        }
         CheckBox fav=findViewById(R.id.fav);
         if(recette.isFavori()) {
             fav.setChecked(true);
@@ -65,7 +94,10 @@ public class affichage_Recette extends AppCompatActivity{
             }
         });
         ImageView imgRecette=findViewById(R.id.img_recette);
-        Picasso.get().load(recette.getLien()).into(imgRecette);
+        if (!recette.getLien().equalsIgnoreCase("")){
+            Picasso.get().load(recette.getLien()).into(imgRecette);
+        }
+
     }
 
     public boolean verifier(String recette, Context act) {//parcours le fichier des fav et verifie que le nom y est si oui renvoi vrai faux sinon

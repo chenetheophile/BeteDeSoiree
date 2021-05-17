@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/boiteItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:cardBackgroundColor="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,10 @@
                 android:id="@+id/ObjetImageView"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="9dp"
                 android:layout_marginEnd="331dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -47,8 +48,8 @@
                 android:id="@+id/DetailJeuTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="16dp"
                 android:text="Detail"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +70,10 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="10dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ObjetImageView" />
 

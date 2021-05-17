@@ -6,10 +6,16 @@ public class Item implements Serializable {
     private String type;
     private String nom;
     private String lien="";
-    private Integer image;
+    private String etape;
     private String ingredient;
     private String Description;
     private String tempsPrepa;
+    private String princip;
+
+    public String getPrincip() {
+        return princip;
+    }
+
     private boolean favori;
     private JeuxAdapter adapter;
     public boolean isFavori() {
@@ -20,17 +26,21 @@ public class Item implements Serializable {
         this.favori = favori;
     }
 
-    public Item(boolean fav, String nom, String lien, String ingredient, String description) {
+    public Item(boolean fav, String nom, String lien, String ingredient, String description,String step,String Principal) {
         this.type = "Cocktail";
+        this.etape=step;
         this.favori=fav;
         this.nom = nom;
         this.lien = lien;
+        this.princip=Principal;
         this.ingredient = ingredient;
         this.Description = description;
     }
-    public Item(boolean fav,String nom, String lien, String ingredient, String description, String temps) {
+    public Item(boolean fav,String nom, String lien, String ingredient, String description, String temps,String step,String Principal) {
         this.type = "Recette";
+        this.etape=step;
         this.nom = nom;
+        this.princip=Principal;
         this.favori=fav;
         this.lien = lien;
         this.ingredient = ingredient;
@@ -38,11 +48,20 @@ public class Item implements Serializable {
         this.tempsPrepa=temps;
 
     }
-    public Item(String type, String nom, String joueur, String equipement,boolean a) {//sert pour musique et jeu
+
+    public String getEtape() {
+        return etape;
+    }
+
+    public Item(String type, String nom, String joueur, String equipement, boolean a) {//sert pour musique et jeu
         this.type = type;
         this.nom = nom;
         this.ingredient = joueur;
         this.Description = equipement;
+    }
+
+    public String getTempsPrepa() {
+        return tempsPrepa;
     }
 
     public JeuxAdapter getAdapter() {

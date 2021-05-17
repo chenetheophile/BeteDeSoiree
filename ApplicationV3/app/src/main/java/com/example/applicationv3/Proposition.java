@@ -25,10 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
-    private  EditText nomRecettePro;
-    private  EditText Desc;
+    private  EditText nomRecettePro,Ingr,Desc,Etape;
     private  Bitmap photo;
-    private  EditText Ingr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +43,7 @@ public class Proposition extends AppCompatActivity {
         nomRecettePro=findViewById(R.id.NomRecettePropo);
         Desc=findViewById(R.id.DescriptionPropo);
         Ingr=findViewById(R.id.IngrRecettePropo);
+        Etape=findViewById(R.id.EtapeProposition);
 
         ImageView img=findViewById(R.id.photo);
         img.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +85,10 @@ public class Proposition extends AppCompatActivity {
                     ArrayList<String>val=new ArrayList<>();
                     champ.add("Description");
                     champ.add("Ingredient");
+                    champ.add("Etape");
                     val.add(Desc.getText().toString());
                     val.add(Ingr.getText().toString());
+                    val.add(Etape.getText().toString());
                     try {
                         new BDD().creerChamp(getIntent().getExtras().getString("type").toLowerCase(),nomRecettePro.getText().toString(),champ,val);
                         Toast.makeText(getApplicationContext(),"Recette ajouté à la BDD",Toast.LENGTH_LONG).show();
@@ -111,8 +112,10 @@ public class Proposition extends AppCompatActivity {
     private void sendProp(){//envoi la proposition par mail
         String Email="chene.theophile@gmail.com";
         String Subject="Proposition recette";
-        String mess=nomRecettePro.getText().toString()+"\n"+Ingr.getText().toString()+"\n"+Desc.getText().toString();
+        String mess=nomRecettePro.getText().toString()+"\n"+Ingr.getText().toString()+"\n"+Desc.getText().toString()+"\n"+Etape.getText().toString();
         JavaMailAPI javaMailAPI=new JavaMailAPI(this,Email,Subject, mess,photo);
         javaMailAPI.execute();
+        finish();
+        Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
     }
 }
