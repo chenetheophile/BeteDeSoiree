@@ -4,10 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +33,7 @@ public class EtapeAdapter extends RecyclerView.Adapter<EtapeAdapter.EtapeHolder>
     @Override
     public void onBindViewHolder(@NonNull EtapeHolder holder, int position) {
         holder.num.setText(String.valueOf(position));
-        holder.etape.setText(etape.get(position));
+        holder.etape.setText(etape.get(position).replace("\\n",System.getProperty("line.separator")));
     }
 
     @Override
