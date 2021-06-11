@@ -32,7 +32,12 @@ public class BDD {
         this.User=usr;
         this.base=FirebaseFirestore.getInstance();
     }
-    public BDD(FirebaseUser usr,ProgressBar chargement){
+
+    public FirebaseUser getUser() {
+        return User;
+    }
+
+    public BDD(FirebaseUser usr, ProgressBar chargement){
         this.User=usr;
         this.charg=chargement;
         this.base=FirebaseFirestore.getInstance();

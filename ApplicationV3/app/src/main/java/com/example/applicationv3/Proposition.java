@@ -90,7 +90,9 @@ public class Proposition extends AppCompatActivity {
                     val.add(Ingr.getText().toString());
                     val.add(Etape.getText().toString());
                     try {
-                        new BDD().creerChamp(getIntent().getExtras().getString("type").toLowerCase(),nomRecettePro.getText().toString(),champ,val);
+                        BDD base=new BDD(usr);
+                        Log.i("base",base.getUser().getUid());
+                        base.creerChamp(getIntent().getExtras().getString("type").toLowerCase(),nomRecettePro.getText().toString(),champ,val);
                         Toast.makeText(getApplicationContext(),"Recette ajouté à la BDD",Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         e.printStackTrace();
