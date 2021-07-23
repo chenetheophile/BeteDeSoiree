@@ -37,7 +37,7 @@ public class affichage_Recette extends AppCompatActivity{
         recette=(Item)getIntent().getExtras().get("Recette");
 
         TextView txt=findViewById(R.id.listeIngredient);
-        txt.setText(recette.getIngredient());
+        txt.setText(recette.getIngredient().replace("@","\n"));
 
         TextView Description=findViewById(R.id.description);
         Description.setText(recette.getDescription());
