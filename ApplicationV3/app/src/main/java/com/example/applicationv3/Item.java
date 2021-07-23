@@ -17,6 +17,7 @@ public class Item implements Serializable {
     }
 
     private boolean favori;
+    private boolean alcool;
     private JeuxAdapter adapter;
     public boolean isFavori() {
         return favori;
@@ -26,11 +27,12 @@ public class Item implements Serializable {
         this.favori = favori;
     }
 
-    public Item(boolean fav, String nom, String lien, String ingredient, String description,String step,String Principal) {
+    public Item(boolean fav, String nom, String lien, String ingredient, String description,String step,String Principal,boolean Alcool) {
         this.type = "Cocktail";
         this.etape=step;
         this.favori=fav;
         this.nom = nom;
+        this.alcool=Alcool;
         this.lien = lien;
         this.princip=Principal;
         this.ingredient = ingredient;
@@ -62,6 +64,10 @@ public class Item implements Serializable {
 
     public String getTempsPrepa() {
         return tempsPrepa;
+    }
+
+    public boolean isAlcool() {
+        return alcool;
     }
 
     public JeuxAdapter getAdapter() {

@@ -47,7 +47,12 @@ public class CocktailsFragment extends Fragment{
             if(i==0){
                 images.clear();
             }
-            images.add(R.drawable.ic_launcher_foreground);
+            if (listeRecette.get(i).isAlcool()){
+                images.add(R.drawable.avec_alcool);
+            }else{
+                images.add(R.drawable.sans_alcool);
+            }
+
         }
         jeuxAdapter = new JeuxAdapter(this.getContext(), listeRecette, images);
         ListeCocktails.setAdapter(jeuxAdapter);

@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/ObjetImageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="68dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="331dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
                 android:id="@+id/DescJeuTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="82dp"
+                android:layout_marginStart="96dp"
                 android:layout_marginTop="48dp"
                 android:text="Description"
                 android:textSize="14sp"
@@ -59,7 +59,7 @@
                 android:id="@+id/NomJeuTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="82dp"
+                android:layout_marginStart="96dp"
                 android:layout_marginTop="16dp"
                 android:text="Nom"
                 android:textSize="24sp"

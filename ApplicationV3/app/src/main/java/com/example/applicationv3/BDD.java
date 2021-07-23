@@ -88,7 +88,7 @@ public class BDD {
                         if (task.isSuccessful()) {
                             int nbCocktail=task.getResult().size();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                cocktailArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("Etape"),document.getString("Principal")));
+                                cocktailArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("Etape"),document.getString("Principal"),document.getBoolean("Alcool")));
                               updateProgressBar((int)50/nbCocktail);
                             }
                             intent.putExtra("Cocktail",cocktailArrayList);
