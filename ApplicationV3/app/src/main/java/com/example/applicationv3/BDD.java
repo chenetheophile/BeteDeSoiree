@@ -2,16 +2,18 @@ package com.example.applicationv3;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -19,8 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class BDD {
@@ -28,25 +36,12 @@ public class BDD {
     private FirebaseUser User;
     private ProgressBar charg;
 
-    public BDD(FirebaseUser usr){
-        this.User=usr;
-        this.base=FirebaseFirestore.getInstance();
-    }
-
-    public FirebaseUser getUser() {
-        return User;
-    }
 
     public BDD(FirebaseUser usr, ProgressBar chargement){
         this.User=usr;
         this.charg=chargement;
         this.base=FirebaseFirestore.getInstance();
     }
-    public  BDD(){
-        this.User=null;
-        this.base=FirebaseFirestore.getInstance();
-    }
-
     public FirebaseFirestore getBDD(){
         return this.base;//récupere la BDD
     }
@@ -73,51 +68,46 @@ public class BDD {
     }
 
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
-        Intent intent=new Intent();
-        intent.putExtra("User",User);
-        FirebaseFirestore base=this.getBDD();
-        intent.setClass(activity,MenuActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        RequestQueue queue = Volley.newRequestQueue(activity);
+        String url ="http://192.168.1.14/Include/get.php";
         ArrayList<Item> cocktailArrayList=new ArrayList<>();
         ArrayList<Item> recetteArrayList=new ArrayList<>();
-        base.collection("cocktail")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            int nbCocktail=task.getResult().size();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                cocktailArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("Etape"),document.getString("Principal"),document.getBoolean("Alcool")));
-                              updateProgressBar((int)50/nbCocktail);
+                    public void onResponse(String response) {
+                        Log.i("HTTP",response);
+                        String[] tab=response.split("%");
+                        for (int i=0;i<tab.length;i++){
+                            Gson gson=new Gson();
+                            Item item=gson.fromJson(tab[i],Item.class);
+                            item.setFavori(new affichage_Recette().verifier(item.getNom(),activity));
+                            if (item.getType().equalsIgnoreCase("Recette")){
+                                recetteArrayList.add(item);
+                            }else if (item.getType().equalsIgnoreCase("Cocktail")){
+                                cocktailArrayList.add(item);
                             }
-                            intent.putExtra("Cocktail",cocktailArrayList);
-                            base.collection("recette")
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                int nbRecette=task.getResult().size();
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    recetteArrayList.add(new Item(new affichage_Recette().verifier(document.getId(),activity),document.getId(),document.getString("lien"),document.getString("Ingredient"),document.getString("Description"),document.getString("Temps"),document.getString("Etape"),document.getString("Principal")));
-                                                    updateProgressBar((int)50/nbRecette);
-                                                }
-                                                intent.putExtra("Recette",recetteArrayList);
-                                                charg.setVisibility(View.INVISIBLE);
-                                                charg.setProgress(0);
-                                                activity.startActivity(intent);
-
-                                            }
-                                        }
-
-                                    });
+                            updateProgressBar((int)50/tab.length);
                         }
+                        Intent intent=new Intent();
+                        intent.putExtra("Cocktail",cocktailArrayList);
+                        intent.putExtra("Recette",recetteArrayList);
+                        charg.setVisibility(View.INVISIBLE);
+                        charg.setProgress(0);
+                        intent.setClass(activity,MenuActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+
                     }
-                });
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("HTTP","Err:"+error.toString());
+            }
+        });
 
-
-
+        queue.add(stringRequest);
 
         }
     public void updateProgressBar(int progress){

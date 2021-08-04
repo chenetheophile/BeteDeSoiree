@@ -3,71 +3,71 @@ package com.example.applicationv3;
 import java.io.Serializable;
 
 public class Item implements Serializable {
-    private String type;
-    private String nom;
-    private String lien="";
-    private String etape;
-    private String ingredient;
+    private String Type;
+    private String Nom;
+    private String Lien="";
+    private String Etape;
+    private String Ingredient;
     private String Description;
-    private String tempsPrepa;
-    private String princip;
+    private String TempsPrepa;
+    private String Princip;
 
     public String getPrincip() {
-        return princip;
+        return Princip;
     }
 
-    private boolean favori;
-    private boolean alcool;
+    private boolean Favori;
+    private boolean Alcool;
     private JeuxAdapter adapter;
     public boolean isFavori() {
-        return favori;
+        return Favori;
     }
 
     public void setFavori(boolean favori) {
-        this.favori = favori;
+        this.Favori = favori;
     }
 
-    public Item(boolean fav, String nom, String lien, String ingredient, String description,String step,String Principal,boolean Alcool) {
-        this.type = "Cocktail";
-        this.etape=step;
-        this.favori=fav;
-        this.nom = nom;
-        this.alcool=Alcool;
-        this.lien = lien;
-        this.princip=Principal;
-        this.ingredient = ingredient;
+    public Item(String nom, String lien, String ingredient, String description,String step,String principal,boolean alcool) {
+        this.Type = "Cocktail";
+        this.Etape=step;
+        this.Favori=false;
+        this.Nom = nom;
+        this.Alcool=Alcool;
+        this.Lien = lien;
+        this.Princip=principal;
+        this.Ingredient = ingredient;
         this.Description = description;
     }
-    public Item(boolean fav,String nom, String lien, String ingredient, String description, String temps,String step,String Principal) {
-        this.type = "Recette";
-        this.etape=step;
-        this.nom = nom;
-        this.princip=Principal;
-        this.favori=fav;
-        this.lien = lien;
-        this.ingredient = ingredient;
+    public Item(String nom, String lien, String ingredient, String description, String temps,String step,String principal,String test) {
+        this.Type = "Recette";
+        this.Etape=step;
+        this.Nom = nom;
+        this.Princip=principal;
+        this.Favori=false;
+        this.Lien = lien;
+        this.Ingredient = ingredient;
         this.Description = description;
-        this.tempsPrepa=temps;
+        this.TempsPrepa=temps;
 
     }
 
     public String getEtape() {
-        return etape;
+        return Etape;
     }
 
     public Item(String type, String nom, String joueur, String equipement, boolean a) {//sert pour musique et jeu
-        this.type = type;
-        this.nom = nom;
-        this.ingredient = joueur;
+        this.Type = type;
+        this.Nom = nom;
+        this.Ingredient = joueur;
         this.Description = equipement;
     }
 
     public String getTempsPrepa() {
-        return tempsPrepa;
+        return TempsPrepa;
     }
 
     public boolean isAlcool() {
-        return alcool;
+        return Alcool;
     }
 
     public JeuxAdapter getAdapter() {
@@ -79,19 +79,19 @@ public class Item implements Serializable {
     }
 
     public String getType() {
-        return type;
+        return Type;
     }
 
     public String getNom() {
-        return nom;
+        return Nom;
     }
 
     public String getLien() {
-        return lien;
+        return Lien;
     }
 
     public String getIngredient() {
-        return ingredient;
+        return Ingredient;
     }
 
     public String getDescription() {
