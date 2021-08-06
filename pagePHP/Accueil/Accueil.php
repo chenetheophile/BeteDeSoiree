@@ -12,7 +12,6 @@
 <body>
     <table>
         <tr>
-            <th>Référence</th>
             <th>Nom</th>
             <th>Temps</th>
             <th>Description</th>
@@ -21,19 +20,28 @@
             <th>Lien</th>
         </tr>
         <?php
-                include("../Include/Entete.php");
-                include("../Include/get.php");
-                //while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-        <tr>
-            <td> <?php //print($result['Id']); ?></td>
-            <td> <?php //print($result['Nom']); ?></td>
-            <td> <?php //print($result['Temps']); ?></td>
-            <td> <?php //print($result['Description']); ?></td>
-            <td> <?php //print($result['Ingredient']); ?></td>
-            <td> <?php //print($result['Etape']); ?></td>
-            <td> <?php //print($result['Lien']); }?></td>
-        </tr>
+        include("../Include/Entete.php");
+        $db_hostname = 'localhost';
+        $db_username = 'root';
+        $db_password = 'root';
+        $db_dbname = 'bdes';
+        $db_tablename = 'item';
+        $db_conn_str = "mysql:host=" . $db_hostname . ";dbname=" . $db_dbname;
+        $conn = new PDO($db_conn_str, $db_username, $db_password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $conn->prepare("SELECT `Nom`, `TempsPrepa`, `Description`, `Ingredient`, `Etape`, `Lien`, `Princip`, `Alcool`, `Favori`, `Type`  FROM $db_tablename WHERE 1");
+        $stmt->execute();
+        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        ?>
+            <tr>
+                <td> <?php print($result['Nom']); ?></td>
+                <td> <?php print($result['TempsPrepa']); ?></td>
+                <td> <?php print($result['Description']); ?></td>
+                <td> <?php print($result['Ingredient']); ?></td>
+                <td> <?php print($result['Etape']); ?></td>
+                <td> <?php print($result['Lien']);} ?></td>
+            </tr>
     </table>
 </body>
 

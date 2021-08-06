@@ -78,13 +78,13 @@
                     android:id="@+id/envoyer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="envoyer"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+                    app:layout_constraintTop_toBottomOf="@+id/horloge" />
 
                 <EditText
                     android:id="@+id/DescriptionPropo"
@@ -141,7 +141,29 @@
                         android:id="@+id/recyclerEtape"
                         android:layout_width="309dp"
                         android:layout_height="wrap_content" />
+
                 </LinearLayout>
+
+                <TimePicker
+                    android:id="@+id/horloge"
+                    android:layout_width="216dp"
+                    android:layout_height="143dp"
+                    android:layout_marginStart="136dp"
+                    android:layout_marginTop="12dp"
+                    android:timePickerMode="spinner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="110dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="64dp"
+                    android:text="Temps de Préparation"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

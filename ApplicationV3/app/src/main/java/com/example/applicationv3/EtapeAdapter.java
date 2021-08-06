@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class EtapeAdapter extends RecyclerView.Adapter<EtapeAdapter.EtapeHolder>
             super(itemView);
             this.num=itemView.findViewById(R.id.numero_etape);
             this.etape=itemView.findViewById(R.id.Etape);
+
         }
     }
 }

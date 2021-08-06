@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         charg=findViewById(R.id.chargement);
         charg.setProgress(0);
-        bdd=new BDD(null,charg);
+        bdd=new BDD(charg);
         View par=findViewById(R.id.parametrefrag);
         par.setVisibility(View.GONE);
         Button StartButton =findViewById(R.id.StartButton);

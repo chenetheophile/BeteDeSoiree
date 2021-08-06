@@ -78,7 +78,7 @@ public class EmailPassword {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                                new BDD(getUser(),chargement).getDocument(window.getContext());//une fois connecter passe a la suite de l'app
+                                new BDD(chargement).getDocument(window.getContext());//une fois connecter passe a la suite de l'app
                         } else {
                             String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                             switch (errorCode){

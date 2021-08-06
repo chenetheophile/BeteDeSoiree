@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,9 @@ import com.google.firebase.firestore.auth.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,45 +36,51 @@ import java.util.Locale;
 import java.util.Map;
 
 public class BDD {
-    private FirebaseFirestore base;
-    private FirebaseUser User;
     private ProgressBar charg;
-
-
-    public BDD(FirebaseUser usr, ProgressBar chargement){
-        this.User=usr;
-        this.charg=chargement;
-        this.base=FirebaseFirestore.getInstance();
+    public BDD(ProgressBar cha){
+        this.charg=cha;
     }
-    public FirebaseFirestore getBDD(){
-        return this.base;//récupere la BDD
+    public BDD(){
     }
+    public  void addPropo(Context activity,String nom,String ingr,String Desc,String Etape,String Type,int temps){
+        String url="http://86.213.174.40/Include/put.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
-    public void creerChamp( String nomCollection, String nomDocument, ArrayList<String> nomChamp, ArrayList<String> valeur) throws Exception {//sert a creer un champ dans un document de la DB servira pour les admins
-        FirebaseFirestore base=this.getBDD();
-        if(nomChamp.size()!=valeur.size()){
-            throw new Exception("Difference du nombre d'element entre nomChamp et Valeur");
-        }
-        else{
-            Map<String, Object> map = new HashMap<>();
-            for(int i=0;i<nomChamp.size();i++){
-                map.put(nomChamp.get(i),valeur.get(i));
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("HTTP",response);
             }
-            base.collection(nomCollection).document(nomDocument)
-                    .set(map)
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("BDD", "Error adding document", e);
-                        }
-                    });
-        }
-    }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){@Override
+        protected Map<String,String> getParams(){
+            Map<String,String> params = new HashMap<>();
 
+            params.put("nom", nom);
+            params.put("ingr", ingr);
+            params.put("desc", Desc);
+            params.put("etape", Etape);
+            params.put("type", Type);
+            params.put("lien", "NA");
+            params.put("alcool", "0");
+            params.put("fav","0" );
+            params.put("temps",temps+"min" );
+            params.put("princ", "NA");
+            return params;
+        }
+        };
+
+        requestQueue.add(stringRequest);
+    }
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
 
         RequestQueue queue = Volley.newRequestQueue(activity);
-        String url ="http://192.168.1.14/Include/get.php";
+        String url ="http://86.213.174.40/Include/get.php";
         ArrayList<Item> cocktailArrayList=new ArrayList<>();
         ArrayList<Item> recetteArrayList=new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -109,7 +119,7 @@ public class BDD {
 
         queue.add(stringRequest);
 
-        }
+    }
     public void updateProgressBar(int progress){
         charg.setProgress(charg.getProgress()+progress);
     }

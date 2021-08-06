@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,33 +28,24 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
-    private  EditText nomRecettePro,Ingr,Desc,Etape;
+    private  EditText nomRecettePro,Desc;
+    private ListeAdapter listeIngrAdapter;
+    private ListeAdapter listeEtapeAdapter;
+    private TimePicker horloge;
     private  Bitmap photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposition);
 
+        horloge=findViewById(R.id.horloge);
+        horloge.setIs24HourView(true);
 
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
 
         Spinner nbIngr=findViewById(R.id.nbIngr);
         ArrayAdapter<Integer> adapterIngr =new ArrayAdapter<Integer>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item){
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                convertView = super.getDropDownView(position, convertView,
-                        parent);
-
-                convertView.setVisibility(View.VISIBLE);
-                ViewGroup.LayoutParams p = convertView.getLayoutParams();
-                p.height = 100; // set the height
-                convertView.setLayoutParams(p);
-
-                return convertView;
-            }
         };
         for(int i=0;i<50;i++){
             adapterIngr.add(i);
@@ -91,17 +83,18 @@ public class Proposition extends AppCompatActivity {
             }
         });
 
-
         FirebaseUser usr= (FirebaseUser) getIntent().getExtras().get("User");
 
         nomRecettePro=findViewById(R.id.NomRecettePropo);
         Desc=findViewById(R.id.DescriptionPropo);
 
 
+
         Button envoi=findViewById(R.id.envoyer);
         envoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 sendProp();
             }
         });
@@ -117,8 +110,8 @@ public class Proposition extends AppCompatActivity {
                 listeIngr.add("");
             }
 
-            ListeAdapter listeAdapter=new ListeAdapter(getApplicationContext(),listeIngr);
-            recyclerIngr.setAdapter(listeAdapter);
+            listeIngrAdapter=new ListeAdapter(getApplicationContext(),listeIngr);
+            recyclerIngr.setAdapter(listeIngrAdapter);
             recyclerIngr.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }else{
             RecyclerView recyclerEtape=findViewById(R.id.recyclerEtape);
@@ -128,19 +121,26 @@ public class Proposition extends AppCompatActivity {
                 listeEtape.add("");
             }
 
-            ListeAdapter listeAdapter=new ListeAdapter(getApplicationContext(),listeEtape);
-            recyclerEtape.setAdapter(listeAdapter);
+            listeEtapeAdapter=new ListeAdapter(getApplicationContext(),listeEtape);
+            recyclerEtape.setAdapter(listeEtapeAdapter);
             recyclerEtape.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }
 
     }
 
     private void sendProp(){//envoi la proposition par mail
-        String Email="chene.theophile@gmail.com";
-        String Subject="Proposition recette";
-        String mess=nomRecettePro.getText().toString()+"\n"+Ingr.getText().toString()+"\n"+Desc.getText().toString()+"\n"+Etape.getText().toString();
-        JavaMailAPI javaMailAPI=new JavaMailAPI(this,Email,Subject, mess,photo);
-        javaMailAPI.execute();
+        String Etape="";
+        String Ingr="";
+        ArrayList<String> listeIngr=listeIngrAdapter.getListe();
+        ArrayList<String> listeEtape=listeEtapeAdapter.getListe();
+        for (int i=0;i<listeIngr.size();i++){
+            Ingr+=listeIngr.get(i)+"@";
+        }
+        for (int i=0;i<listeEtape.size();i++){
+            
+            Etape+=listeEtape.get(i)+"@";
+        }
+        new BDD().addPropo(getApplicationContext(),nomRecettePro.getText().toString(),Ingr,Desc.getText().toString(),Etape,getIntent().getExtras().getString("type"),horloge.getMinute()+horloge.getHour()*60);
         finish();
         Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
     }
