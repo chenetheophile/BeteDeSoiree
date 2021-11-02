@@ -1,1 +1,41 @@
-@import "../Include/includeStyle.css"
+@import "../Include/includeStyle.css";
+body{
+    background-color: cadetblue;
+}
+.tableau{
+    position: relative;
+    min-width:1000px;
+    border-width: 1px;
+    border-style:outset; 
+    border-color:black;
+    color: crimson;
+    font-size: 15px;
+    text-shadow: black 0px 1px;
+
+}
+.case{
+    border-width: 1px;
+    font-size: 25px;
+    max-width: 200px;
+    text-align: justify;
+    border-style:solid; 
+    border-color:black;
+    color: blue;
+    text-shadow: black 0px 1px;
+    
+}
+.valider{
+    text-align: center;
+
+}
+.supprimer{
+    text-align: center;
+}
+button{
+    background-color: transparent;
+    border: none;
+}
+.imglien{
+    max-width: 100px;
+    max-height: 100px;
+}

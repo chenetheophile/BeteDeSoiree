@@ -58,8 +58,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="25dp"
                     android:ems="10"
-                    android:hint="Nom de la recette"
-                    android:inputType="textPersonName"
+                    android:hint="Nom de la recette*"
+                    android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/Type"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -78,13 +78,11 @@
                     android:id="@+id/envoyer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="envoyer"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/horloge" />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
                     android:id="@+id/DescriptionPropo"
@@ -93,8 +91,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="15dp"
                     android:ems="10"
-                    android:hint="Description"
-                    android:inputType="textPersonName"
+                    android:hint="Description*"
+                    android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -166,6 +164,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 

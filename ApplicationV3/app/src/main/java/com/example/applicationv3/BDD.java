@@ -43,7 +43,7 @@ public class BDD {
     public BDD(){
     }
     public  void addPropo(Context activity,String nom,String ingr,String Desc,String Etape,String Type,int temps){
-        String url="http://86.213.174.40/Include/put.php";
+        String url="http://109.215.52.234/Include/put.php";
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
 
@@ -68,7 +68,7 @@ public class BDD {
             params.put("type", Type);
             params.put("lien", "NA");
             params.put("alcool", "0");
-            params.put("fav","0" );
+            params.put("table", "proposition");
             params.put("temps",temps+"min" );
             params.put("princ", "NA");
             return params;
@@ -80,7 +80,7 @@ public class BDD {
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
 
         RequestQueue queue = Volley.newRequestQueue(activity);
-        String url ="http://86.213.174.40/Include/get.php";
+        String url ="http://109.215.52.234/Include/get.php";
         ArrayList<Item> cocktailArrayList=new ArrayList<>();
         ArrayList<Item> recetteArrayList=new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

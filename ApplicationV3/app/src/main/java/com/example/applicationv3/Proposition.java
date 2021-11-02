@@ -32,7 +32,6 @@ public class Proposition extends AppCompatActivity {
     private ListeAdapter listeIngrAdapter;
     private ListeAdapter listeEtapeAdapter;
     private TimePicker horloge;
-    private  Bitmap photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +39,15 @@ public class Proposition extends AppCompatActivity {
 
         horloge=findViewById(R.id.horloge);
         horloge.setIs24HourView(true);
-
+        horloge.setHour(0);
+        horloge.setMinute(5);
         TextView text=findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
 
         Spinner nbIngr=findViewById(R.id.nbIngr);
         ArrayAdapter<Integer> adapterIngr =new ArrayAdapter<Integer>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item){
         };
-        for(int i=0;i<50;i++){
+        for(int i=1;i<25;i++){
             adapterIngr.add(i);
         }
         nbIngr.setAdapter(adapterIngr);
@@ -66,7 +66,7 @@ public class Proposition extends AppCompatActivity {
 
         Spinner nbEtape=findViewById(R.id.nbEtape);
         ArrayAdapter<Integer> adapterEtape =new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item);
-        for(int i=0;i<50;i++){
+        for(int i=1;i<25;i++){
             adapterEtape.add(i);
         }
         nbEtape.setAdapter(adapterEtape);
@@ -106,7 +106,7 @@ public class Proposition extends AppCompatActivity {
             RecyclerView recyclerIngr=findViewById(R.id.recyclerIngr);
             ArrayList<String> listeIngr=new ArrayList<>();
 
-            for(int i=0;i<position;i++){
+            for(int i=0;i<position+1;i++){
                 listeIngr.add("");
             }
 
@@ -117,7 +117,7 @@ public class Proposition extends AppCompatActivity {
             RecyclerView recyclerEtape=findViewById(R.id.recyclerEtape);
             ArrayList<String> listeEtape=new ArrayList<>();
 
-            for(int i=0;i<position;i++){
+            for(int i=0;i<position+1;i++){
                 listeEtape.add("");
             }
 
@@ -129,19 +129,27 @@ public class Proposition extends AppCompatActivity {
     }
 
     private void sendProp(){//envoi la proposition par mail
+        String nom=nomRecettePro.getText().toString();
+        String description=Desc.getText().toString();
         String Etape="";
         String Ingr="";
         ArrayList<String> listeIngr=listeIngrAdapter.getListe();
         ArrayList<String> listeEtape=listeEtapeAdapter.getListe();
+
         for (int i=0;i<listeIngr.size();i++){
             Ingr+=listeIngr.get(i)+"@";
         }
         for (int i=0;i<listeEtape.size();i++){
-            
+
             Etape+=listeEtape.get(i)+"@";
         }
-        new BDD().addPropo(getApplicationContext(),nomRecettePro.getText().toString(),Ingr,Desc.getText().toString(),Etape,getIntent().getExtras().getString("type"),horloge.getMinute()+horloge.getHour()*60);
-        finish();
-        Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
+        if(!nom.equalsIgnoreCase("") && !description.equalsIgnoreCase("")&&!Ingr.equalsIgnoreCase("@")&&!Etape.equalsIgnoreCase("@")){
+
+            new BDD().addPropo(getApplicationContext(),nom,Ingr,description,Etape,getIntent().getExtras().getString("type"),horloge.getMinute()+horloge.getHour()*60);
+            finish();
+            Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"Un des champs obligatoire n'est pas rempli",Toast.LENGTH_LONG).show();        }
+
     }
 }
