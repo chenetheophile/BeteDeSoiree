@@ -1,18 +1,13 @@
 package com.example.applicationv3;
 
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
-
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -22,9 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseUser;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
@@ -82,8 +74,6 @@ public class Proposition extends AppCompatActivity {
 
             }
         });
-
-        FirebaseUser usr= (FirebaseUser) getIntent().getExtras().get("User");
 
         nomRecettePro=findViewById(R.id.NomRecettePropo);
         Desc=findViewById(R.id.DescriptionPropo);

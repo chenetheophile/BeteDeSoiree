@@ -1,5 +1,6 @@
 package com.example.applicationv3;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JeuxHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JeuxHolder holder, @SuppressLint("RecyclerView") int position) {
         if (recipe.size()==position-1 ||recipe.size()<=position){
             holder.layout.setVisibility(View.GONE);
         }else{

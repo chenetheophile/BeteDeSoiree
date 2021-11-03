@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -84,7 +83,6 @@ public class RecettesFragment extends Fragment {
             public void onClick(View v) {
                 Intent proposition=new Intent(getContext(), Proposition.class);
                 proposition.putExtra("type","Recette");
-                proposition.putExtra("User",(FirebaseUser)getActivity().getIntent().getExtras().get("User"));
                 startActivity(proposition);
             }
         });

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.applicationv3">
 
+    <queries>
+        <package android:name="com.spotify.music" />
+    </queries>
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission." />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,11 +17,14 @@
         android:allowBackup="true"
         android:icon="@drawable/logo_appli"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/logo_appli"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ApplicationV3">
-        <activity android:name=".ChoixSorciere"></activity>
+        android:theme="@style/Theme.ApplicationV3"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".lecturePlaylist"
+            android:exported="false" />
+        <activity android:name=".ChoixSorciere" />
         <activity android:name=".ChoixLG" />
         <activity android:name=".Proposition" />
         <activity android:name=".LGJeu" />
@@ -27,7 +34,6 @@
         <activity android:name=".ResultatAV" />
         <activity android:name=".ReglesJeu" />
         <activity android:name=".AVJeu" />
-        <activity android:name=".lecturePlaylist" />
         <activity android:name=".ActionVerite" />
         <activity android:name=".affichage_Recette" />
         <activity
