@@ -62,6 +62,7 @@ public class MusiqueFragment extends Fragment {
                 contenu+=line;
                 line = reader.readLine();
             }
+            Log.i("Contenu: ",contenu);
         } catch (IOException e) {
                 sauver("None");
                 contenu="None";
