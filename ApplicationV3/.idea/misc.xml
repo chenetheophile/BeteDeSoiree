@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/drawable/dezzerLayer.xml" value="0.2703125" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_menu.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_proposition.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/fragment_choix_stream.xml" value="0.8" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_etape.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_liste_proposition.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/musique_fragment_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/mipmap-anydpi-v26/deezeric.xml" value="0.14739583333333334" />
       </map>
     </option>
   </component>
