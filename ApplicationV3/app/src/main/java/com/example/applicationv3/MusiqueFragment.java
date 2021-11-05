@@ -32,14 +32,14 @@ import java.util.Arrays;
 public class MusiqueFragment extends Fragment {
 
     private RecyclerView ListeMusique;
-//    private ArrayList<String> Playlist=new ArrayList<>(Arrays.asList("Chill","Indie","Dance/Electronique","Rock","Jazz","Classique"));
-//    private ArrayList<String> Desc=new ArrayList<>(Arrays.asList("Pour des soirées calmes","Des découvertes en perspectives","De quoi s'ambiancer","Rock","Pour des nouvelles vibes ","Parce que le retour au source nous fait du bien"));
-//    private ArrayList<String> Detail=new ArrayList<>(Arrays.asList("playlist:37i9dQZF1DXdCsscAsbRNz","playlist:37i9dQZF1DX924zU1IARaD",
-//            "playlist:37i9dQZF1DXaXB8fQg7xif","playlist:37i9dQZF1DWXTHBOfJ8aI7",
-//            "playlist:37i9dQZF1DXbITWG1ZJKYt","playlist:37i9dQZF1DWV0gynK7G6pD"));
-    private ArrayList<String> Playlist=new ArrayList<>();
-    private ArrayList<String> Desc=new ArrayList<>();
-    private ArrayList<String> Detail=new ArrayList<>();
+    private ArrayList<String> Playlist=new ArrayList<>(Arrays.asList("Chill","Indie","Dance/Electronique","Rock","Jazz","Classique"));
+    private ArrayList<String> Desc=new ArrayList<>(Arrays.asList("Pour des soirées calmes","Des découvertes en perspectives","De quoi s'ambiancer","Rock","Pour des nouvelles vibes ","Parce que le retour au source nous fait du bien"));
+    private ArrayList<String> Detail=new ArrayList<>(Arrays.asList("playlist:37i9dQZF1DXdCsscAsbRNz","playlist:37i9dQZF1DX924zU1IARaD",
+            "playlist:37i9dQZF1DXaXB8fQg7xif","playlist:37i9dQZF1DWXTHBOfJ8aI7",
+            "playlist:37i9dQZF1DXbITWG1ZJKYt","playlist:37i9dQZF1DWV0gynK7G6pD"));
+//    private ArrayList<String> Playlist=new ArrayList<>();
+//    private ArrayList<String> Desc=new ArrayList<>();
+//    private ArrayList<String> Detail=new ArrayList<>();
     private ArrayList<Item> musique=new ArrayList<>();
     private ArrayList<Integer> images = new ArrayList<>(Arrays.asList(R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground));
@@ -88,7 +88,8 @@ public class MusiqueFragment extends Fragment {
                     builder.setScopes(new String[]{"streaming"});
                     AuthorizationRequest request = builder.build();
 
-                    AuthorizationClient.openLoginActivity(getActivity(), REQUEST_CODE, request);
+                    Intent intent = AuthorizationClient.createLoginActivityIntent(getActivity(), request);
+                    startActivityForResult(intent, REQUEST_CODE);
                 }
             });
             Deezer.setOnClickListener(new View.OnClickListener() {
@@ -141,13 +142,13 @@ public class MusiqueFragment extends Fragment {
 
 
     }
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-
         // Check if result comes from the correct activity
         if (requestCode == REQUEST_CODE) {
             AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, intent);
-
+            Log.i("spot",response.getType().toString());
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
