@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
@@ -87,7 +88,6 @@ public class MusiqueFragment extends Fragment {
 
                     builder.setScopes(new String[]{"streaming"});
                     AuthorizationRequest request = builder.build();
-
                     Intent intent = AuthorizationClient.createLoginActivityIntent(getActivity(), request);
                     startActivityForResult(intent, REQUEST_CODE);
                 }
@@ -109,7 +109,14 @@ public class MusiqueFragment extends Fragment {
         }else{
             View rootView = inflater.inflate(R.layout.musique_fragment_layout, container, false);
             ListeMusique = rootView.findViewById(R.id.ListeMusique);
-
+            FloatingActionButton newPlaylist=rootView.findViewById(R.id.NewPlaylistbutton);
+            newPlaylist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getContext(),PlaylistPerso.class);
+                    startActivity(intent);
+                }
+            });
             for(int i=0;i<Playlist.size();i++){
                 musique.add(new Item("Musique",Playlist.get(i),Detail.get(i),Desc.get(i),true));
             }
@@ -159,6 +166,7 @@ public class MusiqueFragment extends Fragment {
 
                 // Auth flow returned an error
                 case ERROR:
+                    Log.e("erreur Spotify", response.getError());
                     // Handle error response
                     break;
 

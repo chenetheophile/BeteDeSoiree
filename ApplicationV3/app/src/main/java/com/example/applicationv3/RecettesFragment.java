@@ -26,7 +26,7 @@ public class RecettesFragment extends Fragment {
     private EditText barre;
     private RecyclerView ListeRecettes;
    private ArrayList<Integer>images=new ArrayList<>() ;
-//voir cocktail la logique est strictement identique
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

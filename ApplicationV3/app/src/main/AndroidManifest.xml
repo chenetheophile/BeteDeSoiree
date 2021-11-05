@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.applicationv3">
+    package="com.example.applicationv3" >
 
     <queries>
         <package android:name="com.spotify.music" />
@@ -20,7 +20,13 @@
         android:roundIcon="@drawable/logo_appli"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationV3"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".SearchSongsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlaylistPerso"
+            android:exported="false" />
         <activity
             android:name=".lecturePlaylist"
             android:exported="false" />
@@ -49,7 +55,7 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.ApplicationV3.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
