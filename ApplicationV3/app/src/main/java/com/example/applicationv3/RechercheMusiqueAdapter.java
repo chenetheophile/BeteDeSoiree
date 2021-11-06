@@ -1,5 +1,6 @@
 package com.example.applicationv3;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiqueAdapter.MusicHolder> implements Filterable {
-    LayoutInflater mInflater;
-    String token;
-
+    private LayoutInflater mInflater;
+    private String token;
+    private Activity Act;
     public void setToken(String token) {
         this.token = token;
     }
 
     public RechercheMusiqueAdapter(Context c) {
+        Act=(Activity) c.getApplicationContext();
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @NonNull
@@ -50,11 +52,10 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
         return filtre;
     }
 
-    private Filter filtre = new Filter() {
+    private final Filter filtre = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            ArrayList<Musique> listeMusique=new ArrayList<>();
-            String Url= "https://api.spotify.com/v1/search?q="+constraint.toString().toLowerCase().trim()+"&type=track\" -H \"Accept: application/json\"\n                    -H \"Content-Type: application/json\" -H\n        \"Authorization: Bearer "+token;
+            ArrayList<Musique> listeMusique = new ArrayList<>();
 
             FilterResults resultat = new FilterResults();
             return resultat;
@@ -66,5 +67,7 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
 
         }
     };
+
+
 }
 

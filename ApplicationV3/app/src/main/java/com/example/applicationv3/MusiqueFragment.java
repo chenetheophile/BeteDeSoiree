@@ -86,7 +86,7 @@ public class MusiqueFragment extends Fragment {
                     AuthorizationRequest.Builder builder =
                             new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
-                    builder.setScopes(new String[]{"streaming"});
+                    builder.setScopes(new String[]{"playlist-read-private"});
                     AuthorizationRequest request = builder.build();
                     Intent intent = AuthorizationClient.createLoginActivityIntent(getActivity(), request);
                     startActivityForResult(intent, REQUEST_CODE);
