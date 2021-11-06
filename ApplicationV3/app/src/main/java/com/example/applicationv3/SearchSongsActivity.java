@@ -1,5 +1,6 @@
 package com.example.applicationv3;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,9 +20,11 @@ public class SearchSongsActivity extends AppCompatActivity {
     private static final String REDIRECT_URI = "http://com.example.applicationv3/callback";
     private static final String CLIENT_ID="ec59b9a260ab406fbc577be3bc1d285c";
     private static final int REQUEST_CODE = 1337;
+    private Activity act;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_songs);
         RecyclerView affichageresultat=findViewById(R.id.recyclerRechercheTitre);
 
         RechercheMusiqueAdapter adapter=new RechercheMusiqueAdapter(getApplicationContext());
@@ -43,7 +46,7 @@ public class SearchSongsActivity extends AppCompatActivity {
 
                 builder.setScopes(new String[]{"playlist-read-private"});
                 AuthorizationRequest request = builder.build();
-                Intent intent = AuthorizationClient.createLoginActivityIntent(getParent(), request);
+                Intent intent = AuthorizationClient.createLoginActivityIntent(new Activity(), request);
                 intent.putExtra("char",titre.getText().toString().toLowerCase().trim());
                 startActivityForResult(intent, REQUEST_CODE);
             }
@@ -55,20 +58,21 @@ public class SearchSongsActivity extends AppCompatActivity {
         });
 
 
-        setContentView(R.layout.activity_search_songs);
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         // Check if result comes from the correct activity
+        AuthorizationResponse response=null;
         if (requestCode == REQUEST_CODE) {
-            AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, intent);
+                response= AuthorizationClient.getResponse(resultCode, intent);
+
             Log.i("spot",response.getType().toString());
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
                     Log.i("token",response.toString());
-                    String titre=intent.getStringExtra("char");
 
                     break;
 

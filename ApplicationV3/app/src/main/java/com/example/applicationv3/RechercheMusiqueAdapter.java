@@ -22,7 +22,6 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
     }
 
     public RechercheMusiqueAdapter(Context c) {
-        Act=(Activity) c.getApplicationContext();
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @NonNull
