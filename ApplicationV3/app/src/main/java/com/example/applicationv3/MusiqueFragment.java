@@ -113,7 +113,7 @@ public class MusiqueFragment extends Fragment {
             newPlaylist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getContext(),PlaylistPerso.class);
+                    Intent intent=new Intent(getActivity(),PlaylistPerso.class);
                     startActivity(intent);
                 }
             });

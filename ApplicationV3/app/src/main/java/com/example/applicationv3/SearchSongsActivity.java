@@ -1,35 +1,73 @@
 package com.example.applicationv3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Filter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SearchSongsActivity extends AppCompatActivity {
     private static final String REDIRECT_URI = "http://com.example.applicationv3/callback";
     private static final String CLIENT_ID="ec59b9a260ab406fbc577be3bc1d285c";
     private static final int REQUEST_CODE = 1337;
-    private Activity act;
+    private RechercheMusiqueAdapter adapter;
+    private donnee donnee;
+    private Context context;
+    private String token="";
+    private ArrayList<Musique>listeMusiqueTrouver=new ArrayList<>();
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_songs);
+        donnee=(donnee)getApplicationContext();
+        context=donnee.getAdapterCocktail().getContext();
         RecyclerView affichageresultat=findViewById(R.id.recyclerRechercheTitre);
 
-        RechercheMusiqueAdapter adapter=new RechercheMusiqueAdapter(getApplicationContext());
-        affichageresultat.setAdapter(adapter);
-        affichageresultat.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
+        AuthorizationRequest.Builder builder =
+                new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
+
+        builder.setScopes(new String[]{"playlist-read-private"});
+        AuthorizationRequest request = builder.build();
+        Intent intent = AuthorizationClient.createLoginActivityIntent((Activity) context, request);
+        startActivityForResult(intent, REQUEST_CODE);
+
+
 
 
         EditText titre=findViewById(R.id.InputRecherche);
@@ -41,14 +79,43 @@ public class SearchSongsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                AuthorizationRequest.Builder builder =
-                        new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
+                if(count==1){
+                    String url="http://109.215.52.234/Include/search.php";
+                    RequestQueue requestQueue = Volley.newRequestQueue(context);
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.i("HTTP",response);
+                            listeMusiqueTrouver=getMusique(response);
+                            Log.i("Json","\n\n");
+                            for (Musique musique:listeMusiqueTrouver){
+                                Log.i("Json",musique.toString());
+                            }
+                            Log.i("Adapter", listeMusiqueTrouver.toString());
+                            adapter=new RechercheMusiqueAdapter(getApplication(),listeMusiqueTrouver);
+                            affichageresultat.setAdapter(adapter);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                        }
+                    }){@Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params = new HashMap<>();
+                        params.put("recherche",s.toString());
+                        params.put("token",token);
+                        params.put("longueur","50");
+                        return params;
+                    }
+                    };
 
-                builder.setScopes(new String[]{"playlist-read-private"});
-                AuthorizationRequest request = builder.build();
-                Intent intent = AuthorizationClient.createLoginActivityIntent(new Activity(), request);
-                intent.putExtra("char",titre.getText().toString().toLowerCase().trim());
-                startActivityForResult(intent, REQUEST_CODE);
+                    requestQueue.add(stringRequest);
+                }else{
+                    Filter filter= adapter.getFilter();
+                    filter.filter(s);
+                }
+
             }
 
             @Override
@@ -58,7 +125,7 @@ public class SearchSongsActivity extends AppCompatActivity {
         });
 
 
-
+        affichageresultat.setLayoutManager(new LinearLayoutManager(getApplication()));
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -72,8 +139,7 @@ public class SearchSongsActivity extends AppCompatActivity {
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
-                    Log.i("token",response.toString());
-
+                    setToken(response.getAccessToken());
                     break;
 
                 // Auth flow returned an error
@@ -87,5 +153,28 @@ public class SearchSongsActivity extends AppCompatActivity {
                     // Handle other cases
             }
         }
+    }
+    public ArrayList<Musique> getMusique(String JsonString){
+        ArrayList<Musique> val=new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject tracks= (JsonObject) ((JsonObject) parser.parse(String.valueOf(JsonString))).get("tracks");
+        JsonArray items= (JsonArray) tracks.get("items");
+        for (int i=0;i<items.size();i++){
+            String uri=String.valueOf(((JsonObject)items.get(i)).get("uri"));
+            String nom=String.valueOf(((JsonObject)items.get(i)).get("name"));
+            String duree=String.valueOf(((JsonObject)items.get(i)).get("duration_ms"));
+
+            JsonObject album= (JsonObject) ((JsonObject)items.get(i)).get("album");
+            JsonArray img=(JsonArray)album.get("images");
+            String image=String.valueOf(((JsonObject)img.get(2)).get("url"));
+
+            JsonArray artists=(JsonArray) ((JsonObject)items.get(i)).get("artists");
+            String listeArtiste="";
+            for (int j=0;j<artists.size();j++){
+                listeArtiste+=((JsonObject)artists.get(j)).get("name")+", ";
+            }
+            val.add(new Musique(nom,listeArtiste,uri,duree,image));
+        }
+        return val;
     }
 }

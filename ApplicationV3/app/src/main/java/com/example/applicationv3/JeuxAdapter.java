@@ -3,12 +3,10 @@ package com.example.applicationv3;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -18,13 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> implements Filterable{
 
@@ -37,6 +29,10 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
     private ArrayList<Item>listepleine;
     private Context context;
 
+
+    public Context getContext() {
+        return context;
+    }
 
     public JeuxAdapter(Context c, ArrayList<Item>recette , ArrayList<Integer> img){
         this.context=c;
@@ -73,11 +69,14 @@ public class JeuxAdapter extends RecyclerView.Adapter<JeuxAdapter.JeuxHolder> im
             }
 
             String desc = item.getDescription();
+
             holder.layout.setVisibility(View.VISIBLE);
+
             holder.NomJeuTextView.setText(nom);
             holder.DetailJeuTextView.setText(detail);
             holder.DescJeuTextView.setText(desc);
             holder.ObjetImageView.setImageResource(images_jeux.get(position));
+
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

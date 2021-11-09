@@ -5,6 +5,7 @@ import android.app.Application;
 public class donnee extends Application {
     private JeuxAdapter adapter1;
     private JeuxAdapter adapter2;
+    private RechercheMusiqueAdapter adapter3;
 
     public JeuxAdapter getAdapterCocktail(){
         return adapter1;
@@ -12,6 +13,8 @@ public class donnee extends Application {
     public void setAdapterCocktail(JeuxAdapter adapt){
         this.adapter1=adapt;
     }
+
+    public void setAdapterMusique(RechercheMusiqueAdapter adapt){this.adapter3=adapt;}
     public JeuxAdapter getAdapterRecette(){
         return adapter2;
     }

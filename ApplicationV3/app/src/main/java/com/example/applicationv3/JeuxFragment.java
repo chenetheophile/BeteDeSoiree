@@ -4,6 +4,7 @@ package com.example.applicationv3;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class JeuxFragment extends Fragment {
         JeuxAdapter jeuxAdapter = new JeuxAdapter(this.getContext(), jeux, images);
         ListeJeux.setAdapter(jeuxAdapter);
         ListeJeux.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        Log.i("Adapter",jeux.toString());
         barre=getActivity().findViewById(R.id.barreRecherche);
         ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
         rechercher.setOnClickListener(new View.OnClickListener() {

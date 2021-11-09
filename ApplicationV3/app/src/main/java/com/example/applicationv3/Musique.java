@@ -1,31 +1,49 @@
 package com.example.applicationv3;
 
 public class Musique {
-    private String Titre;
-    private String Auteur;
-    private String ID_Titre;
-    private Integer Img;
+    private String name;
+    private String author;
+    private String lien;
+    private String duree;
+    private String lienImage;
 
-    public String getTitre() {
-        return Titre;
+    public Musique(String pName, String pAuthor,String pLink,String pDuration,String pLienImage){
+        this.name=pName;
+        this.author=pAuthor;
+        this.lien=pLink;
+        this.duree=pDuration;
+        this.lienImage=pLienImage;
     }
 
-    public String getAuteur() {
-        return Auteur;
+    public String getName() {
+        return name;
     }
 
-    public String getID_Titre() {
-        return ID_Titre;
+    public String getAuthor() {
+        return author;
     }
 
-    public Integer getImg() {
-        return Img;
+    public String getLien() {
+        return lien;
     }
 
-    public Musique(String pTitre, String pAuteur, String pID_Titre, Integer pImg){
-        this.Auteur=pAuteur;
-        this.ID_Titre=pID_Titre;
-        this.Img=pImg;
-        this.Titre=pTitre;
+    public String getDuree() {
+        return duree;
+    }
+
+    public String getLienImage() {
+        return lienImage;
+    }
+
+    @Override
+    public String toString() {
+        return "Musique{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", lien='" + lien + '\'' +
+                ", duree='" + duree + '\'' +
+                ", lienImage='" + lienImage + '\'' +
+                '}';
     }
 }
+
