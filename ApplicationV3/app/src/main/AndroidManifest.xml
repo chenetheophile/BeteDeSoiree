@@ -13,6 +13,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:screenOrientation="portrait"
         android:name=".donnee"
         android:allowBackup="true"
         android:icon="@drawable/logo_appli"

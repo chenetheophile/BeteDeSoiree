@@ -38,9 +38,6 @@ public class MusiqueFragment extends Fragment {
     private ArrayList<String> Detail=new ArrayList<>(Arrays.asList("playlist:37i9dQZF1DXdCsscAsbRNz","playlist:37i9dQZF1DX924zU1IARaD",
             "playlist:37i9dQZF1DXaXB8fQg7xif","playlist:37i9dQZF1DWXTHBOfJ8aI7",
             "playlist:37i9dQZF1DXbITWG1ZJKYt","playlist:37i9dQZF1DWV0gynK7G6pD"));
-//    private ArrayList<String> Playlist=new ArrayList<>();
-//    private ArrayList<String> Desc=new ArrayList<>();
-//    private ArrayList<String> Detail=new ArrayList<>();
     private ArrayList<Item> musique=new ArrayList<>();
     private ArrayList<Integer> images = new ArrayList<>(Arrays.asList(R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground));
@@ -80,9 +77,6 @@ public class MusiqueFragment extends Fragment {
             spotify.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-
                     AuthorizationRequest.Builder builder =
                             new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
@@ -114,6 +108,7 @@ public class MusiqueFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(getActivity(),PlaylistPerso.class);
+                    intent.putExtra("lecture",false);
                     startActivity(intent);
                 }
             });

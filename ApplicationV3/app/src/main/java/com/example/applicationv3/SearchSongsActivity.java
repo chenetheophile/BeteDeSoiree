@@ -30,15 +30,18 @@ import com.spotify.sdk.android.auth.AuthorizationResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class SearchSongsActivity extends AppCompatActivity {
     private static final String REDIRECT_URI = "http://com.example.applicationv3/callback";
     private static final String CLIENT_ID="ec59b9a260ab406fbc577be3bc1d285c";
     private static final int REQUEST_CODE = 1337;
     private RechercheMusiqueAdapter adapter;
-    private donnee donnee;
     private Context context;
     private String token="";
+    private final ScheduledExecutorService tokenrefresh= Executors.newScheduledThreadPool(1);
     private ArrayList<Musique>listeMusiqueTrouver=new ArrayList<>();
 
     public String getToken() {
@@ -53,22 +56,10 @@ public class SearchSongsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_songs);
-        donnee=(donnee)getApplicationContext();
-        context=donnee.getAdapterCocktail().getContext();
+
+        context=this;
         RecyclerView affichageresultat=findViewById(R.id.recyclerRechercheTitre);
-
-
-
-        AuthorizationRequest.Builder builder =
-                new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
-
-        builder.setScopes(new String[]{"playlist-read-private"});
-        AuthorizationRequest request = builder.build();
-        Intent intent = AuthorizationClient.createLoginActivityIntent((Activity) context, request);
-        startActivityForResult(intent, REQUEST_CODE);
-
-
-
+        tokenrefresh.scheduleAtFixedRate(refreshToken(),0,1, TimeUnit.HOURS);
 
         EditText titre=findViewById(R.id.InputRecherche);
         titre.addTextChangedListener(new TextWatcher() {
@@ -79,20 +70,23 @@ public class SearchSongsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count==1){
+                if(count<=5){
                     String url="http://109.215.52.234/Include/search.php";
                     RequestQueue requestQueue = Volley.newRequestQueue(context);
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.i("HTTP",response);
-                            listeMusiqueTrouver=getMusique(response);
-                            Log.i("Json","\n\n");
+                            try {
+                                listeMusiqueTrouver=getMusique(response);
+                            }catch (Exception e){
+                                Log.e("Error getMusique()",e.toString());
+                            }
+
                             for (Musique musique:listeMusiqueTrouver){
                                 Log.i("Json",musique.toString());
                             }
                             Log.i("Adapter", listeMusiqueTrouver.toString());
-                            adapter=new RechercheMusiqueAdapter(getApplication(),listeMusiqueTrouver);
+                            adapter=new RechercheMusiqueAdapter(context,listeMusiqueTrouver);
                             affichageresultat.setAdapter(adapter);
                         }
                     }, new Response.ErrorListener() {
@@ -111,10 +105,12 @@ public class SearchSongsActivity extends AppCompatActivity {
                     };
 
                     requestQueue.add(stringRequest);
-                }else{
+                }
+                if (adapter!=null){
                     Filter filter= adapter.getFilter();
                     filter.filter(s);
                 }
+
 
             }
 
@@ -133,7 +129,7 @@ public class SearchSongsActivity extends AppCompatActivity {
         // Check if result comes from the correct activity
         AuthorizationResponse response=null;
         if (requestCode == REQUEST_CODE) {
-                response= AuthorizationClient.getResponse(resultCode, intent);
+            response= AuthorizationClient.getResponse(resultCode, intent);
 
             Log.i("spot",response.getType().toString());
             switch (response.getType()) {
@@ -162,7 +158,7 @@ public class SearchSongsActivity extends AppCompatActivity {
         for (int i=0;i<items.size();i++){
             String uri=String.valueOf(((JsonObject)items.get(i)).get("uri"));
             String nom=String.valueOf(((JsonObject)items.get(i)).get("name"));
-            String duree=String.valueOf(((JsonObject)items.get(i)).get("duration_ms"));
+            String duree=mstoMin(String.valueOf(((JsonObject)items.get(i)).get("duration_ms")));
 
             JsonObject album= (JsonObject) ((JsonObject)items.get(i)).get("album");
             JsonArray img=(JsonArray)album.get("images");
@@ -173,8 +169,32 @@ public class SearchSongsActivity extends AppCompatActivity {
             for (int j=0;j<artists.size();j++){
                 listeArtiste+=((JsonObject)artists.get(j)).get("name")+", ";
             }
-            val.add(new Musique(nom,listeArtiste,uri,duree,image));
+            val.add(new Musique(nom.replace("\"",""),listeArtiste.replace("\"",""),uri.replace("\"",""),duree.replace("\"",""),image.replace("\"","")));
         }
         return val;
+    }
+
+    private String mstoMin(String duration_ms) {
+        int duree= Integer.parseInt(duration_ms);
+        int min= (int)duree/60000;
+        int sec=(int)(duree-min*60000)/1000;
+        return min+"min"+sec;
+    }
+    private Runnable refreshToken() {
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+
+                AuthorizationRequest.Builder builder =
+                        new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
+
+                builder.setScopes(new String[]{"playlist-read-private"});
+                AuthorizationRequest request = builder.build();
+
+                Intent intent = AuthorizationClient.createLoginActivityIntent((Activity) context, request);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        };
+        return runnable;
     }
 }

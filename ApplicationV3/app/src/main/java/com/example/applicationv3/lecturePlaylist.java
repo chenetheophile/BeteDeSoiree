@@ -76,10 +76,12 @@ public class lecturePlaylist extends AppCompatActivity {
 
     private void connected() {
         // Play a playlist
-        Log.i("Test","connecté");
-        Item Playlist=(Item)getIntent().getExtras().get("Playlist");
-        String lien="spotify:"+Playlist.getIngredient();
-        Log.i("Test", String.valueOf(mSpotifyAppRemote.getPlayerApi().play(lien)));
+        if (!(boolean) getIntent().getExtras().get("lecture")){
+            Item Playlist=(Item)getIntent().getExtras().get("Playlist");
+            String lien="spotify:"+Playlist.getIngredient();
+            Log.i("Test", String.valueOf(mSpotifyAppRemote.getPlayerApi().play(lien)));
+        }
+
 
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()

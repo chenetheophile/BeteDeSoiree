@@ -1,7 +1,9 @@
 package com.example.applicationv3;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiqueAdapter.MusicHolder> implements Filterable {
     private LayoutInflater mInflater;
@@ -40,6 +43,22 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
             image.add(msc.getLienImage());
         }
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+    public void updateData(Musique data,boolean add) {
+        if(add){
+            listeMusique.add(data);
+            if (listeMusique.get(0).getDuree().equalsIgnoreCase("")&&!data.getDuree().equalsIgnoreCase("")){
+                listeMusique.remove(0);
+            }
+        }else{
+            listeMusique.remove(0);
+            if (listeMusique.size()==0){
+                updateData(new Musique("Aucune musique","","","",""),true);
+            }
+        }
+
+        notifyDataSetChanged();
+
     }
     @NonNull
     @Override
@@ -71,7 +90,17 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (context.getClass().equals(SearchSongsActivity.class)){
+                        Intent result=new Intent();
+                        Musique data=listeMusique.get(holder.getAdapterPosition());
+                        result.putExtra("Musique", data);
+                        ((Activity)context).setResult(Activity.RESULT_OK,result);
+                        ((Activity) context).finish();
+                    }else if(context.getClass().equals(PlaylistPerso.class)){
+                        Intent intent=new Intent(context,lecturePlaylist.class);
+                        intent.putExtra("lecture",true);
+                        context.startActivity(intent);
+                    }
 
                 }
             });
@@ -96,10 +125,10 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
         public MusicHolder(@NonNull View itemView, int viewType) {
             super(itemView);
             this.layout=itemView.findViewById(R.id.boiteMusic);
-            nomAuteur = (TextView) itemView.findViewById(R.id.Auteur);
-            nomMusique = (TextView) itemView.findViewById(R.id.TitreMusic);
-            dureeMusique = (TextView) itemView.findViewById(R.id.TempsMusique);
-            imgMusique = (ImageView) itemView.findViewById(R.id.ImageTitre);
+            nomAuteur = itemView.findViewById(R.id.Auteur);
+            nomMusique =  itemView.findViewById(R.id.TitreMusic);
+            dureeMusique =  itemView.findViewById(R.id.TempsMusique);
+            imgMusique =  itemView.findViewById(R.id.ImageTitre);
         }
     }
 
@@ -111,15 +140,17 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
     private final Filter filtre = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            Log.i("Filtre",constraint.toString());
             ArrayList<Musique> listeMusiquefiltre = new ArrayList<>();
-
             if (constraint==null ||constraint.length()==0){
                 listeMusiquefiltre.addAll(listePleine);
             }else{
                 String lettrefiltre=constraint.toString().toLowerCase().trim();
+                Log.i("Filtre",lettrefiltre);
+                Log.i("Filtre",listePleine.toString());
                 for (Musique music:listePleine){
-                    if (music.getName().contains(lettrefiltre)){
+
+                    if (music.getName().toLowerCase(Locale.ROOT).contains(lettrefiltre.toLowerCase(Locale.ROOT))){
+                        Log.i("Filtre",music.getName());
                         listeMusiquefiltre.add(music);
                     }
                 }
@@ -132,11 +163,15 @@ public class RechercheMusiqueAdapter extends RecyclerView.Adapter<RechercheMusiq
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            listeMusique.clear();
+            listeMusique.addAll((ArrayList)results.values);
+            for (int i=0;i<listeMusique.size();i++){
+                Log.i("searchRECIPE",listeMusique.get(i).toString());
+            }
             notifyDataSetChanged();
 
         }
     };
-
 
 }
 
