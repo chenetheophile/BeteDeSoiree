@@ -25,6 +25,7 @@
     $stmt = $conn->prepare("DELETE FROM `proposition` WHERE `ID`=:id");
     $stmt->bindValue(':id',$id);
     $stmt->execute();
+    print_r($_POST);
     if($_POST['bouton']=="valider"){
     ?>
     

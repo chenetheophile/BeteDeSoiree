@@ -1,0 +1,41 @@
+Absinthe
+Rhum
+Chartreuse
+Armagnac 
+Cognac
+Vocka
+Whisky
+Pastis
+Cointreau
+Kirsch
+Grand Marnier
+Génépi
+Triple Sec
+Calvados
+Gin
+Eau-de-vie
+Tequila
+Limoncello
+Curaçao
+Apérol
+Baileys
+Cidre
+Crèmes
+Liqueur
+Floc-de-Gascogne
+Get
+Lillet
+Malibu
+Manzana
+Martini
+Passoa
+Picon
+Pineau des Charantes
+Poiré
+Pommeau
+Porto
+Ratafia
+Soho
+Suze
+Bière
+Vin
