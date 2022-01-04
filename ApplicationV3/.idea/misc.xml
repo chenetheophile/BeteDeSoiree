@@ -4,12 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_affichage_recette.xml" value="0.23641304347826086" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_main.xml" value="0.13229166666666667" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_playlist_perso.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_search_songs.xml" value="0.264" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/cocktails_fragment_layout.xml" value="0.23641304347826086" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/fragment_login.xml" value="0.18931159420289856" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_jeux.xml" value="0.24094202898550723" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_recherche.xml" value="0.35311143270622286" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_resultat.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Cocktail/layout/cocktails_fragment_layout.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_l_g_local.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/listview_jeux.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/listview_resultat.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Musique/layout/listview_musique.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Musique/layout/listview_recherche.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Recette/layout/recettes_fragment_layout.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/SansCategorie/layout/activity_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/SansCategorie/layout/activity_proposition.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/SansCategorie/layout/listview_etape.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/SansCategorie/layout/listview_items.xml" value="0.1" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/SansCategorie/layout/listview_liste_proposition.xml" value="0.18931159420289856" />
+        <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/menu/recherche_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/drawable/dezzerLayer.xml" value="0.2703125" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_lecture_playlist.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chene/OneDrive/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_main.xml" value="0.1359375" />
