@@ -6,8 +6,29 @@ $desc=$_POST['desc'];
 $ingr=$_POST['ingr'];
 $etape=$_POST['etape'];
 $lien=$_POST['lien'];
+if($_POST['ajoutdb']=='true'){
+    $var=array();
+    if (strpos($ingr, "@") != FALSE) {
+        while (strpos($ingr, "@") != FALSE) {
+            array_push($var,substr($ingr, 0, strpos($ingr, "@")));
+            $ingr = substr($ingr, strpos($ingr, "@") + 1);
+        }
+    } else {
+        array_push($var,$ingr);
+    }
+    foreach($var as $ingredient){
+        if(chercherTexte($ingredient,"../Include/dictionnaireALcool.txt")){
+            $alcool=TRUE;
+            break;
+        }
+    }
+    $ingr=$_POST['ingr'];
+}else{
+    $alcool=$_POST['alcool'];
+}
+
 $prin=$_POST['princ'];
-$alcool=$_POST['alcool'];
+
 $type=$_POST['type'];
 
 $db_hostname = 'localhost';
@@ -21,6 +42,10 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if($db_tablename=="proposition"){
     $stmt=$conn->prepare("INSERT INTO `proposition`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
 }elseif($db_tablename=="ajout"){
+    $stmt=$conn->prepare("INSERT INTO `item`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
+}elseif($db_tablename=="ajoutdb"){
+    $stmt=$conn->prepare("INSERT INTO `proposition`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
+}else{
     $stmt=$conn->prepare("INSERT INTO `item`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
 }
 $stmt->bindValue(':nom',$nom,PDO::PARAM_STR);
@@ -37,9 +62,30 @@ try{
     if($db_tablename=="ajout"){
         header("Location: ../Accueil/Accueil.php");
     }
+    if($db_tablename=="ajoutdb"){
+        header("Location: ../Accueil/ajoutdb.php");
+    }
+    if($db_tablename=="lol"){
+        ?>
+        <form id="lol" action="../Include/bonjour.php" method="POST">
+            <input type="hidden" name="i" value="<?php print($_POST['i']+1) ;?>">
+            <script>document.getElementById('lol').submit()</script>
+        <?php
+    }
 }catch(Exception $e){
     print_r($e);
 }
 
+function chercherTexte($recherche,$nomfichier){
+   $contents = file_get_contents($nomfichier);
+   $pattern = preg_quote($recherche, '/');
 
-?>
+    $pattern = "/^.*$pattern.*\$/m";
+
+    if(preg_match_all($pattern, $contents, $matches)){
+    return TRUE;
+    }
+    else{
+    return FALSE;
+    }
+}
