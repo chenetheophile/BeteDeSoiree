@@ -1,7 +1,7 @@
 <?php
     $db_hostname = 'localhost';
-    $db_username = 'root';
-    $db_password = 'root';
+    $db_username = 'theo';
+    $db_password = '0908';
     $db_dbname = 'bdes';
     $db_tablename = 'proposition';
     $db_conn_str = "mysql:host=" . $db_hostname . ";dbname=" . $db_dbname;
