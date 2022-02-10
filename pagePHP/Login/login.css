@@ -1,0 +1,24 @@
+@import "../Include/includeStyle.css";
+.tabConnexion{
+    color: #cacaca;
+    text-shadow: #1d1d1d 1px 0px 1px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.champ {
+    border-radius: 5px;
+    border-color: #cacaca;
+}
+.bouton{
+    background-color: #390707;
+    color: #cacaca;
+    
+    border-color: #600000;
+    font-size: medium;
+}
+.bouton:hover{
+    background-color:#600000;
+}
