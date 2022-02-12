@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cocktail.css">
-    <link rel="shortcut icon" href="../Include/logo_appli.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../Include/Image/logo_appli.png" type="image/x-icon">
     <title>Cocktail</title>
 </head>
 
@@ -79,7 +79,6 @@
                 <td class="case"> <?php print(afficherCase($result['Etape'])); ?></td>
                 <td class="case"><img class="imglien" src="<?php print($result['Lien']); ?>" alt=""></td>
             </tr>
-            </form>
         <?php } ?>
 
 </body>

@@ -7,7 +7,7 @@ if (isset($_POST['i'])) {
 
 while ($i < 499) {
 ?>
-    <form id="lol" action="../Include/put.php" method="POST">
+    <form id="lol" action="../BDD/put.php" method="POST">
         <input type="hidden" name="nom" value="<?php print($i); ?>">
         <input type="hidden" name="temps" value="<?php print($i); ?>">
         <input type="hidden" name="desc" value="<?php print($i); ?>">

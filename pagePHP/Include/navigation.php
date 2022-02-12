@@ -7,7 +7,8 @@
                 <?php
                 if ($_SESSION["statut"] == "ADMIN") {
                 ?>
-                    <li><a href="../Accueil/ajoutdb.php">Ajouter dans la base</a></li>
+                    <li><a href="../BDD/ajoutdb.php">Ajouter dans la base</a></li>
+                    <li><a href="../BDD/Proposition.php">Voir les propositions</a></li>
                 <?php
                 }
             } else { ?>

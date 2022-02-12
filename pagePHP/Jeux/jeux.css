@@ -1,1 +1,16 @@
-@import "../Include/includeStyle.css"
+@import "../Include/includeStyle.css";
+h1{
+    margin-left: 5%;
+    font-size: large;
+    margin-top: 1%;
+}
+h5{
+    margin-left: 10%
+}
+
+.boiteTexte{
+    background-color: #2e2c2c;
+    color: #cccccc;
+    border-radius: 30px;
+    padding-bottom: 1px;
+}

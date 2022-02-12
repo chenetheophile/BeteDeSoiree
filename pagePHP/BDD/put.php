@@ -68,14 +68,7 @@ try{
         header("Location: ../Accueil/Accueil.php");
     }
     if($db_tablename=="ajoutdb"){
-        header("Location: ../Accueil/ajoutdb.php");
-    }
-    if($db_tablename=="lol"){
-        ?>
-        <form id="lol" action="../Include/bonjour.php" method="POST">
-            <input type="hidden" name="i" value="<?php print($_POST['i']+1) ;?>">
-            <script>document.getElementById('lol').submit()</script>
-        <?php
+        header("Location: ../BDD/ajoutdb.php");
     }
 }catch(Exception $e){
     print_r($e);

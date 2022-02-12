@@ -34,7 +34,7 @@
     if($_POST['bouton']=="valider"){
     ?>
     
-    <form action="../Include/put.php" method="POST" id="add">
+    <form action="../BDD/put.php" method="POST" id="add">
         <input type="hidden" name="table" value="ajout"></input>
         <input type="hidden" name="nom" value="<?php echo $nom;?>"></input>
         <input type="hidden" name="temps" value="<?php echo $Temps;?>"></input>

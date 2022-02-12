@@ -1,5 +1,6 @@
 body{
   background-color: #006666;
+  
 }
 .logosite{
     position: relative;
@@ -10,13 +11,14 @@ body{
     height: 100px;
 }
 .titre{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #dfdfdfdf;
+    text-shadow: #1d1d1d 5px 0px 5px;
     position: relative;
     top: -90px;
     width: fit-content;
     left: 150px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #dfdfdfdf;
-    text-shadow: #1d1d1d 5px 0px 5px;
+    
 }
   nav {
     font-size: 12px;

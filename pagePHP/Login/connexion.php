@@ -24,7 +24,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($result["nb"] == 1) {
     $_SESSION['statut']=$result['statut'];
     $_SESSION['connecte'] = TRUE;
-    header("Location: ../Accueil/Accueil.php");
+    header("Location: ../Accueil/accueil.php");
 }else{
     header("Location: ../Login/login.php?err=1");
 }
