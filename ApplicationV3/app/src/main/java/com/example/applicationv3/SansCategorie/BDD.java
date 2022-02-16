@@ -27,7 +27,7 @@ public class BDD {
     public BDD(){
     }
     public  void addPropo(Context activity,String nom,String ingr,String Desc,String Etape,String Type,int temps){
-        String url="http://betedesoiree.ddns.net/Include/put.php";
+        String url="http://betedesoiree.ddns.net/BDD/put.php";
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
 
@@ -54,7 +54,7 @@ public class BDD {
     }
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
         RequestQueue queue = Volley.newRequestQueue(activity);
-        String url ="http://betedesoiree.ddns.net/Include/get.php";
+        String url ="http://betedesoiree.ddns.net/BDD/get.php";
         ArrayList<Item> cocktailArrayList=new ArrayList<>();
         ArrayList<Item> recetteArrayList=new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
