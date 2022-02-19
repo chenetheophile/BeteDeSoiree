@@ -1,7 +1,12 @@
 <?php
     $db_hostname = 'localhost';
-    $db_username = 'root';
-    $db_password = 'root';
+    if (strcmp($_SERVER['SERVER_NAME'], 'localhost')==0) {
+        $db_username = 'root';
+        $db_password = 'root';
+    } else {
+        $db_username = 'theo';
+        $db_password = '0908';
+    }
     $db_dbname = 'bdes';
     $db_tablename = 'proposition';
     $db_conn_str = "mysql:host=" . $db_hostname . ";dbname=" . $db_dbname;
@@ -29,7 +34,7 @@
     if($_POST['bouton']=="valider"){
     ?>
     
-    <form action="../Include/put.php" method="POST" id="add">
+    <form action="../BDD/put.php" method="POST" id="add">
         <input type="hidden" name="table" value="ajout"></input>
         <input type="hidden" name="nom" value="<?php echo $nom;?>"></input>
         <input type="hidden" name="temps" value="<?php echo $Temps;?>"></input>
@@ -43,5 +48,5 @@
     </form>
     <script>print(document.getElementById('add').submit());</script>
     <?php }
-    //header("Location: ../Accueil/accueil.php")
+    header("Location: ../Accueil/accueil.php")
 ?>

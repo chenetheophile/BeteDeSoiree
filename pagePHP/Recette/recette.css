@@ -1,0 +1,103 @@
+@import "../Include/includeStyle.css";
+
+.tableau {
+    position: relative;
+    min-width: 1000px;
+    
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    display: table;
+    padding: 0 0 8em 0;
+}
+
+.case {
+    font-size: 25px;
+    max-width: 200px;
+}
+
+.souscase {
+    min-width: 90%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.texteCase {
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: justify;
+    color: #dfdfdfdf;
+    text-shadow: #1d1d1d 5px 0px 5px;
+}
+
+.imglien {
+    max-width: inherit;
+    max-height: inherit;
+    display: flex;
+    margin: auto;
+}
+
+.tableau th h1 {
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    color: #185875;
+}
+
+.tableau td {
+    font-weight: normal;
+    font-size: 1em;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    -moz-box-shadow: 0 2px 2px -2px #0E1119;
+    box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.tableau td, .tableau th {
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border-radius: 5px;
+
+    
+}
+
+.tableau tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+.tableau tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.tableau th {
+    background-color: #1F2739;
+}
+
+.tableau tr:hover {
+
+    -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119;
+    box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.tableau td:hover {
+    background-color: #390707;
+    color: #403E10;
+    font-weight: bold;
+
+    box-shadow: #600000 -0.5px 0.5px, #600000 -1px 1px, #600000 -1.5px 1.5px, #600000 -2px 2px, #600000 -2.5px 2.5px, #600000 -3px 3px;
+    transform: translate3d(1px, -1px, 0);
+
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: all;
+    transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+
+    .tableau td:nth-child(4),
+    .tableau th:nth-child(4) {
+        display: none;
+    }
+}

@@ -1,0 +1,91 @@
+@import "../Include/includeStyle.css";
+
+.tableau {
+    position: relative;
+    min-width: 1000px;
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    display: table;
+    padding: 0 0 8em 0;
+}
+label{
+    color: #cccccc;
+}
+input{
+    border-style: solid;
+    color: #cccccc;
+    background-color: #1F2739;
+    min-height: 20px;
+    border-width: 3px;
+    border-radius: 5px;
+    border-top-color: #390707;
+    border-left-color: #390707;
+    border-bottom-color: #600000;
+    border-right-color: #600000;
+}
+.bouton{
+    border-style: inset;
+    background-color: #390707;
+    color: #cacaca;
+    border-radius: 5px;
+    border-color: #600000;
+    font-size: medium;
+}
+.bouton:hover{
+    background-color:#600000;
+}
+.case {
+    font-size: 25px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.tableau th h1 {
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    color: #185875;
+}
+
+.tableau td {
+    font-weight: normal;
+    font-size: 1em;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    -moz-box-shadow: 0 2px 2px -2px #0E1119;
+    box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.tableau td, .tableau th {
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border-radius: 5px;
+
+    
+}
+
+.tableau tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+.tableau tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.tableau th {
+    background-color: #1F2739;
+}
+
+.tableau tr:hover {
+
+    -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119;
+    box-shadow: 0 6px 6px -6px #0E1119;
+}
+@media (max-width: 800px) {
+
+    .tableau td:nth-child(4),
+    .tableau th:nth-child(4) {
+        display: none;
+    }
+}
