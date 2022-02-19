@@ -1,6 +1,7 @@
 package com.example.applicationv3.SansCategorie;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +18,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applicationv3.ui.login.DialogueConnexion;
 import com.example.applicationv3.R;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
@@ -80,8 +88,6 @@ public class Proposition extends AppCompatActivity {
         nomRecettePro=findViewById(R.id.NomRecettePropo);
         Desc=findViewById(R.id.DescriptionPropo);
 
-
-
         Button envoi=findViewById(R.id.envoyer);
         envoi.setOnClickListener(v -> sendProp());
     }
@@ -114,7 +120,7 @@ public class Proposition extends AppCompatActivity {
 
     }
 
-    private void sendProp(){//envoi la proposition par mail
+    private void sendProp(){
         String nom=nomRecettePro.getText().toString();
         String description=Desc.getText().toString();
         String Etape="";
@@ -132,10 +138,51 @@ public class Proposition extends AppCompatActivity {
         if(!nom.equalsIgnoreCase("") && !description.equalsIgnoreCase("")&&!Ingr.equalsIgnoreCase("@")&&!Etape.equalsIgnoreCase("@")){
 
             new BDD().addPropo(getApplicationContext(),nom,Ingr,description,Etape,getIntent().getExtras().getString("type"),horloge.getMinute()+horloge.getHour()*60);
+            if (verifConnexion()){
+                new DialogueConnexion().show(
+                        getSupportFragmentManager(), DialogueConnexion.TAG);
+            }
             finish();
-            Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
+
+
+
+
+
         }else{
             Toast.makeText(getApplicationContext(),"Un des champs obligatoire n'est pas rempli",Toast.LENGTH_LONG).show();        }
+
+    }
+    public boolean verifConnexion(){
+        FileInputStream fis;
+        try {
+            fis =openFileInput("Options");
+            InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                if (line.equalsIgnoreCase("showConnexion")) {
+                    //lancer activité connexio
+                    Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            sauver("showConnexion",getApplicationContext());
+        }
+        return false;
+    }
+    private void sauver(String OptionName,Context act){//ajoute une recette a la fin du fichier des fav
+        try {
+            FileOutputStream outputStream;
+            String filename="Options";
+            outputStream = act.openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(OptionName.getBytes());
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -55,7 +55,7 @@
         android:layout_marginBottom="16dp"
         android:text="Valider"
         android:textSize="24sp"
-        android:backgroundTint="@color/teal_700"
+        android:backgroundTint="@color/bleuvert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

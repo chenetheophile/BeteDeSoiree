@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.applicationv3.R;
 import com.example.applicationv3.SansCategorie.Item;
 import com.example.applicationv3.SansCategorie.ItemAdapter;
-import com.example.applicationv3.SansCategorie.Proposition;
+import com.example.applicationv3.ui.login.Connexion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -80,9 +80,11 @@ public class CocktailsFragment extends Fragment{
         //ouvre la proposition de recette
         FloatingActionButton ajout=rootView.findViewById(R.id.ajoutCocktail);
         ajout.setOnClickListener(v -> {
-            Intent proposition=new Intent(getContext(), Proposition.class);
-            proposition.putExtra("type","Cocktail");
-            startActivity(proposition);
+            Intent inte=new Intent(getContext(), Connexion.class);
+            startActivity(inte);
+//            Intent proposition=new Intent(getContext(), Proposition.class);
+//            proposition.putExtra("type","Cocktail");
+//            startActivity(proposition);
         });
 
         return rootView;

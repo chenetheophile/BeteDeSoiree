@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/teal_700"
+            android:backgroundTint="@color/bleuvert"
             android:text="Compris !"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

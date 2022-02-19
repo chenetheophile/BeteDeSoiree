@@ -50,7 +50,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:background="@color/teal_700"
+            android:background="@color/bleuvert"
             app:tabIndicatorColor="#FFFFFF"
             app:tabPaddingEnd="3dp"
             app:tabPaddingStart="3dp"
