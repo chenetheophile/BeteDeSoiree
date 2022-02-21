@@ -50,15 +50,12 @@ public class JeuxFragment extends Fragment {
 
         barre=getActivity().findViewById(R.id.barreRecherche);
         ImageButton rechercher=getActivity().findViewById(R.id.boutonrecherche);
-        rechercher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        rechercher.setOnClickListener(v -> {
 
-                if (barre.getVisibility()==View.INVISIBLE){
-                    barre.setVisibility(View.VISIBLE);
-                }else {
-                    barre.setVisibility(View.INVISIBLE);
-                }
+            if (barre.getVisibility()==View.INVISIBLE){
+                barre.setVisibility(View.VISIBLE);
+            }else {
+                barre.setVisibility(View.INVISIBLE);
             }
         });
         return rootView;

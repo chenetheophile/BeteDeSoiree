@@ -1,5 +1,6 @@
 package com.example.applicationv3.Jeux;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class ChoixCarteAdapter extends RecyclerView.Adapter<ChoixCarteAdapter.Ca
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartesHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartesHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nomTextView.setText(noms.get(position));
         holder.carteImageView.setImageResource(img.get(position));
 

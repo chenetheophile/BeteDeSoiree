@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_palmier.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_palmier_jeu.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/listview_cartes_palmier.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_a_v_jeu.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_action_verite.xml" value="0.1" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_attribution_l_g.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_choix_l_g.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_l_g_jeu.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_l_g_local.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_loup__garou.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/activity_regles_jeu.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/fragment_choix_cartes.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/fragment_l_g_local.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/fragment_repartition.xml" value="0.2421875" />
+        <entry key="..\:/Users/Odhran/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layouts/Jeux/layout/listview_choix_l_g.xml" value="0.2421875" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_affichage_recette.xml" value="0.23641304347826086" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_main.xml" value="0.13229166666666667" />
         <entry key="..\:/Users/chene/Documents/GitHub/BeteDeSoiree/ApplicationV3/app/src/main/res/layout/activity_playlist_perso.xml" value="0.13020833333333334" />

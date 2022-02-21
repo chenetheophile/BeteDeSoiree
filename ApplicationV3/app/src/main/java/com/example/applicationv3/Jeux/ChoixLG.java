@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicationv3.R;
@@ -28,6 +29,7 @@ public class ChoixLG extends AppCompatActivity {
 
     String role;
 
+    TextView titleChoixTextView;
     ImageView roleImage;
     RecyclerView listeChoix;
     Button validerButton;
@@ -50,31 +52,37 @@ public class ChoixLG extends AppCompatActivity {
 
         checked = new ArrayList<>();
         for (int i = 0; i < roles.size(); i++) {
+            checked.add(false);
         }
 
         checked.add(false);
         LGAdapter = new LGChoixAdapter(roles, joueurs, images, checked,this);
         listeChoix = findViewById(R.id.ListeChoix);
         validerButton = findViewById(R.id.validerChoixButton);
-        validerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < roles.size(); i++) {
-                    if (LGAdapter.getItemViewType(i) == 1) {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("result", joueurs.get(i));
-                        resultIntent.putExtra("role", role);
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
-                        return;
-                    }
+        validerButton.setOnClickListener(v -> {
+            for (int i = 0; i < roles.size(); i++) {
+                if (LGAdapter.getItemViewType(i) == 1) {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("result", joueurs.get(i));
+                    resultIntent.putExtra("role", role);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                    return;
                 }
-                Toast.makeText(ChoixLG.this, "Sélectionnez un joueur.", Toast.LENGTH_LONG).show();
             }
+            Toast.makeText(ChoixLG.this, "Sélectionnez un joueur.", Toast.LENGTH_LONG).show();
         });
 
         roleImage = findViewById(R.id.roleChoixImageView);
         roleImage.setImageResource(img.get(role));
+        switch (role) {
+            case "Loup-Garou":
+                titleChoixTextView.setText("Choix des Loups");
+                break;
+            case "Voyante":
+                titleChoixTextView.setText("Choix de la Voyante");
+        }
+        titleChoixTextView.setText("Choix de ");
 
         layoutManager = new LinearLayoutManager(this);
         listeChoix.setLayoutManager(layoutManager);

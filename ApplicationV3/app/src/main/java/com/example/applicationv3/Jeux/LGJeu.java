@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
@@ -67,33 +65,29 @@ public class LGJeu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_l_g_jeu);
 
-        Resultat=registerForActivityResult(
+        Resultat = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        Intent data=result.getData();
-                        int requestCode= (int) data.getExtras().get("requestCode");
-                        if (requestCode == 1 && result.getResultCode() == RESULT_OK) {
-                            switch (data.getStringExtra("role")) {
-                                case ("Loup-Garou"):
-                                    victimes.set(0, listeJoueurs.indexOf(data.getStringExtra("result")));
-                                    break;
-                                case ("Voyante"):
-                                    choixVoyante = listeJoueurs.indexOf(data.getStringExtra("result"));
-                                    imageVoyante.setImageResource(listeImages.get(choixVoyante));
-                                    imageVoyante.setVisibility(View.VISIBLE);
-                                    titleText.setText(listeRoles.get(listeImages.indexOf(listeImages.get(choixVoyante))));
-                                    topText.setText("");
-                                    midText.setText("");
-                                    break;
-                                case("Sorcière"):
-                                    if (data.getIntExtra("result", -1) == 1) {
-                                        victimes.set(0, -1);
-                                    }
-                                default:
-                                    break;
-                            }
+                result -> {
+                    Intent data = result.getData();
+                    if (result.getResultCode() == RESULT_OK) {
+                        switch (data.getStringExtra("role")) {
+                            case ("Loup-Garou"):
+                                victimes.set(0, listeJoueurs.indexOf(data.getStringExtra("result")));
+                                break;
+                            case ("Voyante"):
+                                choixVoyante = listeJoueurs.indexOf(data.getStringExtra("result"));
+                                imageVoyante.setImageResource(listeImages.get(choixVoyante));
+                                imageVoyante.setVisibility(View.VISIBLE);
+                                titleText.setText(listeRoles.get(listeImages.indexOf(listeImages.get(choixVoyante))));
+                                topText.setText("");
+                                midText.setText("");
+                                break;
+                            case ("Sorcière"):
+                                if (data.getIntExtra("result", -1) == 1) {
+                                    victimes.set(0, -1);
+                                }
+                            default:
+                                break;
                         }
                     }
                 }
@@ -240,7 +234,7 @@ public class LGJeu extends AppCompatActivity {
         intent.putExtra("roles", pListeRoles);
         intent.putExtra("images", pListeImages);
         intent.putExtra("role", "Voyante");
-        intent.putExtra("requestCode",1);
+        intent.putExtra("requestCode", 1);
         Resultat.launch(intent);
     }
 
@@ -261,7 +255,7 @@ public class LGJeu extends AppCompatActivity {
         intent.putExtra("roles", pListeRoles);
         intent.putExtra("images", pListeImages);
         intent.putExtra("role", "Loup-Garou");
-        intent.putExtra("requestCode",1);
+        intent.putExtra("requestCode", 1);
         Resultat.launch(intent);
     }
 
@@ -269,7 +263,7 @@ public class LGJeu extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ChoixSorciere.class);
         intent.putExtra("victime", listeJoueurs.get(victimes.get(0)));
         intent.putExtra("potion", potions.get(0));
-        intent.putExtra("requestCode",1);
+        intent.putExtra("requestCode", 1);
         Resultat.launch(intent);
         if (potions.get(1) == 1) {
             intent = new Intent(getApplicationContext(), ChoixLG.class);
@@ -288,7 +282,7 @@ public class LGJeu extends AppCompatActivity {
             intent.putExtra("roles", pListeRoles);
             intent.putExtra("images", pListeImages);
             intent.putExtra("role", "Loup-Garou");
-            intent.putExtra("requestCode",1);
+            intent.putExtra("requestCode", 1);
             Resultat.launch(intent);
         }
     }

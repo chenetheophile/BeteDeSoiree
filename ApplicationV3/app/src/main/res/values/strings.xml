@@ -6,6 +6,33 @@
     <string name="tab_text_3">Recettes</string>
     <string name="tab_text_4">Musique</string>
 
+    <string-array name="regles_palmier">
+        <item>Distribue 1 gorgée si rouge, boit si noir</item>
+        <item>Distribue 2 gorgée si rouge, boit si noir</item>
+        <item>Distribue 3 gorgée si rouge, boit si noir</item>
+        <item>Dernier joueur à pointer son doit vers le sol boit</item>
+        <item>Dernier joueur à pointer son doit vers le ciel boit</item>
+        <item>
+            Dans la valise : chaque joueur liste le contenu d une valise imaginaire en ajoutant un objet à chaque fois.\n
+            Le joueur qui oublie ou se trompe boit
+        </item>
+        <item>
+            Le maître des questions : s il pose une question, le joueur qui lui répond boit.\n
+            Si quelqu un lui répond `Ta gueule!`, le maître boit.\n
+            Il garde ce pouvoir jusqu à-ce que quelqu un d autre pioche un 7
+        </item>
+        <item>Distribue 8 gorgées</item>
+        <item>
+            Je n ai jamais / j ai déjà.\n
+            les joueurs qui sont différents du joueur actuel boivent.
+        </item>
+        <item>Maître du freeze : le joueur peut crier `Freeze!` et le dernier joueur à arrêter de bouger boit.</item>
+        <item>Invente un thème. Le joueur ne trouvant plus de réponse ou répétant une réponse déjà dite boit</item>
+        <item>Tout le monde boit</item>
+        <item>Invente un règle</item>
+        <item>Cul sec!</item>
+    </string-array>
+
     <string-array name="cartes_lg">
         <item>Loup-Garou</item>
         <item>Voyante</item>
@@ -15,7 +42,6 @@
         <item>Sorcière</item>
         <item>Voleur</item>
         <item>Villageois</item>
-
     </string-array>
 
     <string-array name="repartition">
@@ -78,7 +104,12 @@
 
     <string-array name="desc_jeux">
         <item>Choisissez entre Action et Vérité et laissez le hasard décider de votre sort...</item>
-        <item>Piochez une carte au hasard et réalisez l action correspondante.</item>
+        <item>
+            Disposez les cartes en cercle autour d une bouteille.\n
+            Piochez une carte au hasard et réalisez l action correspondante.\n
+            Posez la carte sur la bouteille en laissant dépasser au moins deux coins.\n
+            Attention à ne pas briser le cercle ou faire tomber le palmier!
+        </item>
         <item>Chaque joueur a un rôle et un objectif. Survivre, protéger le village, ou dévorer les habitants...</item>
     </string-array>
 
