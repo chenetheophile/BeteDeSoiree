@@ -45,7 +45,7 @@ $db_conn_str = "mysql:host=" . $db_hostname . ";dbname=" . $db_dbname;
 $conn = new PDO($db_conn_str, $db_username, $db_password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if($db_tablename=="proposition"){
-    $stmt=$conn->prepare("INSERT INTO `proposition`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
+    $stmt=$conn->prepare("INSERT INTO `proposition`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`,`username`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi,:username)");
 }elseif($db_tablename=="ajout"){
     $stmt=$conn->prepare("INSERT INTO `item`(`Nom`, `Description`, `Type`, `Ingredient`, `Etape`, `TempsPrepa`, `Alcool`, `Lien`, `Princip`) VALUES (:nom, :descr, :typ, :ing, :etape, :temps, :alc, :lien, :princi)");
 }elseif($db_tablename=="ajoutdb"){
@@ -62,6 +62,9 @@ $stmt->bindValue(':temps',$temps,PDO::PARAM_STR);
 $stmt->bindValue(':alc',$alcool,PDO::PARAM_BOOL);
 $stmt->bindValue(':lien',$lien,PDO::PARAM_STR);
 $stmt->bindValue(':princi',$prin,PDO::PARAM_STR);
+if(isset($_POST['username'])){
+    $stmt->bindValue(':username',$_POST['username'],PDO::PARAM_STR);
+}
 try{
     $stmt->execute();
     if($db_tablename=="ajout"){

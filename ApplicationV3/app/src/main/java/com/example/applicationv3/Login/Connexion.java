@@ -49,7 +49,7 @@ public class Connexion extends AppCompatActivity {
         });
         loginButton.setOnClickListener(v -> {
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            String url="http://bdes.ddns.net/Login/connexion.php";
+            String url="http://betedesoiree.ddns.net/Login/connexion.php";
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
                 if (response.equalsIgnoreCase("0")){

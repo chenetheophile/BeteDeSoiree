@@ -140,7 +140,6 @@ public class Proposition extends AppCompatActivity {
                         getSupportFragmentManager(), DialogueConnexion.TAG);
             }
             new BDD().addPropo(getApplicationContext(), nom, Ingr, description, Etape, getIntent().getExtras().getString("type"), horloge.getMinute() + horloge.getHour() * 60, getUsername());
-            finish();
         } else {
             Toast.makeText(getApplicationContext(), "Un des champs obligatoire n'est pas rempli", Toast.LENGTH_LONG).show();
         }
