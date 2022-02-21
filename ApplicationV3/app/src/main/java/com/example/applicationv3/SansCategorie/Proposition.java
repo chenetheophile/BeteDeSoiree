@@ -1,7 +1,6 @@
 package com.example.applicationv3.SansCategorie;
 
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -18,38 +17,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.applicationv3.ui.login.DialogueConnexion;
+import com.example.applicationv3.Login.DialogueConnexion;
 import com.example.applicationv3.R;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Proposition extends AppCompatActivity {
-    private  EditText nomRecettePro,Desc;
+    private EditText nomRecettePro, Desc;
     private ListeAdapter listeIngrAdapter;
     private ListeAdapter listeEtapeAdapter;
     private TimePicker horloge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposition);
 
-        horloge=findViewById(R.id.horloge);
+        horloge = findViewById(R.id.horloge);
         horloge.setIs24HourView(true);
         horloge.setHour(0);
         horloge.setMinute(5);
-        TextView text=findViewById(R.id.Type);
+        TextView text = findViewById(R.id.Type);
         text.setText(getIntent().getExtras().getString("type"));
 
-        Spinner nbIngr=findViewById(R.id.nbIngr);
-        ArrayAdapter<Integer> adapterIngr =new ArrayAdapter<Integer>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item){
+        Spinner nbIngr = findViewById(R.id.nbIngr);
+        ArrayAdapter<Integer> adapterIngr = new ArrayAdapter<Integer>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item) {
         };
-        for(int i=1;i<25;i++){
+        for (int i = 1; i < 25; i++) {
             adapterIngr.add(i);
         }
         nbIngr.setAdapter(adapterIngr);
@@ -57,7 +56,7 @@ public class Proposition extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
-                onItemSelectedHandler(parent,view,position,id);
+                onItemSelectedHandler(parent, view, position, id);
             }
 
             @Override
@@ -66,9 +65,9 @@ public class Proposition extends AppCompatActivity {
             }
         });
 
-        Spinner nbEtape=findViewById(R.id.nbEtape);
-        ArrayAdapter<Integer> adapterEtape =new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item);
-        for(int i=1;i<25;i++){
+        Spinner nbEtape = findViewById(R.id.nbEtape);
+        ArrayAdapter<Integer> adapterEtape = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item);
+        for (int i = 1; i < 25; i++) {
             adapterEtape.add(i);
         }
         nbEtape.setAdapter(adapterEtape);
@@ -76,7 +75,7 @@ public class Proposition extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
-                onItemSelectedHandler(parent,view,position,id);
+                onItemSelectedHandler(parent, view, position, id);
             }
 
             @Override
@@ -85,104 +84,104 @@ public class Proposition extends AppCompatActivity {
             }
         });
 
-        nomRecettePro=findViewById(R.id.NomRecettePropo);
-        Desc=findViewById(R.id.DescriptionPropo);
+        nomRecettePro = findViewById(R.id.NomRecettePropo);
+        Desc = findViewById(R.id.DescriptionPropo);
 
-        Button envoi=findViewById(R.id.envoyer);
+        Button envoi = findViewById(R.id.envoyer);
         envoi.setOnClickListener(v -> sendProp());
     }
 
     private void onItemSelectedHandler(AdapterView<?> parent, View view, int position, long id) {
-        Spinner ing=findViewById(R.id.nbIngr);
-        if(parent.equals(ing)){
-            RecyclerView recyclerIngr=findViewById(R.id.recyclerIngr);
-            ArrayList<String> listeIngr=new ArrayList<>();
+        Spinner ing = findViewById(R.id.nbIngr);
+        if (parent.equals(ing)) {
+            RecyclerView recyclerIngr = findViewById(R.id.recyclerIngr);
+            ArrayList<String> listeIngr = new ArrayList<>();
 
-            for(int i=0;i<position+1;i++){
+            for (int i = 0; i < position + 1; i++) {
                 listeIngr.add("");
             }
 
-            listeIngrAdapter=new ListeAdapter(getApplicationContext(),listeIngr);
+            listeIngrAdapter = new ListeAdapter(getApplicationContext(), listeIngr);
             recyclerIngr.setAdapter(listeIngrAdapter);
             recyclerIngr.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        }else{
-            RecyclerView recyclerEtape=findViewById(R.id.recyclerEtape);
-            ArrayList<String> listeEtape=new ArrayList<>();
+        } else {
+            RecyclerView recyclerEtape = findViewById(R.id.recyclerEtape);
+            ArrayList<String> listeEtape = new ArrayList<>();
 
-            for(int i=0;i<position+1;i++){
+            for (int i = 0; i < position + 1; i++) {
                 listeEtape.add("");
             }
 
-            listeEtapeAdapter=new ListeAdapter(getApplicationContext(),listeEtape);
+            listeEtapeAdapter = new ListeAdapter(getApplicationContext(), listeEtape);
             recyclerEtape.setAdapter(listeEtapeAdapter);
             recyclerEtape.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }
 
     }
 
-    private void sendProp(){
-        String nom=nomRecettePro.getText().toString();
-        String description=Desc.getText().toString();
-        String Etape="";
-        String Ingr="";
-        ArrayList<String> listeIngr=listeIngrAdapter.getListe();
-        ArrayList<String> listeEtape=listeEtapeAdapter.getListe();
+    private void sendProp() {
+        String nom = nomRecettePro.getText().toString();
+        String description = Desc.getText().toString();
+        String Etape = "";
+        String Ingr = "";
+        ArrayList<String> listeIngr = listeIngrAdapter.getListe();
+        ArrayList<String> listeEtape = listeEtapeAdapter.getListe();
 
-        for (int i=0;i<listeIngr.size();i++){
-            Ingr+=listeIngr.get(i)+"@";
+        for (int i = 0; i < listeIngr.size(); i++) {
+            Ingr += listeIngr.get(i) + "@";
         }
-        for (int i=0;i<listeEtape.size();i++){
+        for (int i = 0; i < listeEtape.size(); i++) {
 
-            Etape+=listeEtape.get(i)+"@";
+            Etape += listeEtape.get(i) + "@";
         }
-        if(!nom.equalsIgnoreCase("") && !description.equalsIgnoreCase("")&&!Ingr.equalsIgnoreCase("@")&&!Etape.equalsIgnoreCase("@")){
-
-            new BDD().addPropo(getApplicationContext(),nom,Ingr,description,Etape,getIntent().getExtras().getString("type"),horloge.getMinute()+horloge.getHour()*60);
-            if (verifConnexion()){
+        if (!nom.equalsIgnoreCase("") && !description.equalsIgnoreCase("") && !Ingr.equalsIgnoreCase("@") && !Etape.equalsIgnoreCase("@")) {
+            if (!verifConnexion()) {
                 new DialogueConnexion().show(
                         getSupportFragmentManager(), DialogueConnexion.TAG);
             }
+            new BDD().addPropo(getApplicationContext(), nom, Ingr, description, Etape, getIntent().getExtras().getString("type"), horloge.getMinute() + horloge.getHour() * 60, getUsername());
             finish();
-
-
-
-
-
-        }else{
-            Toast.makeText(getApplicationContext(),"Un des champs obligatoire n'est pas rempli",Toast.LENGTH_LONG).show();        }
+        } else {
+            Toast.makeText(getApplicationContext(), "Un des champs obligatoire n'est pas rempli", Toast.LENGTH_LONG).show();
+        }
 
     }
-    public boolean verifConnexion(){
+
+    public boolean verifConnexion() {
+        boolean verif=true;
+
         FileInputStream fis;
         try {
-            fis =openFileInput("Options");
+            fis =openFileInput("Username");
             InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
-                if (line.equalsIgnoreCase("showConnexion")) {
-                    //lancer activité connexio
-                    Toast.makeText(getApplicationContext(),"Proposition envoyé",Toast.LENGTH_LONG).show();
-                    return true;
+                if (line.equalsIgnoreCase("none") ) {
+                    verif = false;
                 }
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            sauver("showConnexion",getApplicationContext());
+            verif=false;
         }
-        return false;
+        return verif;
     }
-    private void sauver(String OptionName,Context act){//ajoute une recette a la fin du fichier des fav
-        try {
-            FileOutputStream outputStream;
-            String filename="Options";
-            outputStream = act.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(OptionName.getBytes());
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+    private String getUsername() {
+        String username="";
+        FileInputStream fis;
+        try {
+            fis =openFileInput("Username");
+            InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                username=line;
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+        }
+        return username;
     }
 }

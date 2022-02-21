@@ -52,6 +52,33 @@ public class BDD {
 
         requestQueue.add(stringRequest);
     }
+    public  void addPropo(Context activity,String nom,String ingr,String Desc,String Etape,String Type,int temps,String username){
+        String url="http://betedesoiree.ddns.net/BDD/put.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(activity);
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+        }, error -> error.printStackTrace()){@Override
+        protected Map<String,String> getParams(){
+            Map<String,String> params = new HashMap<>();
+
+            params.put("nom", nom);
+            params.put("ingr", ingr);
+            params.put("desc", Desc);
+            params.put("etape", Etape);
+            params.put("type", Type);
+            params.put("lien", "NA");
+            params.put("alcool", "0");
+            params.put("table", "proposition");
+            params.put("temps",temps+"min" );
+            params.put("princ", "NA");
+            params.put("username",username);
+            return params;
+        }
+        };
+
+        requestQueue.add(stringRequest);
+    }
     public void getDocument(Context activity){//recupere le contenue de la DB et le transmet dans la suite de l'app
         RequestQueue queue = Volley.newRequestQueue(activity);
         String url ="http://betedesoiree.ddns.net/BDD/get.php";

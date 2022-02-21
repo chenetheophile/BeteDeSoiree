@@ -23,7 +23,7 @@
         android:theme="@style/Theme.ApplicationV3"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.login.Connexion"
+            android:name=".Login.Connexion"
             android:exported="false"
             android:label="@string/title_activity_connexion" />
         <activity

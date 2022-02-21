@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.applicationv3.R;
 import com.example.applicationv3.SansCategorie.Item;
 import com.example.applicationv3.SansCategorie.ItemAdapter;
-import com.example.applicationv3.ui.login.Connexion;
+import com.example.applicationv3.Login.Connexion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

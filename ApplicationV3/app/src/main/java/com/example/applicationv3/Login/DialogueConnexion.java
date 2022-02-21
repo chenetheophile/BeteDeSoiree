@@ -1,4 +1,4 @@
-package com.example.applicationv3.ui.login;
+package com.example.applicationv3.Login;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,24 +26,27 @@ public class DialogueConnexion extends DialogFragment {
                     startActivity(inte);
                 } )
                 .setNegativeButton("non", (dialog, which) -> {
+                    sauverUsername("none");
                     getActivity().finish();
                 } )
                 .setNeutralButton("Non, ne plus demander",(dialog, which) -> {
-                    try {
-                        FileOutputStream outputStream;
-                        String filename="Options";
-                        outputStream = getActivity().openFileOutput(filename, Context.MODE_PRIVATE);
-                        outputStream.write("".getBytes(StandardCharsets.UTF_8));
-                        outputStream.flush();
-                        outputStream.close();
-                        getActivity().finish();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    sauverUsername("anonymous");
 
                 })
                 .create();
     }
-
+    public void sauverUsername(String username){
+        try {
+            FileOutputStream outputStream;
+            String filename="Username";
+            outputStream = getActivity().openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(username.getBytes(StandardCharsets.UTF_8));
+            outputStream.flush();
+            outputStream.close();
+            getActivity().finish();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static String TAG = "Connexion";
 }

@@ -32,7 +32,7 @@ $prin=$_POST['princ'];
 $type=$_POST['type'];
 
 $db_hostname = 'localhost';
-if (strcmp($_SERVER['SERVER_NAME'], 'localhost')==0) {
+if (strcmp($_SERVER['SERVER_NAME'], 'localhost')==0 or strcmp($_SERVER['SERVER_NAME'], '192.168.1.14') == 0) {
     $db_username = 'root';
     $db_password = 'root';
 } else {
